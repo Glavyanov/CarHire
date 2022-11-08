@@ -1,6 +1,8 @@
-using CarHire.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+using CarHire.Infrastructure.Data;
+using CarHire.Infrastructure.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
 { 
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;

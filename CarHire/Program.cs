@@ -13,15 +13,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
 { 
-    options.SignIn.RequireConfirmedAccount = false;
-    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = 
+    builder.Configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
+    options.User.RequireUniqueEmail = builder.Configuration.GetValue<bool>("Identity:RequireUniqueEmail");
 
-    options.Password.RequiredLength = 5;
-    options.Password.RequiredUniqueChars = 0;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:RequiredLength");
+    options.Password.RequiredUniqueChars = builder.Configuration.GetValue<int>("Identity:RequiredUniqueChars");
+    options.Password.RequireNonAlphanumeric = 
+    builder.Configuration.GetValue<bool>("Identity:RequireNonAlphanumeric");
+    options.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity:RequireUppercase");
+    options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:RequireLowercase");
+    options.Password.RequireDigit = builder.Configuration.GetValue<bool>("Identity:RequireDigit");
 
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();

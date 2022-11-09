@@ -1,10 +1,11 @@
-﻿using CarHire.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace CarHire.Controllers
+﻿namespace CarHire.Controllers
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+
+    using CarHire.Models;
+
     public class HomeController : BaseController
     {
         [AllowAnonymous]

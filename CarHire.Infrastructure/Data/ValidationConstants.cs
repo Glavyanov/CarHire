@@ -8,6 +8,10 @@ namespace CarHire.Infrastructure.Data
 {
     public static class ValidationConstants
     {
+        public static class ClaimsConstants
+        {
+            public const string FirstName = "first_name";
+        }
         public static class ApplicationUserConstants
         {
             public const int FirstNameMinLength = 2;

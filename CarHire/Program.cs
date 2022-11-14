@@ -28,6 +28,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddApplicationServices();
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {

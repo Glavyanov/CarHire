@@ -5,14 +5,26 @@
     using Microsoft.AspNetCore.Authorization;
 
     using CarHire.Models;
+    using CarHire.Core.Contracts;
+    using CarHire.Core.Services;
+    using CarHire.Core.Models.Category;
 
     public class HomeController : BaseController
     {
+        private readonly ICategoryService categoryService;
+
+        public HomeController(ICategoryService _categoryService)
+        {
+            categoryService = _categoryService;
+        }
+
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<CategoryHomeModel> categoryHomeModels = await categoryService.GetCategoriesAsync();
+
+            return View(categoryHomeModels);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

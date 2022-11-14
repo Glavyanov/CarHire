@@ -8,6 +8,7 @@
 
     public class HomeController : BaseController
     {
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Index()
         {

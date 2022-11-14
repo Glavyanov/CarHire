@@ -29,6 +29,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.LoginPath = "/User/Login";
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

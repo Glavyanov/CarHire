@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CarHire.Infrastructure.Data
+﻿namespace CarHire.Infrastructure.Data
 {
     public static class ValidationConstants
     {
@@ -32,8 +26,30 @@ namespace CarHire.Infrastructure.Data
 
         public static class CategoryConstants
         {
-            public const int NameMinLength = 5;
+            public const int NameMinLength = 3;
             public const int NameMaxLength = 60;
+        }
+        public static class VehicleConstants
+        {
+            public const int ImageUrlMinLength = 10;
+            public const int ImageUrlMaxLength = 3000;
+        }
+
+        public static class DiscountConstants
+        {
+            public const int NameMinLength = 5;
+            public const int NameMaxLength = 50;
+        }
+
+        public static class RenterConstants
+        {
+            public const int DrivingLicenseNumberMinLength = 8;
+            public const int DrivingLicenseNumberMaxLength = 100;
+        }
+        public static class CommentConstants
+        {
+            public const int DescriptionMinLength = 8;
+            public const int DescriptionMaxLength = 5000;
         }
     }
 }

@@ -34,5 +34,8 @@
 
         [Comment("When became a renter")]
         public DateTime RegisteredOn { get; set; }
+
+        [Comment("Vehicles of the renter")]
+        public virtual ICollection<Vehicle> Vehicles { get; set; } = new HashSet<Vehicle>();
     }
 }

@@ -33,6 +33,12 @@
         {
             public const int ImageUrlMinLength = 10;
             public const int ImageUrlMaxLength = 3000;
+
+            public const int MakeMinLength = 2;
+            public const int MakeMaxLength = 100;
+
+            public const int ModelMinLength = 1;
+            public const int ModelMaxLength = 100;
         }
 
         public static class DiscountConstants

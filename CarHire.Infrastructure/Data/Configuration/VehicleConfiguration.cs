@@ -18,11 +18,13 @@
             Vehicle vehicle = new()
             {
                 Id = new Guid("779bd522-2646-40b0-90a9-af4ddb9551a5"),
+                Make = "Koenigsegg",
+                Model = "RAW",
                 Year = 2018,
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,
                 Seats = 2,
-                ImageUrl = "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/2_3.gif?itok=dyWvAKCx",
+                ImageUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/9a84ff95800693.5e9ff770404b5.jpg",
                 Doors = 2,
                 Suspension = Entities.Enums.Suspension.Sport,
                 NavigationSystem = true,
@@ -38,6 +40,8 @@
             vehicle = new()
             {
                 Id = new Guid("f31db974-2830-410d-b435-66844298846a"),
+                Make = "Chevrolet",
+                Model = "Chevelle SS black panther",
                 Year = 2014,
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,
@@ -58,6 +62,8 @@
             vehicle = new()
             {
                 Id = new Guid("82ea3f6a-4782-41d0-bc2d-6ca2f7f9acea"),
+                Make = "Nissan",
+                Model = "NV200",
                 Year = 2020,
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,
@@ -78,6 +84,8 @@
             vehicle = new()
             {
                 Id = new Guid("e0dec8e7-92c7-441e-ad75-55f8234fad59"),
+                Make = "Mercedes-Benz",
+                Model = "Actros",
                 Year = 2015,
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,
@@ -98,6 +106,8 @@
             vehicle = new()
             {
                 Id = new Guid("b544d7b1-7f17-4213-9823-90e82c66db2e"),
+                Make = "Ford",
+                Model = "F550 Executive Limo Bus",
                 Year = 2020,
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,

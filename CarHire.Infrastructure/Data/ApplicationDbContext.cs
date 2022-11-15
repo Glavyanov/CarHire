@@ -34,6 +34,7 @@
                 .HasKey(k => new { k.VehicleId, k.DiscountId });
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
             builder.ApplyConfiguration(new RenterConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new VehicleConfiguration());
@@ -46,9 +47,17 @@
                 .IsRequired();
 
             builder.Entity<ApplicationUser>()
+                .Property(p => p.NormalizedUserName)
+                .HasMaxLength(UserNameMaxLength);
+
+            builder.Entity<ApplicationUser>()
                 .Property(p => p.Email)
                 .HasMaxLength(EmailMaxLength)
                 .IsRequired();
+
+            builder.Entity<ApplicationUser>()
+                .Property(p => p.NormalizedEmail)
+                .HasMaxLength(EmailMaxLength);
         }
     }
 }

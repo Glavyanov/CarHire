@@ -12,6 +12,6 @@
 @foreach (var cat in Model)
 {
     <div class="text-center">
-        <h1 class="display-4">@cat.Name</h1>
+        <a class="display-7" asp-controller="Home" asp-action="Vehicles" asp-route-category="@cat.Name">@cat.Name</a>
     </div>
 }

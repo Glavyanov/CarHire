@@ -58,6 +58,8 @@
             {
                 await signInManager.SignInAsync(user, isPersistent: false);
                 await userManager.AddClaimAsync(user, new Claim(FirstName, user.FirstName ?? user.Email));
+                await signInManager.SignOutAsync();
+                await signInManager.SignInAsync(user, isPersistent: false);
 
                 return RedirectToAction("Index", "Home");
             }

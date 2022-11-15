@@ -17,6 +17,16 @@
         public Guid Id { get; init; }
 
         [Required]
+        [MaxLength(MakeMaxLength)]
+        [Comment("Vehicle Make")]
+        public string Make { get; set; } = null!;
+
+        [Required]
+        [MaxLength(ModelMaxLength)]
+        [Comment("Vehicle Model")]
+        public string Model { get; set; } = null!;
+
+        [Required]
         [Comment("Allows entry showing")]
         public bool IsDeleted { get; set; }
 

@@ -59,12 +59,12 @@ namespace CarHire.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -105,7 +105,7 @@ namespace CarHire.Infrastructure.Migrations
                         {
                             Id = "44569627-988b-4096-8397-48cae1a68157",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "917c2ea4-bb79-4147-bac3-f19c9da352ca",
+                            ConcurrencyStamp = "11b5ac88-53f0-4c51-b1a0-13a8792654a7",
                             Email = "John@mail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -113,9 +113,9 @@ namespace CarHire.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN@MAIL.COM",
                             NormalizedUserName = "JOHN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHio1Vi0sKgm3heQq5XF9xbmRzxpjvJujnce6YfnjiyxrPEyXYHtp9ljDZeTUSionw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOZslJVnENtEF2hUXgFQ5Z1G+lB70JezqsrdVoVqpKqkymoLSspfj3wf7B40kkHolg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3eed683e-59d2-4215-aafb-d370692755c4",
+                            SecurityStamp = "9fd64b60-ef7e-4d9c-ae7d-047da9e8b968",
                             TwoFactorEnabled = false,
                             UserName = "John@mail.com"
                         },
@@ -123,7 +123,7 @@ namespace CarHire.Infrastructure.Migrations
                         {
                             Id = "27fba6ae-8175-4484-9b0d-917d6b32c851",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f9db05cb-7617-448b-b6ec-19a8f4b3916e",
+                            ConcurrencyStamp = "c3558b31-3de8-40a1-b73a-7fe27b8abe66",
                             Email = "Jane@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jane",
@@ -131,9 +131,9 @@ namespace CarHire.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JANE@MAIL.COM",
                             NormalizedUserName = "JANE@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOnNlM/hnJI/9bYDA4gtfV3fqPsRlwUWyvn1nmkHNDjEISYGT0cHiza2jkJUtr5B5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDU9Ua9rz40kf0RV9qjQK28LYmxXEyytbLDQrKNbWnJyrkxnfAqoPUuu+UY/HII1yA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c44d92e2-2368-462c-8d91-e8f172045b53",
+                            SecurityStamp = "712a0c05-59c6-4b3c-8485-01120aa5eadd",
                             TwoFactorEnabled = false,
                             UserName = "Jane@mail.com"
                         });
@@ -349,7 +349,7 @@ namespace CarHire.Infrastructure.Migrations
                             Id = new Guid("0d5e7b0b-f3ed-4026-bec8-90ebc90019f8"),
                             ApplicationUserId = "27fba6ae-8175-4484-9b0d-917d6b32c851",
                             DrivingLicenseNumber = "Jane888888Doe",
-                            RegisteredOn = new DateTime(2022, 11, 14, 11, 49, 25, 743, DateTimeKind.Local).AddTicks(4494),
+                            RegisteredOn = new DateTime(2022, 11, 16, 0, 7, 57, 142, DateTimeKind.Local).AddTicks(8131),
                             RenterDiscount = 15,
                             TotalValue = 0m
                         });
@@ -395,6 +395,18 @@ namespace CarHire.Infrastructure.Migrations
                     b.Property<int>("Kilometers")
                         .HasColumnType("int")
                         .HasComment("Vehicle kilometers");
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasComment("Vehicle Make");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasComment("Vehicle Model");
 
                     b.Property<bool>("NavigationSystem")
                         .HasColumnType("bit")
@@ -446,9 +458,11 @@ namespace CarHire.Infrastructure.Migrations
                             Consumption = 20.0,
                             Doors = 2,
                             Fuel = 2,
-                            ImageUrl = "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/2_3.gif?itok=dyWvAKCx",
+                            ImageUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/9a84ff95800693.5e9ff770404b5.jpg",
                             IsDeleted = false,
                             Kilometers = 10000,
+                            Make = "Koenigsegg",
+                            Model = "RAW",
                             NavigationSystem = true,
                             PricePerDay = 250m,
                             Seats = 2,
@@ -468,6 +482,8 @@ namespace CarHire.Infrastructure.Migrations
                             ImageUrl = "https://s1.cdn.autoevolution.com/images/news/gallery/chevrolet-chevelle-ss-black-panther-looks-wide-and-then-some_3.jpg",
                             IsDeleted = false,
                             Kilometers = 30000,
+                            Make = "Chevrolet",
+                            Model = "Chevelle SS black panther",
                             NavigationSystem = true,
                             PricePerDay = 250m,
                             Seats = 4,
@@ -487,6 +503,8 @@ namespace CarHire.Infrastructure.Migrations
                             ImageUrl = "http://3.bp.blogspot.com/-Tq37hVW0jJE/TlTJo5Q9q8I/AAAAAAAAANE/-I5-G8zgZ2w/s1600/Nissan-NV200-Concept-for-professional-photographers-1.jpg",
                             IsDeleted = false,
                             Kilometers = 60000,
+                            Make = "Nissan",
+                            Model = "NV200",
                             NavigationSystem = true,
                             PricePerDay = 25m,
                             Seats = 7,
@@ -506,6 +524,8 @@ namespace CarHire.Infrastructure.Migrations
                             ImageUrl = "https://1.bp.blogspot.com/-rL5k8U1xzKY/VRGEpRQnY4I/AAAAAAAABmE/U66r0OBX5hw/s1600/MB%2BNew%2BActros%2B2014%2BExterior.jpg",
                             IsDeleted = false,
                             Kilometers = 500000,
+                            Make = "Mercedes-Benz",
+                            Model = "Actros",
                             NavigationSystem = true,
                             PricePerDay = 150m,
                             Seats = 3,
@@ -525,6 +545,8 @@ namespace CarHire.Infrastructure.Migrations
                             ImageUrl = "https://www.dekalblimo.com/assets/images/mini-charter-bus-825x550.jpg",
                             IsDeleted = false,
                             Kilometers = 200000,
+                            Make = "Ford",
+                            Model = "F550 Executive Limo Bus",
                             NavigationSystem = true,
                             PricePerDay = 150m,
                             Seats = 36,
@@ -629,6 +651,22 @@ namespace CarHire.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "first_name",
+                            ClaimValue = "John",
+                            UserId = "44569627-988b-4096-8397-48cae1a68157"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "first_name",
+                            ClaimValue = "Jane",
+                            UserId = "27fba6ae-8175-4484-9b0d-917d6b32c851"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>

@@ -6,6 +6,11 @@
         {
             public const string FirstName = "first_name";
         }
+
+        public static class RolesConstants
+        {
+            public const string Admin = "Admin";
+        }
         public static class ApplicationUserConstants
         {
             public const int FirstNameMinLength = 2;

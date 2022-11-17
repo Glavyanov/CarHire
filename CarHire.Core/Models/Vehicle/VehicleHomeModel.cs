@@ -2,6 +2,6 @@
 {
     public class VehicleHomeModel
     {
-
+        public string ImageUrl { get; set; } = null!;
     }
 }

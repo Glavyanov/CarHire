@@ -35,6 +35,8 @@
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new UserClaimsConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
             builder.ApplyConfiguration(new RenterConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new VehicleConfiguration());

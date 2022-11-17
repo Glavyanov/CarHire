@@ -1,0 +1,15 @@
+﻿@model IEnumerable<VehicleHomeModel>
+
+@{
+    ViewData["Title"] = "Vehicles";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <img class="card-img-top" src="@item.ImageUrl" alt="Vehicle Image">
+            </div>
+        }
+    </div>
+</div>

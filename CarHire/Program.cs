@@ -26,6 +26,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireDigit = builder.Configuration.GetValue<bool>("Identity:RequireDigit");
 
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationServices();

@@ -88,7 +88,7 @@
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(UserLoginModel model)
+        public async Task<IActionResult> Login(UserLoginModel model, [FromQuery]string? ReturnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -103,6 +103,10 @@
 
                 if (result.Succeeded)
                 {
+                    if (ReturnUrl != null)
+                    {
+                        return Redirect(ReturnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
             }

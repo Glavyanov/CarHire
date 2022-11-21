@@ -3,6 +3,8 @@
     using CarHire.Core.Models.Vehicle;
     public interface IVehicleService
     {
-        Task<IEnumerable<VehicleHomeModel>> GetVehiclesAsync(string category);
+        Task<IEnumerable<VehicleHomeModel>> GetAllAsync();
+
+        Task<IEnumerable<VehicleHomeModel>> GetVehiclesByCategoryAsync(int categoryId);
     }
 }

@@ -23,14 +23,8 @@
         public async Task<IActionResult> Index()
         {
             IEnumerable<CategoryHomeModel> categoryHomeModels = await categoryService.GetCategoriesAsync();
-
+            
             return View(categoryHomeModels);
-        }
-
-        public async Task<IActionResult> Vehicles(string category)
-        {
-
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

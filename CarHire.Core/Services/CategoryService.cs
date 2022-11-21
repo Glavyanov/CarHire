@@ -16,11 +16,17 @@
             repository = _repository;
         }
 
+        public async Task<bool> ExistsbyIdAsync(int categoryId)
+        {
+            return await repository.AllReadonly<Category>(c => c.Id == categoryId).AnyAsync();
+        }
+
         public async Task<IEnumerable<CategoryHomeModel>> GetCategoriesAsync()
         {
             return await this.repository.AllReadonly<Category>()
                 .Select(c => new CategoryHomeModel()
                 {
+                    CategoryId = c.Id,
                     Name = c.Name
                 })
                 .ToListAsync();

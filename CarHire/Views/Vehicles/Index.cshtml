@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<VehicleHomeModel>
 
 @{
-    ViewData["Title"] = "Vehicles";
+    ViewData["Title"] = "All Vehicles";
 }
+
 <div class="container">
     <div class="row justify-content-center">
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
             <div class="col-md-6">
-                <img class="card-img-top" src="@item.ImageUrl" alt="Vehicle Image">
+                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 85%; height: 350px;">
             </div>
-        }
+    }
     </div>
 </div>

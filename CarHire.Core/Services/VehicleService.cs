@@ -16,10 +16,21 @@
             repo = _repo;
         }
 
-        public async Task<IEnumerable<VehicleHomeModel>> GetVehiclesAsync(string category)
+        public async Task<IEnumerable<VehicleHomeModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == category)
+                .OrderBy(v => v.CategoryId)
+                .Select(v => new VehicleHomeModel()
+                {
+                    ImageUrl = v.ImageUrl
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<VehicleHomeModel>> GetVehiclesByCategoryAsync(int categoryId)
+        {
+            return await repo.AllReadonly<Vehicle>()
+                .Where(v => v.CategoryId == categoryId)
                 .Select(v => new VehicleHomeModel() 
                 {
                     ImageUrl = v.ImageUrl 

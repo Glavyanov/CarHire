@@ -11,6 +11,7 @@
         {
             public const string Admin = "Admin";
         }
+
         public static class ApplicationUserConstants
         {
             public const int FirstNameMinLength = 2;
@@ -34,6 +35,7 @@
             public const int NameMinLength = 3;
             public const int NameMaxLength = 60;
         }
+
         public static class VehicleConstants
         {
             public const int ImageUrlMinLength = 10;
@@ -57,6 +59,7 @@
             public const int DrivingLicenseNumberMinLength = 8;
             public const int DrivingLicenseNumberMaxLength = 100;
         }
+
         public static class CommentConstants
         {
             public const int DescriptionMinLength = 8;

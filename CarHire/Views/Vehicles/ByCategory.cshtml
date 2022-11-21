@@ -1,56 +1,14 @@
 ﻿@model IEnumerable<VehicleHomeModel>
-
 @{
     ViewData["Title"] = "Vehicles by category";
 }
-
-@if (Model == null)
-{
-    @section Scripts {
-    <script>
-        (function () {
-            Swal.fire({
-                icon: 'error',
-                toast: true,
-                html: '<b>The category does not exists!</b>',
-                background: 'bisque',
-                timer: 2500
-            }).then(() => {
-                document.getElementById('home').click();
-            })
-        })();
-    </script>
-    }
-}
-else
-{
-    if (!Model.Any())
-    {
-        @section Scripts {
-    <script>
-        (function () {
-            Swal.fire({
-                toast: true,
-                html: '<strong style="color:blue;">Sorry we don\'t have any vehicles for this category yet!</strong>',
-                background: 'bisque'
-            }).then(() => {
-                document.getElementById('home').click();
-            })
-        })();
-    </script>
-        }
-    }
-    else
-    {
-        <div class="container">
-            <div class="row justify-content-center">
-                @foreach (var item in Model!)
-                {
-                    <div class="col-md-6">
-                        <img class="card-img-top" src="@item.ImageUrl" alt="Vehicle Image">
-                    </div>
-                }
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model!)
+        {
+            <div class="col-md-6">
+                <img class="card-img-top" src="@item.ImageUrl" alt="Vehicle Image">
             </div>
-        </div>
-    }
-}
+        }
+    </div>
+</div>

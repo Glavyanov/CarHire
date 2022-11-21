@@ -3,6 +3,7 @@
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Vehicle;
     using Microsoft.AspNetCore.Mvc;
+    using static CarHire.Infrastructure.Data.ValidationConstants;
 
     public class VehiclesController : BaseController
     {
@@ -30,11 +31,18 @@
         {
             if (await categoryService.ExistsbyIdAsync(categoryId) == false)
             {
-                return View();
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageValue;
+
+                return RedirectToAction("Index", "Home");
             }
 
             var vehicles = await vehicleService.GetVehiclesByCategoryAsync(categoryId);
+            if (!vehicles.Any())
+            {
+                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageValue;
 
+                return RedirectToAction("Index", "Home");
+            }
             return View(vehicles);
         }
     }

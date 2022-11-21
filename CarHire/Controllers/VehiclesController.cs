@@ -31,7 +31,7 @@
         {
             if (await categoryService.ExistsbyIdAsync(categoryId) == false)
             {
-                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageValue;
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageCategory;
 
                 return RedirectToAction("Index", "Home");
             }
@@ -39,7 +39,7 @@
             var vehicles = await vehicleService.GetVehiclesByCategoryAsync(categoryId);
             if (!vehicles.Any())
             {
-                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageValue;
+                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageCategory;
 
                 return RedirectToAction("Index", "Home");
             }

@@ -69,9 +69,11 @@
         public static class MessageConstant
         {
             public const string ErrorMessage = "ErrorMessage";
-            public const string ErrorMessageValue = "The category does not exists!";
+            public const string ErrorMessageCategory = "The category does not exists!";
+
             public const string WarningMessage = "WarningMessage";
-            public const string WarningMessageValue = "Sorry we don\'t have any vehicles for this category yet!";
+            public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category yet!";
+
             public const string SuccessMessage = "SuccessMessage";
         }
     }

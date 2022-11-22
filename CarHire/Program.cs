@@ -11,15 +11,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
-{ 
-    options.SignIn.RequireConfirmedAccount = 
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount =
     builder.Configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
     options.User.RequireUniqueEmail = builder.Configuration.GetValue<bool>("Identity:RequireUniqueEmail");
 
     options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:RequiredLength");
     options.Password.RequiredUniqueChars = builder.Configuration.GetValue<int>("Identity:RequiredUniqueChars");
-    options.Password.RequireNonAlphanumeric = 
+    options.Password.RequireNonAlphanumeric =
     builder.Configuration.GetValue<bool>("Identity:RequireNonAlphanumeric");
     options.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity:RequireUppercase");
     options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:RequireLowercase");
@@ -56,9 +56,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "areas", 
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "default", 
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoints.MapRazorPages();
+});
 
 app.Run();

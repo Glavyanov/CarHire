@@ -2,6 +2,8 @@
 {
     public class VehicleHomeModel
     {
+        public string Id { get; set; } = null!;
+
         public string ImageUrl { get; set; } = null!;
     }
 }

@@ -6,11 +6,12 @@
 
 <div class="container">
     <div class="row justify-content-center">
-    @foreach (var item in Model)
-    {
-            <div class="col-md-6">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-6 position-relative mb-5">
+                <a class="btn btn-primary position-absolute position-absolute bottom-0 end-50 translate-middle" asp-controller="Vehicles" asp-action="MyRent" asp-route-id="@item.Id">Rent</a>
                 <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 85%; height: 350px;">
             </div>
-    }
+        }
     </div>
 </div>

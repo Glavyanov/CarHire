@@ -30,6 +30,10 @@
         [Comment("Allows entry showing")]
         public bool IsDeleted { get; set; }
 
+        [Required]
+        [Comment("Indicates whether the vehicle is rented")]
+        public bool IsRented{ get; set; }
+
         [Comment("Year of manufacture")]
         public int Year { get; init; }
 

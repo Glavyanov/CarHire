@@ -2,6 +2,7 @@
 {
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Vehicle;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
 
@@ -19,6 +20,7 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var vehicles = await vehicleService.GetAllAsync();
@@ -27,6 +29,7 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ByCategory(int categoryId)
         {
             if (await categoryService.ExistsbyIdAsync(categoryId) == false)
@@ -43,7 +46,19 @@
 
                 return RedirectToAction("Index", "Home");
             }
+
             return View(vehicles);
+        }
+
+        public IActionResult Rent(string id)
+        {
+            return RedirectToAction(nameof(MyRent));
+        }
+
+        public IActionResult MyRent(string id)
+        {
+            VehicleHomeModel model = new (){ Id = id };
+            return View(model);
         }
     }
 }

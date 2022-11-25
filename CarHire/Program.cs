@@ -34,6 +34,7 @@ builder.Services.AddApplicationServices();
 builder.Services.ConfigureApplicationCookie(opt =>
 {
     opt.LoginPath = "/User/Login";
+    opt.Cookie.HttpOnly = true;
 });
 
 var app = builder.Build();

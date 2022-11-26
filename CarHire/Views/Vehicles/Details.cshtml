@@ -1,0 +1,62 @@
+﻿@model VehicleDetailsModel
+
+@{
+    ViewBag.Title = "CarHire Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="House Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Make</u></p>
+            <p style="font-size:25px;"><u>@Model.Model</u></p>
+            <p>Manufactured in: <b>@Model.Year</b></p>
+            <p>
+                Price per day :
+                <b>@String.Format("{0:f2}", Model.PricePerDay) EUR</b>
+            </p>
+            <p>Category: <b>@Model.CategoryName</b></p>
+            <div class="form-inline">
+                <a class="btn btn-primary" asp-controller="Comment" asp-action="GetComments"
+                   asp-route-id="@Model.Id">View comments</a>
+                @if (!Model.IsRented)
+                {
+                    <form class="ml-2" asp-controller="Vehicles"
+                      asp-action="MyRent" asp-route-id="@Model.Id" method="get">
+                        <input class="btn btn-warning" type="submit" value="Rent" style="height: 40px; width: 16%;" />
+                    </form>
+                }
+                else
+                {
+                    <div style="background-color: red;height: 40px; width: 16%;">
+                        <p style="text-align: center;">
+                            <b>Rented</b>
+                        </p>
+                    </div>
+
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Vehicle Info</h5>
+                    <p class="card-text">Suspension:  @Model.Suspension</p>
+                    <p class="card-text">Navigation:  @(Model.NavigationSystem ? "Yes" : "No")</p>
+                    <p class="card-text">Gear box:  @Model.Transmission</p>
+                    <p class="card-text">Air condition:  @(Model.AirCondition ? "Yes" : "No")</p>
+                    <p class="card-text">Seats: @Model.Seats</p>
+                    <p class="card-text">Doors: @Model.Doors</p>
+                    <p class="card-text">Fuel type: @Model.FuelType</p>
+                    <p class="card-text">Consumption: @(Model.Consumption == null ? "N/A" : String.Format("{0:f2}", Model.Consumption))</p>
+                    <p class="card-text">Tank capacity: @(Model.TankCapacity == null ? "N/A" : Model.TankCapacity)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

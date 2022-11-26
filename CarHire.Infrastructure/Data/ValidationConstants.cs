@@ -70,9 +70,11 @@
         {
             public const string ErrorMessage = "ErrorMessage";
             public const string ErrorMessageCategory = "The category does not exists!";
+            public const string ErrorMessageVehicle = "The vehicle is not exists!";
 
             public const string WarningMessage = "WarningMessage";
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category yet!";
+            public const string WarningMessageIsRented = "Sorry vehicle is rented!";
 
             public const string SuccessMessage = "SuccessMessage";
         }

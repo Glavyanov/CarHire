@@ -1,10 +1,5 @@
 ﻿@using static CarHire.Infrastructure.Data.ValidationConstants.MessageConstant;
 
-@{
-    var errorMessage = ErrorMessageCategory;
-    var warningMessage = WarningMessageCategory;
-}
-
 <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
 
 @if (TempData[ErrorMessage] != null)
@@ -14,7 +9,7 @@
             Swal.fire({
                 icon: 'error',
                 toast: true,
-                html: '<b style="color:#FFFAF0">@errorMessage</b>',
+                html: '<b style="color:#FFFAF0">@TempData[ErrorMessage]</b>',
                 background: '#B22222',
                 timer: 3500
             })
@@ -28,7 +23,7 @@
         (function () {
             Swal.fire({
                 toast: true,
-                html: '<strong style="color:black;">@warningMessage</strong>',
+                html: '<strong style="color:black;">@TempData[WarningMessage]</strong>',
                 background: 'orange'
             })
         })();

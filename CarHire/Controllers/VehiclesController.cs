@@ -55,9 +55,43 @@
             return RedirectToAction(nameof(MyRent));
         }
 
-        public IActionResult MyRent(string id)
+        [HttpGet]
+        public async Task<IActionResult> MyRent(string id)
         {
-            VehicleHomeModel model = new (){ Id = id };
+            if (await vehicleService.ExistsAsync(id) == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            VehicleHomeModel model = new ()
+            {
+                Id = id ,
+                //IsRented = true
+            };
+
+            if (model.IsRented)
+            {
+                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageIsRented;
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            if (await vehicleService.ExistsAsync(id) == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction("Index", "Home");
+            }
+            var model = await vehicleService.GetVehicleByIdAsync(id);
+
             return View(model);
         }
     }

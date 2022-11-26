@@ -50,13 +50,13 @@
             return View(vehicles);
         }
 
-        public IActionResult Rent(string id)
+        public IActionResult MyRent(string id)
         {
-            return RedirectToAction(nameof(MyRent));
+            return RedirectToAction(nameof(Rent));
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyRent(string id)
+        public async Task<IActionResult> Rent(string id)
         {
             if (await vehicleService.ExistsAsync(id) == false)
             {
@@ -77,6 +77,7 @@
 
                 return RedirectToAction(nameof(Index));
             }
+
             return View(model);
         }
 

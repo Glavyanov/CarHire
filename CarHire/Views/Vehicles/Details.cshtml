@@ -28,7 +28,7 @@
                 @if (!Model.IsRented)
                 {
                     <form class="ml-2" asp-controller="Vehicles"
-                      asp-action="MyRent" asp-route-id="@Model.Id" method="get">
+                      asp-action="Rent" asp-route-id="@Model.Id" method="get">
                         <input class="btn btn-warning" type="submit" value="Rent" style="height: 40px; width: 16%;" />
                     </form>
                 }

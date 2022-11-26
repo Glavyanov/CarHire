@@ -12,7 +12,7 @@
                 @if (!item.IsRented)
                 {
                     <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 16%;" 
-                    asp-controller="Vehicles" asp-action="MyRent" asp-route-id="@item.Id">Rent</a>
+                    asp-controller="Vehicles" asp-action="Rent" asp-route-id="@item.Id">Rent</a>
                 }
                 else
                 {

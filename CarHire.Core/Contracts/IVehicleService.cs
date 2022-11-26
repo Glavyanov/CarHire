@@ -7,7 +7,7 @@
 
         Task<IEnumerable<VehicleHomeModel>> GetVehiclesByCategoryAsync(int categoryId);
 
-        Task<VehicleDetailsModel> GetVehicleByIdAsync(string id);
+        Task<VehicleDetailsModel> GetVehicleDetailsByIdAsync(string id);
 
         Task<bool> ExistsAsync(string id);
     }

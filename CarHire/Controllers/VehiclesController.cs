@@ -91,7 +91,7 @@
 
                 return RedirectToAction("Index", "Home");
             }
-            var model = await vehicleService.GetVehicleByIdAsync(id);
+            var model = await vehicleService.GetVehicleDetailsByIdAsync(id);
 
             return View(model);
         }

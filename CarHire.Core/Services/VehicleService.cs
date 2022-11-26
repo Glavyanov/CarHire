@@ -34,7 +34,7 @@
                 .ToListAsync();
         }
 
-        public async Task<VehicleDetailsModel> GetVehicleByIdAsync(string id)
+        public async Task<VehicleDetailsModel> GetVehicleDetailsByIdAsync(string id)
         {
             return await repo.AllReadonly<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
                 .Select(x => new VehicleDetailsModel()

@@ -1,0 +1,33 @@
+﻿@model VehicleRentModel
+
+@{
+    ViewData["Title"] = "Rent Vehicle";
+}
+
+<div class="container">
+    <div class="row">
+        <h3>Car Id</h3>
+        <div class="row justify-content-end">
+            <span class="badge badge-black" style="color: black">@Model.Id</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <form method="post">
+                <input asp-for="@Model.Id" />
+                <div class="mb-3">
+                    <label asp-for="@Model.DrivingLicense" class="form-label">Driving License</label>
+                    <input asp-for="@Model.DrivingLicense" class="form-control" aria-required="true" />
+                    <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Rent" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

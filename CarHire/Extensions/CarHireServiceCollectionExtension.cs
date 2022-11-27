@@ -16,6 +16,7 @@
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IRentService, RentService>();
 
             return services;
         }

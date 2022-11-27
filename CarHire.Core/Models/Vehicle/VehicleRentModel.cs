@@ -25,5 +25,11 @@
         [HiddenInput(DisplayValue = false)]
         public string RenterId { get; set; } = null!;
 
+        [Range(MinRentDays, MaxRentDays,
+            ErrorMessage = "The {0} must be at least {1} and at max {2} days.")]
+        public int RentDays { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public decimal PricePerDay { get; set; }
     }
 }

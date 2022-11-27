@@ -1,9 +1,12 @@
 ﻿namespace CarHire.Controllers
 {
     using CarHire.Core.Contracts;
+    using CarHire.Core.Models.Renter;
     using CarHire.Core.Models.Vehicle;
+    using CarHire.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
+    using static CarHire.Infrastructure.Data.ValidationConstants.RenterConstants;
 
     public class RentController : BaseController
     {
@@ -45,15 +48,49 @@
 
 
         [HttpPost]
-        public IActionResult Index(VehicleRentModel model)
+        public async Task<IActionResult> Index(VehicleRentModel model)
         {
             if (!TempData.ContainsKey(model.Id))
             {
                 TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
-                return RedirectToAction("Index", "Home");
 
+                return RedirectToAction("Index", "Home");
             }
 
+            if (await rentService.ExistsbyApplicationUserIdAsync(User.Id()) == false)
+            {
+                int renterDiscount = RenterConstants.BasicRenterDiscount;
+                RenterHomeModel renterModel = new()
+                {
+                    ApplicationUserId = User.Id(),
+                    DrivingLicenseNumber = model.DrivingLicense,
+                    RegisteredOn = DateTime.Now,
+                    RenterDiscount = renterDiscount,
+                    TotalValue = Math.Round(
+                    (model.PricePerDay * model.RentDays) * (decimal)(1 - (renterDiscount * 1.00 / 100)), 2),
+                    VehicleId = model.Id,
+                    HiredCarPricePerDay = model.PricePerDay
+                };
+                try
+                {
+                    await rentService.CreateRenterAsync(renterModel);
+
+                }
+                catch (ArgumentException ex)
+                {
+                    TempData[MessageConstant.ErrorMessage] = ex.Message;
+
+                    return RedirectToAction("Index", "Home");
+
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                //TODO:
+
+            }
             //TODO:
             return View(model);
         }

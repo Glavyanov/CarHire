@@ -58,6 +58,9 @@
         {
             public const int DrivingLicenseNumberMinLength = 8;
             public const int DrivingLicenseNumberMaxLength = 100;
+            public const int BasicRenterDiscount = 15;
+            public const int MinRentDays = 1;
+            public const int MaxRentDays = 30;
         }
 
         public static class CommentConstants

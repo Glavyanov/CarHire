@@ -8,5 +8,10 @@
         Task<RenterHomeModel> GetRenterByIdAsync(string id);
 
         Task<VehicleRentModel> GetVehicleRentByIdAsync(string id);
+
+        Task<bool> ExistsbyApplicationUserIdAsync(string id);
+
+        Task<string> CreateRenterAsync(RenterHomeModel model);
+
     }
 }

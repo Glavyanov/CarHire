@@ -6,7 +6,6 @@
     using CarHire.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
-    using static CarHire.Infrastructure.Data.ValidationConstants.RenterConstants;
 
     public class RentController : BaseController
     {

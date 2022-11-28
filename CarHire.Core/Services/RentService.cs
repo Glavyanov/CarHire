@@ -22,7 +22,12 @@
         public async Task<string> CreateRenterAsync(RenterHomeModel model)
         {
             Guid vehicleId = Guid.Parse(model.VehicleId);
-            Vehicle vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+            Vehicle vehicle = 
+                await repo.All<Vehicle>(v => v.Id == vehicleId)
+                .Include(x => x.VehicleDiscounts)
+                .ThenInclude(x => x.Discount)
+                .FirstAsync();
+
             if (vehicle.PricePerDay > model.HiredCarPricePerDay)
             {
                 throw new ArgumentException("The price is manipulated!");
@@ -40,6 +45,33 @@
             vehicle.IsRented = true;
 
             await repo.AddAsync<Renter>(renter);
+            await repo.SaveChangesAsync();
+
+            var startDate = DateTime.Now;
+            var endDate = startDate.AddDays(model.RentDays);
+
+            int discount = 0;
+            if (vehicle.VehicleDiscounts.Any())
+            {
+                discount = vehicle.VehicleDiscounts.Sum(s => s.Discount.DiscountSize);
+            }
+            decimal totalPriceWithDiscount = 
+                Math.Round( model.TotalValue * (decimal)(1 - (discount * 1.00 / 100)), 2);
+
+            Order order = new()
+            {
+                RenterId = renter.Id,
+                VehicleId = vehicleId,
+                StartDate = startDate,
+                EndDate = endDate,
+                Discount = discount,
+                TotalDays = model.RentDays,
+                Price = model.TotalValue,
+                TotalPriceWithDiscount = totalPriceWithDiscount,
+                IsDeleted = false
+            };
+
+            await repo.AddAsync<Order>(order);
             await repo.SaveChangesAsync();
 
             return renter.Id.ToString();
@@ -76,5 +108,22 @@
 
                 }).FirstAsync();
         }
+
+        //TODO DELETE
+        /*public async Task<List<Vehicle>> GetVehiclesByRenterId(string id)
+        {
+            var renter = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id).FirstAsync();
+            var vehiclesId = await repo.AllReadonly<Order>(o => o.RenterId == renter.Id)
+                .Select(x => x.VehicleId)
+                .ToListAsync();
+            List<Vehicle> vehicles = new();
+            foreach (var item in vehiclesId)
+            {
+                var vehicle = await repo.AllReadonly<Vehicle>(x => x.Id == item).FirstAsync();
+                vehicles.Add(vehicle);
+            }
+
+            return vehicles;
+        }*/
     }
 }

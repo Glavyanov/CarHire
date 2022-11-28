@@ -18,5 +18,6 @@
 
         public decimal HiredCarPricePerDay { get; set; }
 
+        public int RentDays { get; set; }
     }
 }

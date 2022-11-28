@@ -68,7 +68,8 @@
                     TotalValue = Math.Round(
                     (model.PricePerDay * model.RentDays) * (decimal)(1 - (renterDiscount * 1.00 / 100)), 2),
                     VehicleId = model.Id,
-                    HiredCarPricePerDay = model.PricePerDay
+                    HiredCarPricePerDay = model.PricePerDay,
+                    RentDays = model.RentDays
                 };
                 try
                 {
@@ -94,9 +95,12 @@
             return View(model);
         }
 
-
-        public IActionResult MyRent(string id)
+        [HttpGet]
+        public async Task<IActionResult> MyRent()
         {
+            /*var userId = User.Id();
+            var vehicle = await rentService.GetVehiclesByRenterId(userId);
+            if (vehicle == null) return RedirectToAction("Index", "Home");*/
             return RedirectToAction(nameof(Index));
         }
     }

@@ -27,8 +27,8 @@
                    asp-route-id="@Model.Id">View comments</a>
                 @if (!Model.IsRented)
                 {
-                    <form class="ml-2" asp-controller="Vehicles"
-                      asp-action="Rent" asp-route-id="@Model.Id" method="get">
+                    <form class="ml-2" asp-controller="Rent"
+                      asp-action="Index" asp-route-id="@Model.Id" method="get">
                         <input class="btn btn-warning" type="submit" value="Rent" style="height: 40px; width: 16%;" />
                     </form>
                 }

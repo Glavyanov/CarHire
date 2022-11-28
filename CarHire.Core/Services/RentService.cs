@@ -39,8 +39,6 @@
 
             vehicle.IsRented = true;
 
-            renter.Vehicles.Add(vehicle);
-
             await repo.AddAsync<Renter>(renter);
             await repo.SaveChangesAsync();
 

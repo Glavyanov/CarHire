@@ -69,7 +69,7 @@
                     (model.PricePerDay * model.RentDays) * (decimal)(1 - (renterDiscount * 1.00 / 100)), 2),
                     VehicleId = model.Id,
                     HiredCarPricePerDay = model.PricePerDay,
-                    RentDays = model.RentDays
+                    RentDays = model.RentDays,
                 };
                 try
                 {

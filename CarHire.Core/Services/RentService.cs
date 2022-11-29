@@ -28,7 +28,17 @@
                 .ThenInclude(x => x.Discount)
                 .FirstAsync();
 
-            if (vehicle.PricePerDay > model.HiredCarPricePerDay)
+            decimal checkVehiclePrice = await repo.All<Vehicle>(v => v.Id == vehicleId)
+                .Include(x => x.VehicleDiscounts)
+                .ThenInclude(x => x.Discount)
+                .Select(x => x.VehicleDiscounts.Sum(s => s.Discount.DiscountSize) != 0
+                    ? Math.Round(
+                        x.PricePerDay *
+                        (decimal)(1 - (x.VehicleDiscounts.Sum(s => s.Discount.DiscountSize) * 1.00 / 100)), 2)
+                    : x.PricePerDay)
+                .FirstAsync();
+
+            if (checkVehiclePrice > model.HiredCarPricePerDay)
             {
                 throw new ArgumentException("The price is manipulated!");
             }
@@ -50,13 +60,7 @@
             var startDate = DateTime.Now;
             var endDate = startDate.AddDays(model.RentDays);
 
-            int discount = 0;
-            if (vehicle.VehicleDiscounts.Any())
-            {
-                discount = vehicle.VehicleDiscounts.Sum(s => s.Discount.DiscountSize);
-            }
-            decimal totalPriceWithDiscount = 
-                Math.Round( model.TotalValue * (decimal)(1 - (discount * 1.00 / 100)), 2);
+            int sumOfVehicleDiscounts = vehicle.VehicleDiscounts.Sum(s => s.Discount.DiscountSize);
 
             Order order = new()
             {
@@ -64,10 +68,10 @@
                 VehicleId = vehicleId,
                 StartDate = startDate,
                 EndDate = endDate,
-                Discount = discount,
+                VehicleDiscount = sumOfVehicleDiscounts,
                 TotalDays = model.RentDays,
-                Price = model.TotalValue,
-                TotalPriceWithDiscount = totalPriceWithDiscount,
+                Price = vehicle.PricePerDay,
+                TotalPriceWithDiscounts = model.TotalValue,
                 IsDeleted = false
             };
 
@@ -99,12 +103,18 @@
         public async Task<VehicleRentModel> GetVehicleRentByIdAsync(string id)
         {
             return await repo.All<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
+                .Include(x => x.VehicleDiscounts)
+                .ThenInclude(x => x.Discount)
                 .Select(v => new VehicleRentModel()
                 {
                     Id = v.Id.ToString(),
                     ImageUrl = v.ImageUrl,
                     IsRented = v.IsRented,
-                    PricePerDay = v.PricePerDay
+                    PricePerDay = v.VehicleDiscounts.Sum(s => s.Discount.DiscountSize) != 0 
+                    ? Math.Round(
+                        v.PricePerDay * 
+                        (decimal)(1 - (v.VehicleDiscounts.Sum(s => s.Discount.DiscountSize) * 1.00 / 100)), 2)
+                    : v.PricePerDay
 
                 }).FirstAsync();
         }

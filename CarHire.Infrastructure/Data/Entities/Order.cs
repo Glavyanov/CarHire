@@ -35,12 +35,12 @@
         [Comment("Price before discount")]
         public decimal Price { get; set; }
 
-        [Comment("All discounts of renter and vehicle")]
-        public int Discount { get; set; }
+        [Comment("All discounts of vehicle")]
+        public int VehicleDiscount { get; set; }
 
         [Column(TypeName = "money")]
-        [Comment("Price after all discounts")]
-        public decimal TotalPriceWithDiscount { get; set; }
+        [Comment("Price after all discounts on vehicle and renter")]
+        public decimal TotalPriceWithDiscounts { get; set; }
 
         [Comment("Begining of order")]
         public DateTime StartDate { get; set; }

@@ -10,11 +10,10 @@
 
         Task<VehicleRentModel> GetVehicleRentByIdAsync(string id);
 
-        Task<bool> ExistsbyApplicationUserIdAsync(string id);
+        Task<bool> ExistsByApplicationUserIdAsync(string id);
 
         Task<string> CreateRenterAsync(RenterHomeModel model);
 
-        //TODO: DELETE
-        /*Task<List<Vehicle>> GetVehiclesByRenterId(string id);*/
+        Task<List<VehicleHomeModel>> GetVehiclesByRenterId(string id);
     }
 }

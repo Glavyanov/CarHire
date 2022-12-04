@@ -56,52 +56,57 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            if (await rentService.ExistsbyApplicationUserIdAsync(User.Id()) == false)
+            int renterDiscount = RenterConstants.BasicRenterDiscount;
+            decimal totalValue = Math.Round(
+                    (model.PricePerDay * model.RentDays) * (decimal)(1 - (renterDiscount * 1.00 / 100)), 2);
+
+            if (await rentService.ExistsByApplicationUserIdAsync(User.Id()))
             {
-                int renterDiscount = RenterConstants.BasicRenterDiscount;
-                RenterHomeModel renterModel = new()
-                {
-                    ApplicationUserId = User.Id(),
-                    DrivingLicenseNumber = model.DrivingLicense,
-                    RegisteredOn = DateTime.Now,
-                    RenterDiscount = renterDiscount,
-                    TotalValue = Math.Round(
-                    (model.PricePerDay * model.RentDays) * (decimal)(1 - (renterDiscount * 1.00 / 100)), 2),
-                    VehicleId = model.Id,
-                    HiredCarPricePerDay = model.PricePerDay,
-                    RentDays = model.RentDays,
-                };
-                try
-                {
-                    await rentService.CreateRenterAsync(renterModel);
-
-                }
-                catch (ArgumentException ex)
-                {
-                    TempData[MessageConstant.ErrorMessage] = ex.Message;
-
-                    return RedirectToAction("Index", "Home");
-
-                }
-
-                return RedirectToAction("Index", "Home");
+                renterDiscount = RenterConstants.ZeroDiscount;
+                totalValue = model.PricePerDay * model.RentDays;
             }
-            else
+
+            RenterHomeModel renterModel = new()
             {
-                //TODO:
+                ApplicationUserId = User.Id(),
+                DrivingLicenseNumber = model.DrivingLicense,
+                RegisteredOn = DateTime.Now,
+                RenterDiscount = renterDiscount,
+                TotalValue = totalValue,
+                VehicleId = model.Id,
+                HiredCarPricePerDay = model.PricePerDay,
+                RentDays = model.RentDays,
+            };
+
+            try
+            {
+                await rentService.CreateRenterAsync(renterModel);
 
             }
-            //TODO:
-            return View(model);
+            catch (ArgumentException ex)
+            {
+                TempData[MessageConstant.ErrorMessage] = ex.Message;
+
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(MyRent));
         }
 
         [HttpGet]
         public async Task<IActionResult> MyRent()
         {
-            /*var userId = User.Id();
-            var vehicle = await rentService.GetVehiclesByRenterId(userId);
-            if (vehicle == null) return RedirectToAction("Index", "Home");*/
-            return RedirectToAction(nameof(Index));
+            var userId = User.Id();
+            var vehicles = await rentService.GetVehiclesByRenterId(userId);
+
+            if (!vehicles.Any())
+            {
+                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageMyRent;
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(vehicles);
         }
     }
 }

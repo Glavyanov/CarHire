@@ -81,7 +81,7 @@
             return renter.Id.ToString();
         }
 
-        public async Task<bool> ExistsbyApplicationUserIdAsync(string id)
+        public async Task<bool> ExistsByApplicationUserIdAsync(string id)
         {
             return await repo.All<Renter>(r => r.ApplicationUserId == id).AnyAsync();
         }
@@ -118,22 +118,23 @@
 
                 }).FirstAsync();
         }
-
-        //TODO DELETE
-        /*public async Task<List<Vehicle>> GetVehiclesByRenterId(string id)
+        public async Task<List<VehicleHomeModel>> GetVehiclesByRenterId(string id)
         {
-            var renter = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id).FirstAsync();
-            var vehiclesId = await repo.AllReadonly<Order>(o => o.RenterId == renter.Id)
+            var renter = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id)
+                .Select(x => x.Id)
+                .ToListAsync();
+
+            var vehiclesId = await repo.AllReadonly<Order>(o => renter.Contains(o.RenterId) && !o.IsDeleted)
                 .Select(x => x.VehicleId)
                 .ToListAsync();
-            List<Vehicle> vehicles = new();
-            foreach (var item in vehiclesId)
-            {
-                var vehicle = await repo.AllReadonly<Vehicle>(x => x.Id == item).FirstAsync();
-                vehicles.Add(vehicle);
-            }
 
-            return vehicles;
-        }*/
+            return await repo.AllReadonly<Vehicle>(x => vehiclesId.Contains(x.Id))
+                    .Select(v => new VehicleHomeModel()
+                    {
+                        Id = v.Id.ToString(),
+                        ImageUrl = v.ImageUrl
+                    })
+                    .ToListAsync();
+        }
     }
 }

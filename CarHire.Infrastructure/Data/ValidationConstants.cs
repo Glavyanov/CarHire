@@ -56,11 +56,14 @@
 
         public static class RenterConstants
         {
-            public const int DrivingLicenseNumberMinLength = 8;
-            public const int DrivingLicenseNumberMaxLength = 100;
-            public const int BasicRenterDiscount = 15;
             public const int MinRentDays = 1;
             public const int MaxRentDays = 30;
+
+            public const int BasicRenterDiscount = 15;
+            public const int ZeroDiscount = 0;
+
+            public const int DrivingLicenseNumberMinLength = 8;
+            public const int DrivingLicenseNumberMaxLength = 100;
         }
 
         public static class CommentConstants
@@ -76,8 +79,9 @@
             public const string ErrorMessageVehicle = "The vehicle is not exists!";
 
             public const string WarningMessage = "WarningMessage";
-            public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category yet!";
+            public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
             public const string WarningMessageIsRented = "Sorry vehicle is rented!";
+            public const string WarningMessageMyRent = "You have no rental vehicles!";
 
             public const string SuccessMessage = "SuccessMessage";
         }

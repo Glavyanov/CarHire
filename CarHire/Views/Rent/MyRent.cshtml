@@ -1,0 +1,22 @@
+﻿@model IEnumerable<VehicleHomeModel>
+
+@{
+    ViewData["Title"] = "My rented vehicles";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-6 position-relative mb-5">
+               
+                <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 16%;"
+               asp-controller="Rent" asp-action="Leave" asp-route-id="@item.Id">Leave</a>
+               
+                <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 16%;"
+               asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 85%; height: 350px;">
+            </div>
+        }
+    </div>
+</div>

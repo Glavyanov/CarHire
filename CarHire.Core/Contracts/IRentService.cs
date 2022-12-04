@@ -14,6 +14,8 @@
 
         Task<string> CreateRenterAsync(RenterHomeModel model);
 
-        Task<List<VehicleHomeModel>> GetVehiclesByRenterId(string id);
+        Task<List<VehicleHomeModel>> GetVehiclesByRenterIdAsync(string id);
+
+        Task<bool> DeleteOrderAsync(string vehicleId, string applicationUserId);
     }
 }

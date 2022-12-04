@@ -81,6 +81,26 @@
             return renter.Id.ToString();
         }
 
+        public async Task<bool> DeleteOrderAsync(string vehicleId, string applicationUserId)
+        {
+            Guid vehicleGuidId = Guid.Parse(vehicleId);
+
+            var rentersIds = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == applicationUserId)
+                .Select(x => x.Id)
+                .ToListAsync();
+
+            var order = await repo.All<Order>( o => !o.IsDeleted &&
+                            rentersIds.Contains(o.RenterId) && 
+                            o.VehicleId == vehicleGuidId).FirstOrDefaultAsync();
+            if (order != null)
+            {
+                order.IsDeleted = true;
+                await repo.SaveChangesAsync();
+            }
+
+            return order?.IsDeleted ?? false;
+        }
+
         public async Task<bool> ExistsByApplicationUserIdAsync(string id)
         {
             return await repo.All<Renter>(r => r.ApplicationUserId == id).AnyAsync();
@@ -118,17 +138,19 @@
 
                 }).FirstAsync();
         }
-        public async Task<List<VehicleHomeModel>> GetVehiclesByRenterId(string id)
+        public async Task<List<VehicleHomeModel>> GetVehiclesByRenterIdAsync(string id)
         {
-            var renter = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id)
+            var rentersIds = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id)
                 .Select(x => x.Id)
                 .ToListAsync();
 
-            var vehiclesId = await repo.AllReadonly<Order>(o => renter.Contains(o.RenterId) && !o.IsDeleted)
+            var vehiclesId = 
+                await repo.AllReadonly<Order>(o => rentersIds.Contains(o.RenterId) && !o.IsDeleted)
                 .Select(x => x.VehicleId)
                 .ToListAsync();
 
-            return await repo.AllReadonly<Vehicle>(x => vehiclesId.Contains(x.Id))
+            return await repo.AllReadonly<Vehicle>(
+                x => vehiclesId.Contains(x.Id) && !x.IsDeleted && x.IsRented)
                     .Select(v => new VehicleHomeModel()
                     {
                         Id = v.Id.ToString(),

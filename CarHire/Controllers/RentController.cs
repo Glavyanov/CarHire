@@ -1,10 +1,11 @@
 ﻿namespace CarHire.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
+    using CarHire.Extensions;
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Renter;
     using CarHire.Core.Models.Vehicle;
-    using CarHire.Extensions;
-    using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
 
     public class RentController : BaseController
@@ -97,16 +98,44 @@
         public async Task<IActionResult> MyRent()
         {
             var userId = User.Id();
-            var vehicles = await rentService.GetVehiclesByRenterId(userId);
+            var vehicles = await rentService.GetVehiclesByRenterIdAsync(userId);
 
             if (!vehicles.Any())
             {
                 TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageMyRent;
 
-                return RedirectToAction("Index", "Home");
             }
 
             return View(vehicles);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Drop(string id)
+        {
+            if (await vehicleService.ExistsAsync(id) == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction(nameof(MyRent));
+
+            }
+
+            var userId = User.Id();
+
+            if (await rentService.ExistsByApplicationUserIdAsync(userId) == false ||
+                (await rentService.GetVehiclesByRenterIdAsync(userId)).Any() == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageRenterExist;
+
+                return RedirectToAction(nameof(MyRent));
+            }
+
+            if (await rentService.DeleteOrderAsync(vehicleId: id, applicationUserId: userId))
+            {
+                await vehicleService.DropVehicleAsync(id);
+            }
+
+            return RedirectToAction(nameof(MyRent));
         }
     }
 }

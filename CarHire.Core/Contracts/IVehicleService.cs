@@ -10,5 +10,7 @@
         Task<VehicleDetailsModel> GetVehicleDetailsByIdAsync(string id);
 
         Task<bool> ExistsAsync(string id);
+
+        Task DropVehicleAsync(string id);
     }
 }

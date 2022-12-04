@@ -71,5 +71,18 @@
                 })
                 .ToListAsync();
         }
+
+        public async Task DropVehicleAsync(string id)
+        {
+            Guid vehicleId = Guid.Parse(id);
+
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+            if (!vehicle.IsDeleted)
+            {
+                vehicle.IsRented = false;
+                await repo.SaveChangesAsync();
+            }
+
+        }
     }
 }

@@ -4,26 +4,20 @@
     ViewData["Title"] = "Rent Vehicle";
     Model.RentDays = 1;
 }
-
+<article style="background-image: url(@Model.ImageUrl); background-size: cover; width: 80rem; height: 70rem">
 <div class="container">
-    <div class="row">
-        <h3>Car Id</h3>
-        <div class="row justify-content-end">
-            <span class="badge badge-black" style="color: black">@Model.Id</span>
-        </div>
-    </div>
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
             <form method="post">
                 <input asp-for="@Model.Id" />
                 <input asp-for="@Model.PricePerDay" />
-                <div class="mb-3">
-                    <label asp-for="@Model.DrivingLicense" class="form-label">Driving License</label>
+                <div class="mb-3 text-center">
+                        <label asp-for="@Model.DrivingLicense" class="form-label text-danger"><h5>Driving License</h5></label>
                     <input asp-for="@Model.DrivingLicense" class="form-control" aria-required="true" />
                     <span asp-validation-for="DrivingLicense" class="text-danger"></span>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.RentDays" class="form-label">Rent Days</label>
+                <div class="mb-3 text-center">
+                        <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
                     <input asp-for="@Model.RentDays" class="form-control" aria-required="true" />
                     <span asp-validation-for="RentDays" class="text-danger"></span>
                 </div>
@@ -34,7 +28,7 @@
         </div>
     </div>
 </div>
-
+</article>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

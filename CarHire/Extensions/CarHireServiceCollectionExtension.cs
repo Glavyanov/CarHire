@@ -17,6 +17,7 @@
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IRentService, RentService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

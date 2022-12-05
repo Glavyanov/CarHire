@@ -1,0 +1,39 @@
+﻿@model IEnumerable<UserRoleModel>
+
+@{
+    ViewData["Title"] = "Add Roles";
+}
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <form method="post">
+                <input asp-for="@item.Id" />
+                <div class="form-group">
+                    <label asp-for="@item.FullName"></label>
+                    <span class="small text-black">- @item.FullName</span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="@item.Email"></label>
+                    <span class="small text-black">- @item.Email</span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="@item.RoleId"></label>
+                    <select asp-for="@item.RoleId" class="form-control">
+                        @foreach (var role in item.Roles)
+                        {
+                            <option value="@role.Id">@role.RoleName</option>
+                        }
+                    </select>
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-primary mt-3" type="submit" value="Add to Role" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+

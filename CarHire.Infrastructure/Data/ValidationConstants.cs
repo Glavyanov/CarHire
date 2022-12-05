@@ -10,6 +10,7 @@
         public static class RolesConstants
         {
             public const string Admin = "Admin";
+            public const string Manager = "Manager";
         }
 
         public static class ApplicationUserConstants
@@ -78,11 +79,14 @@
             public const string ErrorMessageCategory = "The category does not exists!";
             public const string ErrorMessageVehicle = "The vehicle is not exists!";
             public const string ErrorMessageRenterExist = "You don\'t have permission";
+            public const string ErrorMessageAddUserToRole = "User not added in role!";
+            public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
 
             public const string WarningMessage = "WarningMessage";
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
             public const string WarningMessageIsRented = "Sorry vehicle is rented!";
             public const string WarningMessageMyRent = "You have no rental vehicles!";
+            public const string WarningMessageAddUserToRole = "Successfully added user to role!";
 
             public const string SuccessMessage = "SuccessMessage";
         }

@@ -8,17 +8,17 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
             <div class="form-group">
-                <label asp-for="Make"></label>
-                <input asp-for="Make" class="form-control" placeholder="Make..."/>
+                <label asp-for="Make" class="bg-primary text-white"></label>
+                <input asp-for="Make" class="form-control" placeholder="Make..." />
                 <span asp-validation-for="Make" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model"></label>
-                <input asp-for="Model" class="form-control" placeholder="Model..."/>
+                <label asp-for="Model" class="bg-primary text-white"></label>
+                <input asp-for="Model" class="form-control" placeholder="Model..." />
                 <span asp-validation-for="Model" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SuspensionId"></label>
+                <label asp-for="SuspensionId" class="bg-primary text-white"></label>
                 <select asp-for="SuspensionId" class="form-control">
                     @foreach (var item in Model.Suspensions)
                     {
@@ -28,7 +28,7 @@
                 <span asp-validation-for="SuspensionId" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FuelId"></label>
+                <label asp-for="FuelId" class="bg-primary text-white"></label>
                 <select asp-for="FuelId" class="form-control">
                     @foreach (var item in Model.Fuels)
                     {
@@ -38,7 +38,7 @@
                 <span asp-validation-for="FuelId" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TransmissionId"></label>
+                <label asp-for="TransmissionId" class="bg-primary text-white"></label>
                 <select asp-for="TransmissionId" class="form-control">
                     @foreach (var item in Model.Transmissions)
                     {
@@ -48,55 +48,55 @@
                 <span asp-validation-for="TransmissionId" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Year"></label>
-                <input asp-for="Year" rows="4" class="form-control"/>
+                <label asp-for="Year" class="bg-primary text-white"></label>
+                <input asp-for="Year" rows="4" class="form-control" />
                 <span asp-validation-for="Year" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Kilometers"></label>
-                <input asp-for="Kilometers" class="form-control"/>
+                <label asp-for="Kilometers" class="bg-primary text-white"></label>
+                <input asp-for="Kilometers" class="form-control" />
                 <span asp-validation-for="Kilometers" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl"></label>
-                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here..."/>
+                <label asp-for="ImageUrl" class="bg-primary text-white"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here..." />
                 <span asp-validation-for="ImageUrl" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirCondition"></label>
-                <input asp-for="AirCondition"/>
+                <label asp-for="AirCondition" class="bg-primary text-white"></label>
+                <input asp-for="AirCondition" />
             </div>
             <div class="form-group">
-                <label asp-for="NavigationSystem"></label>
-                <input asp-for="NavigationSystem"/>
+                <label asp-for="NavigationSystem" class="bg-primary text-white"></label>
+                <input asp-for="NavigationSystem" />
             </div>
             <div class="form-group">
-                <label asp-for="Seats"></label>
-                <input asp-for="Seats" class="form-control" placeholder="Seats..."/>
+                <label asp-for="Seats" class="bg-primary text-white"></label>
+                <input asp-for="Seats" class="form-control" placeholder="Seats..." />
                 <span asp-validation-for="Seats" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Doors"></label>
-                <input asp-for="Doors" class="form-control" placeholder="Doors..."/>
+                <label asp-for="Doors" class="bg-primary text-white"></label>
+                <input asp-for="Doors" class="form-control" placeholder="Doors..." />
                 <span asp-validation-for="Doors" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TankCapacity"></label>
-                <input asp-for="TankCapacity" class="form-control" placeholder="TankCapacity..."/>
+                <label asp-for="TankCapacity" class="bg-primary text-white"></label>
+                <input asp-for="TankCapacity" class="form-control" placeholder="TankCapacity..." />
                 <span asp-validation-for="TankCapacity" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Consumption"></label>
-                <input asp-for="Consumption" class="form-control" placeholder="Consumption..."/>
+                <label asp-for="Consumption" class="bg-primary text-white"></label>
+                <input asp-for="Consumption" class="form-control" placeholder="Consumption..." />
                 <span asp-validation-for="Consumption" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PricePerDay"></label>
-                <input asp-for="PricePerDay" class="form-control" placeholder="PricePerDay..."/>
+                <label asp-for="PricePerDay" class="bg-primary text-white"></label>
+                <input asp-for="PricePerDay" class="form-control" placeholder="PricePerDay..." />
                 <span asp-validation-for="PricePerDay" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId"></label>
+                <label asp-for="CategoryId" class="bg-primary text-white"></label>
                 <select asp-for="CategoryId" class="form-control">
                     @foreach (var category in Model.VehicleCategories)
                     {

@@ -9,6 +9,7 @@
     using CarHire.Infrastructure.Data.Entities;
     using CarHire.Core.Models.Enum;
     using CarHire.Infrastructure.Data.Entities.Enums;
+    using System.Security.Cryptography.X509Certificates;
 
     public class VehicleService : IVehicleService
     {
@@ -172,6 +173,60 @@
             };
 
             await repo.AddAsync(vehicle);
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<VehicleEditModel> GetVehicleEditModelAsync(string id)
+        {
+            Guid vehicleGuid = new(id);
+            var v = await repo.GetByIdAsync<Vehicle>(vehicleGuid);
+
+            return new VehicleEditModel()
+            {
+                Id = v.Id.ToString(),
+                Make = v.Make,
+                Model = v.Model,
+                Kilometers = v.Kilometers,
+                ImageUrl = v.ImageUrl,
+                TankCapacity = v.TankCapacity,
+                Consumption = v.Consumption,
+                PricePerDay = v.PricePerDay,
+                AirCondition = v.AirConditioning,
+                NavigationSystem = v.NavigationSystem,
+                Seats = v.Seats,
+                Doors = v.Doors,
+                IsDeleted = v.IsDeleted,
+                IsRented = v.IsRented,
+                CategoryId = v.CategoryId,
+                FuelId = (int)v.Fuel,
+                SuspensionId = (int)v.Suspension,
+                TransmissionId = (int)v.Transmission
+                
+            };
+        }
+
+        public async Task EditVehicleAsync(VehicleEditModel vehicle)
+        {
+            var v = await repo.GetByIdAsync<Vehicle>(new Guid(vehicle.Id));
+
+            v.Make = vehicle.Make;
+            v.Model = vehicle.Model;
+            v.Kilometers = vehicle.Kilometers;
+            v.ImageUrl = vehicle.ImageUrl;
+            v.TankCapacity = vehicle.TankCapacity;
+            v.Consumption = vehicle.Consumption;
+            v.PricePerDay = vehicle.PricePerDay;
+            v.AirConditioning = vehicle.AirCondition;
+            v.NavigationSystem = vehicle.NavigationSystem;
+            v.Seats = vehicle.Seats;
+            v.Doors = vehicle.Doors;
+            v.IsDeleted = vehicle.IsDeleted;
+            v.IsRented = vehicle.IsRented;
+            v.CategoryId = vehicle.CategoryId;
+            v.Fuel = (Fuel)vehicle.FuelId;
+            v.Transmission = (Transmission)vehicle.TransmissionId;
+            v.Suspension = (Suspension)vehicle.SuspensionId;
+            
             await repo.SaveChangesAsync();
         }
     }

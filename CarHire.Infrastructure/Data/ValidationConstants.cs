@@ -93,7 +93,7 @@
             public const string ErrorMessageRenterExist = "You don\'t have permission";
             public const string ErrorMessageAddUserToRole = "User not added in role!";
             public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
-            public const string ErrorMessageAddVehicle = "The vehicle data is in not correct!";
+            public const string ErrorMessageAddVehicle = "The vehicle data is not correct!";
 
             public const string WarningMessage = "WarningMessage";
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
@@ -102,6 +102,7 @@
             public const string WarningMessageAddUserToRole = 
                 "The user has been successfully added to the role!";
             public const string WarningMessageAddVehicle = "Vehicle successfully added!";
+            public const string WarningMessageEditVehicle = "Vehicle successfully edited!";
 
             public const string SuccessMessage = "SuccessMessage";
         }

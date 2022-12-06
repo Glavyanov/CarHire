@@ -1,0 +1,30 @@
+﻿@model IEnumerable<VehicleHomeModel>
+
+@{
+    ViewData["Title"] = "Edit Page";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class ="col-sm-3">
+                <div class="col-sm-1">
+                    <img class="card-img-top" style="width: 17rem;"
+                     src="@item.ImageUrl" alt="Vehicle Image">
+                </div>
+                <div class="col-lg-6 position-relative mb-5">
+                    @if (!item.IsRented)
+                    {
+                        <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 45%;"
+                     asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    }
+                    else
+                    {
+                        <p class="btn btn-primary position-absolute top-0 start-0" style="background-color: red;height: 40px; width: 45%;">Rented</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

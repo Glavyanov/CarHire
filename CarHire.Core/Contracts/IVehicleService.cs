@@ -23,5 +23,8 @@
         IEnumerable<FuelModel> GetFuels();
 
         Task CreateVehicleAsync(VehicleAddModel vehicle);
+        Task EditVehicleAsync(VehicleEditModel vehicle);
+
+        Task<VehicleEditModel> GetVehicleEditModelAsync(string id);
     }
 }

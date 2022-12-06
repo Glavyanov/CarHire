@@ -1,0 +1,118 @@
+﻿@model VehicleAddModel
+
+@{
+    ViewData["Title"] = "Add Vehicle";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Make"></label>
+                <input asp-for="Make" class="form-control" placeholder="Make..."/>
+                <span asp-validation-for="Make" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model"></label>
+                <input asp-for="Model" class="form-control" placeholder="Model..."/>
+                <span asp-validation-for="Model" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuspensionId"></label>
+                <select asp-for="SuspensionId" class="form-control">
+                    @foreach (var item in Model.Suspensions)
+                    {
+                        <option value="@item.SuspensionId">@item.SuspensionType</option>
+                    }
+                </select>
+                <span asp-validation-for="SuspensionId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelId"></label>
+                <select asp-for="FuelId" class="form-control">
+                    @foreach (var item in Model.Fuels)
+                    {
+                        <option value="@item.FuelId">@item.FuelType</option>
+                    }
+                </select>
+                <span asp-validation-for="FuelId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransmissionId"></label>
+                <select asp-for="TransmissionId" class="form-control">
+                    @foreach (var item in Model.Transmissions)
+                    {
+                        <option value="@item.TransmissionId">@item.TransmissionType</option>
+                    }
+                </select>
+                <span asp-validation-for="TransmissionId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year"></label>
+                <input asp-for="Year" rows="4" class="form-control"/>
+                <span asp-validation-for="Year" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kilometers"></label>
+                <input asp-for="Kilometers" class="form-control"/>
+                <span asp-validation-for="Kilometers" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here..."/>
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AirCondition"></label>
+                <input asp-for="AirCondition"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="NavigationSystem"></label>
+                <input asp-for="NavigationSystem"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seats"></label>
+                <input asp-for="Seats" class="form-control" placeholder="Seats..."/>
+                <span asp-validation-for="Seats" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doors"></label>
+                <input asp-for="Doors" class="form-control" placeholder="Doors..."/>
+                <span asp-validation-for="Doors" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TankCapacity"></label>
+                <input asp-for="TankCapacity" class="form-control" placeholder="TankCapacity..."/>
+                <span asp-validation-for="TankCapacity" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consumption"></label>
+                <input asp-for="Consumption" class="form-control" placeholder="Consumption..."/>
+                <span asp-validation-for="Consumption" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePerDay"></label>
+                <input asp-for="PricePerDay" class="form-control" placeholder="PricePerDay..."/>
+                <span asp-validation-for="PricePerDay" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.VehicleCategories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

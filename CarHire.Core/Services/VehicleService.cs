@@ -1,11 +1,14 @@
 ﻿namespace CarHire.Core.Services
 {
+    using System.Reflection;
     using Microsoft.EntityFrameworkCore;
 
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Vehicle;
     using CarHire.Infrastructure.Data.Common;
     using CarHire.Infrastructure.Data.Entities;
+    using CarHire.Core.Models.Enum;
+    using CarHire.Infrastructure.Data.Entities.Enums;
 
     public class VehicleService : IVehicleService
     {
@@ -83,6 +86,93 @@
                 await repo.SaveChangesAsync();
             }
 
+        }
+
+        public async Task<IEnumerable<VehicleCategoryModel>> GetCategoriesAsync()
+        {
+            return await repo.AllReadonly<Category>()
+                .Select(c => new VehicleCategoryModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+        }
+
+        public IEnumerable<TransmissionModel> GetTransmissions()
+        {
+            MemberInfo[] memberInfos = typeof(Transmission).GetMembers(BindingFlags.Public | BindingFlags.Static);
+            List<TransmissionModel> transmissions = new();
+
+            foreach (var item in memberInfos)
+            {
+                transmissions.Add(new TransmissionModel()
+                {
+                    TransmissionId = (int)Enum.Parse(typeof(Transmission), item.Name),
+                    TransmissionType = item.Name
+                });
+            }
+
+            return transmissions;
+        }
+
+        public IEnumerable<SuspensionModel> GetSuspensions()
+        {
+            MemberInfo[] memberInfos = typeof(Suspension).GetMembers(BindingFlags.Public | BindingFlags.Static);
+            List<SuspensionModel> suspensions = new();
+
+            foreach (var item in memberInfos)
+            {
+                suspensions.Add(new SuspensionModel()
+                {
+                    SuspensionId = (int)Enum.Parse(typeof(Suspension), item.Name),
+                    SuspensionType = item.Name
+                });
+            }
+
+            return suspensions;
+        }
+
+        public IEnumerable<FuelModel> GetFuels()
+        {
+            MemberInfo[] memberInfos = typeof(Fuel).GetMembers(BindingFlags.Public | BindingFlags.Static);
+            List<FuelModel> fuels = new();
+
+            foreach (var item in memberInfos)
+            {
+                fuels.Add(new FuelModel()
+                {
+                    FuelId = (int)Enum.Parse(typeof(Fuel), item.Name),
+                    FuelType = item.Name
+                });
+            }
+
+            return fuels;
+        }
+
+        public async Task CreateVehicleAsync(VehicleAddModel v)
+        {
+            Vehicle vehicle = new()
+            {
+                Make = v.Make,
+                Model = v.Model,
+                Year = v.Year,
+                Kilometers = v.Kilometers,
+                AirConditioning = v.AirCondition,
+                NavigationSystem = v.NavigationSystem,
+                Seats = v.Seats,
+                Doors = v.Doors,
+                Suspension = (Suspension)v.SuspensionId,
+                Fuel = (Fuel)v.FuelId,
+                Transmission = (Transmission)v.TransmissionId,
+                CategoryId = v.CategoryId,
+                ImageUrl = v.ImageUrl,
+                TankCapacity = v.TankCapacity,
+                Consumption = v.Consumption,
+                PricePerDay = v.PricePerDay
+            };
+
+            await repo.AddAsync(vehicle);
+            await repo.SaveChangesAsync();
         }
     }
 }

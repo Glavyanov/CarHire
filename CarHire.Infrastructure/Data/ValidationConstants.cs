@@ -47,6 +47,18 @@
 
             public const int ModelMinLength = 1;
             public const int ModelMaxLength = 100;
+
+            public const int YearMinRange= 1929;
+            public const int YearMaxRange = 2030;
+
+            public const int SeatsMinRange = 1;
+            public const int SeatsMaxRange = 100;
+
+            public const int DoorsMinRange = 0;
+            public const int DoorsMaxRange = 10;
+
+            public const string PriceMinRange = "10";
+            public const string PriceMaxRange = "10000";
         }
 
         public static class DiscountConstants
@@ -81,12 +93,15 @@
             public const string ErrorMessageRenterExist = "You don\'t have permission";
             public const string ErrorMessageAddUserToRole = "User not added in role!";
             public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
+            public const string ErrorMessageAddVehicle = "The vehicle data is in not correct!";
 
             public const string WarningMessage = "WarningMessage";
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
             public const string WarningMessageIsRented = "Sorry vehicle is rented!";
             public const string WarningMessageMyRent = "You have no rental vehicles!";
-            public const string WarningMessageAddUserToRole = "Successfully added user to role!";
+            public const string WarningMessageAddUserToRole = 
+                "The user has been successfully added to the role!";
+            public const string WarningMessageAddVehicle = "Vehicle successfully added!";
 
             public const string SuccessMessage = "SuccessMessage";
         }

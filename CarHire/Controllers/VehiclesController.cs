@@ -2,6 +2,7 @@
 {
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Vehicle;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
@@ -63,6 +64,44 @@
             var model = await vehicleService.GetVehicleDetailsByIdAsync(id);
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = RolesConstants.Manager)]
+        public async Task<IActionResult> Add()
+        {
+            VehicleAddModel model = new()
+            {
+                VehicleCategories = await vehicleService.GetCategoriesAsync(),
+                Transmissions = vehicleService.GetTransmissions(),
+                Fuels = vehicleService.GetFuels(),
+                Suspensions = vehicleService.GetSuspensions()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = RolesConstants.Manager)]
+        public async Task<IActionResult> Add(VehicleAddModel postModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                postModel.VehicleCategories = await vehicleService.GetCategoriesAsync();
+                postModel.Transmissions = vehicleService.GetTransmissions();
+                postModel.Fuels = vehicleService.GetFuels();
+                postModel.Suspensions = vehicleService.GetSuspensions();
+
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageAddVehicle;
+
+                return View(postModel);
+            }
+
+            await vehicleService.CreateVehicleAsync(postModel);
+
+            TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageAddVehicle;
+
+            return RedirectToAction(nameof(Index), "Vehicles", new { area = "" });
         }
     }
 }

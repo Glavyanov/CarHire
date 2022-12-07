@@ -23,8 +23,8 @@
             </p>
             <p>Category: <b>@Model.CategoryName</b></p>
             <div class="form-inline">
-                <a class="btn btn-primary" asp-controller="Comment" asp-action="GetComments"
-                   asp-route-id="@Model.Id">View comments</a>
+                <a class="btn btn-primary" asp-controller="Comment" asp-action="All"
+                   asp-route-vehicleId="@Model.Id">View comments</a>
                 @if (!Model.IsRented)
                 {
                     <form class="ml-2" asp-controller="Rent"

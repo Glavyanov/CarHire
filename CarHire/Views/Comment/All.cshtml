@@ -1,0 +1,43 @@
+﻿@model CommentExposeModel
+
+@{
+    ViewData["Title"] = "Comments Page";
+    int count = 1;
+}
+
+<h2 class="text-center">All Comments</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Vehicle Image">
+        </div>
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="u-repeater u-repeater-1">
+                <div class="u-align-left u-container-style u-gradient u-list-item u-radius-20 u-repeater-item u-shape-round u-list-item-1">
+                    <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <div class="form-outline">
+                            <div class="form-outline">
+                                <h2 class="u-custom-font u-font-montserrat u-text u-text-palette-2-base u-text-2">@count</h2>
+                            </div>
+                        </div>
+                        <div class="form-outline">
+                            <textarea class="form-control" id="textAreaExample" rows="6" disabled >@comment.Description</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {
+                count++;
+            }
+        }
+        @if (!Model.Comments.Any())
+        {
+            <hr />
+            <h2 class="text-center">No comments found by this vehicle!</h2>
+        }
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CommentViewModel>
+
+@{
+    ViewData["Title"] = "Manage comments";
+    int count = 1;
+}
+
+
+<h2 class="text-center">Manage all comments</h2>
+<hr />
+
+@foreach (var comment in Model)
+{
+    <div class="u-repeater u-repeater-1">
+        <div class="u-align-left u-container-style u-gradient u-list-item u-radius-20 u-repeater-item u-shape-round u-list-item-1">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+                <div class="form-outline">
+                    <div class="form-outline">
+                        <h2 class="u-custom-font u-font-montserrat u-text u-text-palette-2-base u-text-2">@count</h2>
+                    </div>
+                </div>
+                <div class="form-outline">
+                    <textarea class="form-control" id="textAreaExample" rows="6" disabled>@comment.Description</textarea>
+                    <a class="btn btn-danger" asp-controller="Comment" asp-action="Delete" asp-route-commentId="@comment.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {
+        count++;
+    }
+}
+
+@if (!Model?.Any() ?? true)
+{
+    <h2 class="text-center text-danger">No comments found!</h2>
+}

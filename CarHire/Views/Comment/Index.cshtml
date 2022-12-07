@@ -1,0 +1,34 @@
+﻿@model CommentHomeModel
+
+@{
+    ViewData["Title"] = "Comment Page";
+    Model.UserName = ViewBag.UserFirstName;
+}
+
+<h2 class="text-center">Please write your comments here</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input  asp-for="@Model.VehicleId" />
+            <input asp-for="@Model.UserId" />
+            <input asp-for="@Model.UserName" />
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="My Comment..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12">
+        <a class="btn btn-primary" asp-controller="Rent" asp-action="Drop" asp-route-id="@Model.VehicleId" >Dismiss</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

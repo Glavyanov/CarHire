@@ -99,8 +99,7 @@
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
             public const string WarningMessageIsRented = "Sorry vehicle is rented!";
             public const string WarningMessageMyRent = "You have no rental vehicles!";
-            public const string WarningMessageAddUserToRole = 
-                "The user has been successfully added to the role!";
+            public const string WarningMessageAddUserToRole = "The user has been successfully added to role!";
             public const string WarningMessageAddVehicle = "Vehicle successfully added!";
             public const string WarningMessageEditVehicle = "Vehicle successfully edited!";
 

@@ -4,9 +4,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-@foreach (var cat in Model)
-{
-    <div class="text-center">
-        <a class="display-7" asp-controller="Vehicles" asp-action="ByCategory" asp-route-categoryId="@cat.CategoryId">@cat.Name</a>
-    </div>
+<h2 class="text-center text-info">Vehicle Categories</h2>
+<hr />
+
+<div class="row" style="margin-left: 0rem; width: 84rem; ">
+        @foreach (var cat in Model)
+        {
+            <div class="col">
+                <a class="btn btn-primary" asp-controller="Vehicles" asp-action="ByCategory" asp-route-categoryId="@cat.CategoryId" style="height: 40px; width: 80%;">@cat.Name</a>
+            </div>
+        }
+</div>
+<div class="container image" >
+    
+</div>
+
+@section Scripts {
+    <style>
+       div.image {
+           background-image: url('https://traveltomerida.com/wp-content/uploads/2021/07/Merida-Car-Rental-Header.jpg');
+           background-size: cover;
+           background-position: center;
+           margin-top: 1rem;
+           margin-left: 0rem;
+           width: 81rem;
+           height: 30rem;
+       }​
+    </style>
 }

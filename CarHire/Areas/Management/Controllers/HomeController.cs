@@ -41,6 +41,11 @@
                 model.Fuels = vehicleService.GetFuels();
                 model.Suspensions = vehicleService.GetSuspensions();
             }
+            else
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+                return RedirectToAction(nameof(EditAll));
+            }
 
             return View(model);
         }

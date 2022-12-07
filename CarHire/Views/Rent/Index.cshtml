@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Rent Vehicle";
     Model.RentDays = 1;
+
 }
 
 <article style="background-image: url(@Model.ImageUrl); background-size: cover; width: 80rem; height: 70rem">
@@ -11,16 +12,21 @@
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
             <form method="post">
                 <input asp-for="@Model.Id" />
-                <input asp-for="@Model.PricePerDay" />
+                <input asp-for="@Model.PricePerDay" id="pricePerDay"/>
                 <div class="mb-3 text-center">
-                        <label asp-for="@Model.DrivingLicense" class="form-label text-danger"><h5>Driving License</h5></label>
+                    <label asp-for="@Model.DrivingLicense" class="form-label text-danger"><h5>Driving License</h5></label>
                     <input asp-for="@Model.DrivingLicense" class="form-control" aria-required="true" />
                     <span asp-validation-for="DrivingLicense" class="text-danger"></span>
                 </div>
                 <div class="mb-3 text-center">
-                        <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
-                    <input asp-for="@Model.RentDays" class="form-control" aria-required="true" />
+                    <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
+                    <input asp-for="@Model.RentDays" class="form-control" aria-required="true" id="rentDays" onchange="calculatePrice(event)"/>
                     <span asp-validation-for="RentDays" class="text-danger"></span>
+                    
+                </div>
+                <div class ="mb-3 text-center">
+                    <label class="form-label text-danger"><h5>Price: </h5></label>
+                    <input id="price" placeholder="@Model.PricePerDay.ToString("N2") Euro" disabled />
                 </div>
                 <div class="mb-3">
                     <input class="btn btn-primary" type="submit" value="Rent" />
@@ -31,6 +37,15 @@
 </div>
 </article>
 
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        function calculatePrice(e){
+            days = +$("#rentDays").val();
+            price = +$("#pricePerDay").val();
+
+            $("#price").val((days * price).toFixed(2) + " Euro");
+        }
+    </script>
 }

@@ -6,7 +6,6 @@ Config.cs
 
 Configuration.cs
 
-*.sln
 
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -19,7 +18,6 @@ Configuration.cs
 *.suo
 *.user
 *.userosscache
-*.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -406,4 +404,3 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
-*.sln.iml

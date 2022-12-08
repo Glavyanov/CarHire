@@ -1,15 +1,13 @@
 ﻿namespace CarHire.Core.Services
 {
-    using System.Reflection;
-    using Microsoft.EntityFrameworkCore;
-
     using CarHire.Core.Contracts;
+    using CarHire.Core.Models.Enum;
     using CarHire.Core.Models.Vehicle;
     using CarHire.Infrastructure.Data.Common;
     using CarHire.Infrastructure.Data.Entities;
-    using CarHire.Core.Models.Enum;
     using CarHire.Infrastructure.Data.Entities.Enums;
-    using System.Security.Cryptography.X509Certificates;
+    using Microsoft.EntityFrameworkCore;
+    using System.Reflection;
 
     public class VehicleService : IVehicleService
     {

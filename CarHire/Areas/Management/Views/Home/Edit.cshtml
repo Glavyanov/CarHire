@@ -4,7 +4,9 @@
     ViewData["Title"] = "Edit Vehicle";
 }
 
-<div class="row">
+<h2 class="text-center text-danger">Edit Vehicle</h2>
+
+<div class="row" style="margin-top: 4rem">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
             <div class="form-group">
@@ -102,7 +104,7 @@
                 <span asp-validation-for="CategoryId" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IsDeleted" class="bg-primary text-white"></label>
+                <label asp-for="IsDeleted" class="bg-danger text-black"></label>
                 <input asp-for="IsDeleted" />
             </div>
             <div class="form-group">

@@ -3,6 +3,7 @@
     public class InMemoryDbContext
     {
         private readonly SqliteConnection sqliteConnection;
+
         private readonly DbContextOptions<ApplicationDbContext> dbContextOptions;
 
         public InMemoryDbContext()

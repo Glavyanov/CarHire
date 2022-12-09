@@ -1,9 +1,4 @@
-﻿using CarHire.Core.Models.Comment;
-using CarHire.Infrastructure.Data.Entities;
-using Castle.Components.DictionaryAdapter;
-using System.ComponentModel.Design;
-
-namespace CarHire.UnitTests
+﻿namespace CarHire.UnitTests
 {
     [TestFixture]
     public class CommentServiceTests

@@ -9,3 +9,4 @@ global using CarHire.Infrastructure.Data;
 global using CarHire.Infrastructure.Data.Common;
 global using CarHire.Infrastructure.Data.Entities;
 global using CarHire.Core.Models.Category;
+global using CarHire.Core.Models.Comment;

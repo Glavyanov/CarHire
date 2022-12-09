@@ -28,7 +28,7 @@
                 .ThenInclude(x => x.Discount)
                 .FirstAsync();
 
-            decimal checkVehiclePrice = await repo.All<Vehicle>(v => v.Id == vehicleId)
+            decimal checkVehiclePrice = await repo.AllReadonly<Vehicle>(v => v.Id == vehicleId)
                 .Include(x => x.VehicleDiscounts)
                 .ThenInclude(x => x.Discount)
                 .Select(x => x.VehicleDiscounts.Sum(s => s.Discount.DiscountSize) != 0

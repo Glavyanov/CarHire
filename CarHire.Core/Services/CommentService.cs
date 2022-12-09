@@ -1,13 +1,16 @@
 ﻿namespace CarHire.Core.Services
 {
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using Microsoft.EntityFrameworkCore;
+
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Comment;
     using CarHire.Infrastructure.Data.Common;
     using CarHire.Infrastructure.Data.Entities;
-    using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Threading.Tasks;
+    
 
     public class CommentService : ICommentService
     {
@@ -22,7 +25,7 @@
         {
             var order =
                 await repo.AllReadonly<Order>(o => o.VehicleId.ToString() == c.VehicleId && !o.IsDeleted)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
             if (order == null)
             {
                 throw new ArgumentException("The renter is not exist!");

@@ -24,7 +24,7 @@ namespace CarHire.UnitTests
 
             await SeedDbAsync(repo!);
 
-            categoryService = serviceProvider!.GetService<ICategoryService>();
+            categoryService = serviceProvider.GetService<ICategoryService>()!;
         }
 
         [Test]
@@ -44,24 +44,8 @@ namespace CarHire.UnitTests
             Assert.That(await categoryService!.ExistsbyIdAsync(categoryId), Is.False);
 
         [Test]
-        public async Task GetCategoriesAsyncMethodShouldReturnCorrectCount()
-        {
-            List<CategoryHomeModel> categoryModels = new()
-            {
-                new CategoryHomeModel()
-                {
-                    CategoryId = 100,
-                    Name = "Passenger"
-                },
-                new CategoryHomeModel()
-                {
-                    CategoryId = 101,
-                    Name = "Light comercial"
-                }
-            };
-
+        public async Task GetCategoriesAsyncMethodShouldReturnCorrectCount() =>
             Assert.That((await categoryService.GetCategoriesAsync()).Count, Is.EqualTo(6));
-        }
 
         [Test]
         public async Task GetCategoriesAsyncShouldReturnCorrectType() =>

@@ -8,7 +8,7 @@ namespace CarHire.UnitTests
         private ICategoryService categoryService;
 
         [SetUp]
-        public async Task Setup()
+        public async Task SetUp()
         {
             dbContext = new InMemoryDbContext();
 

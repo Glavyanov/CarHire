@@ -106,6 +106,7 @@
             return await repo.All<Renter>(r => r.ApplicationUserId == id).AnyAsync();
         }
 
+        //TODO: For future use must be handle exception
         public async Task<RenterHomeModel> GetRenterByIdAsync(string id)
         {
             Guid renterGuid = Guid.Parse(id);
@@ -138,6 +139,7 @@
 
                 }).FirstAsync();
         }
+
         public async Task<List<VehicleHomeModel>> GetVehiclesByRenterIdAsync(string id)
         {
             var rentersIds = await repo.AllReadonly<Renter>(x => x.ApplicationUserId == id)

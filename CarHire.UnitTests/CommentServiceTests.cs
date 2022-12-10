@@ -106,7 +106,9 @@
 
             };
 
-            Assert.CatchAsync<ArgumentException>(async () => await commentService.CreateCommentAsync(model), "The renter is not exist!");
+            Assert.CatchAsync<ArgumentException>(async () => await commentService.CreateCommentAsync(model));
+
+            Assert.That(Assert.CatchAsync<ArgumentException>(async () => await commentService.CreateCommentAsync(model)).Message, Is.EqualTo("The renter is not exist!"));
         }
 
         [Test]

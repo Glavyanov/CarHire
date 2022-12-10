@@ -1,7 +1,4 @@
-﻿using CarHire.Core.Models.Renter;
-using CarHire.Infrastructure.Data.Entities;
-
-namespace CarHire.UnitTests
+﻿namespace CarHire.UnitTests
 {
     [TestFixture]
     public class RentServiceTests

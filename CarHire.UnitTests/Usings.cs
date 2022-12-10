@@ -11,3 +11,4 @@ global using CarHire.Infrastructure.Data.Entities;
 global using CarHire.Core.Models.Category;
 global using CarHire.Core.Models.Comment;
 global using CarHire.Core.Models.Vehicle;
+global using CarHire.Core.Models.Renter;

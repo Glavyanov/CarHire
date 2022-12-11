@@ -13,3 +13,4 @@ global using CarHire.Core.Models.Comment;
 global using CarHire.Core.Models.Vehicle;
 global using CarHire.Core.Models.Renter;
 global using CarHire.Infrastructure.Data.Entities.Enums;
+global using CarHire.Core.Models.Enum;

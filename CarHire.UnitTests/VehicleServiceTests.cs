@@ -1,6 +1,4 @@
-﻿using CarHire.Core.Models.Enum;
-
-namespace CarHire.UnitTests
+﻿namespace CarHire.UnitTests
 {
 
     [TestFixture]

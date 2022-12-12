@@ -16,6 +16,14 @@
             repository = _repository;
         }
 
+        public async Task EditCategoryAsync(CategoryHomeModel model)
+        {
+            var c = await repository.GetByIdAsync<Category>(model.CategoryId);
+            c.Name = model.Name;
+
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistsbyIdAsync(int categoryId)
         {
             return await repository.AllReadonly<Category>(c => c.Id == categoryId).AnyAsync();
@@ -30,6 +38,17 @@
                     Name = c.Name
                 })
                 .ToListAsync();
+        }
+
+        public async Task CreateCategoryAsync(CategoryHomeModel model)
+        {
+            Category category = new()
+            {
+                Name = model.Name
+            };
+
+            await repository.AddAsync(category);
+            await repository.SaveChangesAsync();
         }
     }
 }

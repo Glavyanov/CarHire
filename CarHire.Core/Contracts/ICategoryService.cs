@@ -6,5 +6,9 @@
         Task<IEnumerable<CategoryHomeModel>> GetCategoriesAsync();
 
         Task<bool> ExistsbyIdAsync(int categoryId);
+
+        Task EditCategoryAsync(CategoryHomeModel model);
+
+        Task CreateCategoryAsync(CategoryHomeModel model);
     }
 }

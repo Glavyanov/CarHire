@@ -10,7 +10,7 @@
 
 
         [SetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             dbContext = new InMemoryDbContext();
             var serviceCollection = new ServiceCollection();
@@ -23,7 +23,7 @@
 
             var repo = serviceProvider.GetService<IRepository>();
 
-            SeedDbAsync(repo!);
+            await SeedDbAsync(repo!);
 
             vehicleService = serviceProvider.GetService<IVehicleService>()!;
         }

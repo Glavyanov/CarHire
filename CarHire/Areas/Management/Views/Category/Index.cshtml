@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CategoryHomeModel>
+
+@{
+    ViewData["Title"] = "Edit Page";
+}
+
+<h2 class="text-center text-danger">Categories</h2>
+
+<div class="container" style="margin-top: 4rem;">
+    <div class="row justify">
+        @foreach (var cat in Model)
+        {
+                <div class="col-sm-3">
+                    <div class="position-relative p-3 bg-gray" style="height: 180px; margin-top: 1rem">
+                        <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-danger text-xl">
+                                @cat.Name
+                            </div>
+                        <a class="btn btn-warning position-absolute bottom-0 start-0" style="height: 40px; width: 45%;"
+                       asp-controller="Category" asp-action="Edit" asp-route-categoryId="@cat.CategoryId">Edit</a>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+}

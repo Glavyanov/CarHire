@@ -1,0 +1,25 @@
+﻿@model CategoryHomeModel
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h2 class="text-center text-danger">Add new category for vehicles</h2>
+
+<div class="container-xxl">
+    <form method="post">
+        <div class="form-group">
+            <input asp-for="@Model.CategoryId" />
+            <label asp-for="Name" class="bg-primary text-white"></label>
+            <input asp-for="Name" class="form-control" placeholder="Name..." />
+            <span asp-validation-for="Name" class="small text-danger"></span>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Add" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

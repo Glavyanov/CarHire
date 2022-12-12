@@ -34,7 +34,7 @@ namespace CarHire.UnitTests
         [TestCase(100)]
         [TestCase(101)]
         public async Task ExistsbyIdAsyncMethodShouldReturnTrue(int categoryId) =>
-            Assert.That(await categoryService!.ExistsbyIdAsync(categoryId), Is.True);
+            Assert.That(await categoryService.ExistsbyIdAsync(categoryId), Is.True);
 
         [Test]
         [TestCase(-1)]

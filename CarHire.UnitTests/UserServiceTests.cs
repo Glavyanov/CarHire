@@ -107,7 +107,7 @@ namespace CarHire.UnitTests
         }
 
         [Test]
-        public void RemoveUserFromRoleAsyncShouldThrowsArgumentException()
+        public void RemoveUserFromRoleAsyncShouldThrowsArgumentExceptionWhenUserIsNotInRole()
         {
             string userId = "44569627-988b-4096-8397-48cae1a68157";
             string roleId = "fc4fdb35-719a-4ac2-8041-2e5034d2bae6";

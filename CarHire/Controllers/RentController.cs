@@ -50,10 +50,6 @@
         [HttpPost]
         public async Task<IActionResult> Index(VehicleRentModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
             if (!TempData.ContainsKey(model.Id))
             {

@@ -89,6 +89,7 @@
         {
             public const string ErrorMessage = "ErrorMessage";
             public const string ErrorMessageCategory = "The category does not exists!";
+            public const string ErrorMessageCategoryExist = "The category already exists!";
             public const string ErrorMessageVehicle = "The vehicle is not exists!";
             public const string ErrorMessageRenterExist = "You don\'t have permission";
             public const string ErrorMessageAddUserToRole = "User not added in role!";

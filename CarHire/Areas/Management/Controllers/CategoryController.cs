@@ -38,6 +38,15 @@
                 return View(model);
             }
 
+            var allCategories = await categoryService.GetCategoriesAsync();
+
+            if (allCategories.Any(x => x.Name.ToLower() == model.Name.ToLower()))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageCategoryExist;
+
+                return View(model);
+            }
+
             await categoryService.CreateCategoryAsync(model);
 
             return RedirectToAction(nameof(Index));
@@ -72,6 +81,15 @@
                 TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageCategory;
 
                 return RedirectToAction(nameof(Index));
+            }
+
+            var allCategories = await categoryService.GetCategoriesAsync();
+
+            if (allCategories.Any(x => x.Name.ToLower() == model.Name.ToLower()))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageCategoryExist;
+
+                return View(model);
             }
 
             await categoryService.EditCategoryAsync(model);

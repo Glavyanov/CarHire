@@ -76,7 +76,6 @@
                 Assert.That(vehicle.ImageUrl, Is.EqualTo("https://mir-s3-cdn-cf.behance.net/project_modules/1400/9a84ff95800693.5e9ff770404b5.jpg"));
                 Assert.That(vehicle.IsRented, Is.True);
                 Assert.That(vehicle.DrivingLicense, Is.Null);
-                Assert.That(vehicle.RenterId, Is.Null);
             });
         }
 
@@ -93,7 +92,6 @@
                 Assert.That(vehicle.ImageUrl, Is.EqualTo("https://s1.cdn.autoevolution.com/images/news/gallery/chevrolet-chevelle-ss-black-panther-looks-wide-and-then-some_3.jpg"));
                 Assert.That(vehicle.IsRented, Is.True);
                 Assert.That(vehicle.DrivingLicense, Is.Null);
-                Assert.That(vehicle.RenterId, Is.Null);
             });
         }
 

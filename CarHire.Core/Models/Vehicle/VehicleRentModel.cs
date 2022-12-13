@@ -22,9 +22,6 @@
              ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
         public string DrivingLicense { get; set; } = null!;
 
-        [HiddenInput(DisplayValue = false)]
-        public string RenterId { get; set; } = null!;
-
         [Range(MinRentDays, MaxRentDays,
             ErrorMessage = "The {0} must be at least {1} and at max {2} days.")]
         public int RentDays { get; set; }

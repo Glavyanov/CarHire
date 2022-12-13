@@ -36,8 +36,8 @@ namespace CarHire.UnitTests
 
             var adminUser = await repo.GetByIdAsync<ApplicationUser>("44569627-988b-4096-8397-48cae1a68157");
 
-            mockUserManager.Setup(p =>  p.IsInRoleAsync(adminUser,"Admin").Result)
-                .Returns(true);
+            mockUserManager.Setup(p =>  p.IsInRoleAsync(adminUser,"Admin"))
+                .ReturnsAsync(true);
 
             mockUserManager.Setup(p => p.RemoveFromRoleAsync(adminUser, "Admin"))
                 .ReturnsAsync(IdentityResult.Failed());

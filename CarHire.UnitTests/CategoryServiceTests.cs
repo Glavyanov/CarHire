@@ -55,6 +55,51 @@ namespace CarHire.UnitTests
         public async Task GetCategoriesAsyncShouldReturnCorrectCollectionOfType() =>
             Assert.IsInstanceOf<List<CategoryHomeModel>>(await categoryService.GetCategoriesAsync());
 
+        [Test]
+        [TestCase(100, "Pass")]
+        [TestCase(101, "Motorcycle")]
+        [TestCase(4, "Buses")]
+        [TestCase(1, "Vessels")]
+        public async Task EditCategoryAsyncShouldWorkCorrect(int id, string name)
+        {
+            CategoryHomeModel model = new()
+            {
+                CategoryId = id,
+                Name = name
+            };
+
+            await categoryService.EditCategoryAsync(model);
+            var category = (await categoryService.GetCategoriesAsync())
+                .Where(c => c.CategoryId == model.CategoryId)
+                .First();
+
+            Assert.That(category.Name, Is.EqualTo(model.Name));
+        }
+
+        [Test]
+        [TestCase("Super moto")]
+        [TestCase("Formula 1")]
+        [TestCase("DTM")]
+        [TestCase("ATV")]
+        public async Task CreateCategoryAsyncShouldWorkCorrect(string name)
+        {
+            CategoryHomeModel model = new()
+            {
+                Name = name
+            };
+
+            await categoryService.CreateCategoryAsync(model);
+            var category = (await categoryService.GetCategoriesAsync())
+                .Where(c => c.Name == model.Name)
+                .First();
+
+            Assert.Multiple(async () =>
+            {
+                Assert.That(category.Name, Is.EqualTo(model.Name));
+                Assert.That((await categoryService.GetCategoriesAsync()).Count(), Is.EqualTo(7));
+            });
+        }
+
         [TearDown]
         public void TearDown()
         {

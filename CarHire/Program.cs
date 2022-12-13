@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using CarHire.Infrastructure.Data;
 using CarHire.Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(configure =>
+{
+    configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
+
 builder.Services.AddApplicationServices();
 
 builder.Services.ConfigureApplicationCookie(opt =>

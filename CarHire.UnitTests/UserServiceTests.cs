@@ -39,6 +39,9 @@ namespace CarHire.UnitTests
             mockUserManager.Setup(p =>  p.IsInRoleAsync(adminUser,"Admin").Result)
                 .Returns(true);
 
+            mockUserManager.Setup(p => p.RemoveFromRoleAsync(adminUser, "Admin"))
+                .ReturnsAsync(IdentityResult.Failed());
+
             userService = new UserService(repo, mockUserManager.Object);
         }
 
@@ -98,7 +101,29 @@ namespace CarHire.UnitTests
             await userService.AddUserToRoleAsync(userId, roleId);
 
             Assert.That(
-                await repo.AllReadonly<IdentityUserRole<string>>(u => u.UserId == userId).AnyAsync(), Is.True);
+                await repo.AllReadonly<IdentityUserRole<string>>(
+                    u => u.UserId == userId && u.RoleId == roleId)
+                .AnyAsync(), Is.True);
+        }
+
+        [Test]
+        public void RemoveUserFromRoleAsyncShouldThrowsArgumentException()
+        {
+            string userId = "44569627-988b-4096-8397-48cae1a68157";
+            string roleId = "fc4fdb35-719a-4ac2-8041-2e5034d2bae6";
+
+            Assert.CatchAsync<ArgumentException>(
+                async () => await userService.RemoveUserFromRoleAsync(userId, roleId));
+        }
+
+        [Test]
+        public void RemoveUserFromRoleAsyncShouldThrowsArgumentExceptionWhenNotSuccesfullyRemovedFromRole()
+        {
+            string userId = "44569627-988b-4096-8397-48cae1a68157";
+            string roleId = "5208a8e1-ff35-4845-9cb3-cc19d1434c11";
+
+            Assert.CatchAsync<ArgumentException>(
+                async () => await userService.RemoveUserFromRoleAsync(userId, roleId));
         }
 
         [TearDown]

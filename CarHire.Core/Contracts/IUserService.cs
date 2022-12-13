@@ -6,5 +6,7 @@
         Task<IEnumerable<UserRoleModel>> GetAllUsersAsync();
 
         Task AddUserToRoleAsync(string userId, string roleId);
+
+        Task RemoveUserFromRoleAsync(string userId, string roleId);
     }
 }

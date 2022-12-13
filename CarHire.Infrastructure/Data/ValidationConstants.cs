@@ -96,12 +96,15 @@
             public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
             public const string ErrorMessageAddVehicle = "The vehicle data is not correct!";
             public const string ErrorMessageCommentExist = "The comment is not exists!";
+            public const string ErrorMessageRemoveUserFromRole = "The user is not removed from role!";
+            public const string ErrorMessageRemoveUserFromRoleNotExists = "The user does not in role!";
 
             public const string WarningMessage = "WarningMessage";
             public const string WarningMessageCategory = "Sorry we don\'t have any vehicles for this category!";
             public const string WarningMessageIsRented = "Sorry vehicle is rented!";
             public const string WarningMessageMyRent = "You have no rental vehicles!";
             public const string WarningMessageAddUserToRole = "The user has been successfully added to role!";
+            public const string WarningMessageRemoveUserFromRole = "The user has been successfully removed from role!";
             public const string WarningMessageAddVehicle = "Vehicle successfully added!";
             public const string WarningMessageEditVehicle = "Vehicle successfully edited!";
             public const string WarningMessageDeleteComment = "Comment successfully deleted!";

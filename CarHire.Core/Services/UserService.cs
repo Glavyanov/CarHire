@@ -43,6 +43,25 @@
             await repo.SaveChangesAsync();
         }
 
+        public async Task RemoveUserFromRoleAsync(string userId, string roleId)
+        {
+            var user = await repo.GetByIdAsync<ApplicationUser>(userId);
+            var roleName = await repo.GetByIdAsync<IdentityRole>(roleId);
+
+            if (!await userManager.IsInRoleAsync(user, roleName?.Name))
+            {
+                throw new ArgumentException();
+            }
+
+            var result = await userManager.RemoveFromRoleAsync(user, roleName?.Name);
+
+            if (!result.Succeeded)
+            {
+                throw new ArgumentException();
+            }
+
+        }
+
         public async Task<IEnumerable<UserRoleModel>> GetAllUsersAsync()
         {
             var roles = await repo.AllReadonly<IdentityRole>()

@@ -48,5 +48,40 @@
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove()
+        {
+            var users = await userService.GetAllUsersAsync();
+
+            return View(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(
+            [FromForm(Name = "item.Id")] string userId,
+            [FromForm(Name = "item.RoleId")] string roleId)
+        {
+            if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(roleId))
+            {
+                try
+                {
+                    await userService.RemoveUserFromRoleAsync(userId, roleId);
+                    TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageRemoveUserFromRole;
+                }
+                catch (ArgumentException)
+                {
+                    TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageRemoveUserFromRoleNotExists;
+                }
+
+            }
+            else
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageRemoveUserFromRole;
+
+            }
+
+            return RedirectToAction(nameof(Index), "Home");
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<UserRoleModel>
 
 @{
-    ViewData["Title"] = "Add Roles";
+    ViewData["Title"] = "Remove Role";
 }
 
-<h2 class="text-center text-danger">Add user to role</h2>
+<h2 class="text-center text-danger">Remove from role</h2>
 
 @foreach (var item in Model)
 {
@@ -32,10 +32,9 @@
                     </select>
                 </div>
                 <div class="text-center">
-                    <input class="btn btn-info mt-3" type="submit" value="Add to Role" />
+                    <input class="btn btn-info mt-3" type="submit" value="Remove Role" />
                 </div>
             </form>
         </div>
     </div>
 }
-

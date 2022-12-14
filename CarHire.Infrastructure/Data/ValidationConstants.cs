@@ -65,6 +65,8 @@
         {
             public const int NameMinLength = 5;
             public const int NameMaxLength = 50;
+            public const int DiscountSizeMinRange= 0;
+            public const int DiscountSizeMaxRange= 50;
         }
 
         public static class RenterConstants
@@ -90,11 +92,13 @@
             public const string ErrorMessage = "ErrorMessage";
             public const string ErrorMessageCategory = "The category does not exists!";
             public const string ErrorMessageCategoryExist = "The category already exists!";
-            public const string ErrorMessageVehicle = "The vehicle is not exists!";
+            public const string ErrorMessageDiscount = "The discount does not exists!";
+            public const string ErrorMessageDiscountExist = "The discount already exists!";
             public const string ErrorMessageRenterExist = "You don\'t have permission";
             public const string ErrorMessageAddUserToRole = "User not added in role!";
             public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
             public const string ErrorMessageAddVehicle = "The vehicle data is not correct!";
+            public const string ErrorMessageVehicle = "The vehicle is not exists!";
             public const string ErrorMessageCommentExist = "The comment is not exists!";
             public const string ErrorMessageRemoveUserFromRole = "The user is not removed from role!";
             public const string ErrorMessageRemoveUserFromRoleNotExists = "The user does not in role!";

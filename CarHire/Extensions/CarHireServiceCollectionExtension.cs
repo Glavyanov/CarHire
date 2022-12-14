@@ -19,6 +19,7 @@
             services.AddScoped<IRentService, RentService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IDiscountService, DiscountService>();
 
             return services;
         }

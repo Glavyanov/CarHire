@@ -1,0 +1,34 @@
+﻿@model DiscountAddModel
+
+@{
+    ViewData["Title"] = "Add Discount";
+}
+
+<h2 class="text-center text-danger">Add new discount</h2>
+
+<div class="container-xxl">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="bg-primary text-white"></label>
+            <input asp-for="Name" class="form-control" placeholder="Name..." />
+            <span asp-validation-for="Name" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DiscountSize" class="bg-primary text-white"></label>
+            <input asp-for="DiscountSize" class="form-control" placeholder="Size..." />
+            <span asp-validation-for="DiscountSize" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ExpireOn" class="bg-primary text-white"></label>
+            <input asp-for="ExpireOn" class="form-control" placeholder="ExpireOn..." />
+            <span asp-validation-for="ExpireOn" class="small text-danger"></span>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary mt-3" type="submit" value="Add" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DiscountHomeModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2 class="text-center text-danger">All Discounts</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                <div class="col-sm-1">
+                    <div style="background-color: red; height: 40px; width: 17rem;">
+                        <p style="text-align: center;">
+                            <b>@item.Name - @item.DiscountSize%</b>
+                        </p>
+                    </div>
+                    <img class="card-img-top" style="width: 17rem;"
+                     src="https://grandnode.com/content/images/thumbs/5b17a6869e8c8b2cc8075e4d_discount-buy-2-get-1_850.png" alt="Discount Image">
+                </div>
+                <div class="col-lg-6 position-relative mb-5">
+                    <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 45%;"
+                   asp-controller="Discount" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

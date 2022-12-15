@@ -86,7 +86,10 @@
 
             var discounts = await discountService.GetAllAsync();
 
-            if (discounts.Any(x => x.Name.ToLower() == model!.Name.ToLower() && x.DiscountSize == model.DiscountSize))
+            Func<DiscountHomeModel, bool> checkDiscount = (DiscountHomeModel x) => 
+            x.Name.ToLower() == model!.Name.ToLower() && x.DiscountSize == model.DiscountSize;
+
+            if (discounts.Any(checkDiscount))
             {
                 TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageDiscountExist;
 

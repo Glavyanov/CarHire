@@ -9,6 +9,9 @@
         Task CreateDiscountAsync(DiscountAddModel model);
 
         Task<bool> ExistsbyIdAsync(string id);
+
         Task EditDiscountAsync(DiscountHomeModel model);
+
+        Task<DiscountsVehicleModel> GetVehicleAndDiscountsAsync(string vehicleId);
     }
 }

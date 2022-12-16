@@ -1,17 +1,22 @@
 ﻿namespace CarHire.Areas.Management.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     using CarHire.Core.Contracts;
     using CarHire.Core.Models.Discount;
-    using Microsoft.AspNetCore.Mvc;
     using static CarHire.Infrastructure.Data.ValidationConstants;
 
     public class DiscountController : BaseController
     {
         private readonly IDiscountService discountService;
+        private readonly IVehicleService vehicleService;
 
-        public DiscountController(IDiscountService _discountService)
+        public DiscountController(
+            IDiscountService _discountService, 
+            IVehicleService _vehicleService)
         {
             discountService = _discountService;
+            vehicleService = _vehicleService;
         }
 
         [HttpGet]
@@ -108,6 +113,38 @@
             
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllVehicles()
+        {
+            var vehicles = await vehicleService.GetAllAsync();
+
+            return View(vehicles);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddToVehicle(string vehicleId)
+        {
+            if (!await vehicleService.ExistsAsync(vehicleId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            var model = await discountService.GetVehicleAndDiscountsAsync(vehicleId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddToVehicle(
+            [FromForm(Name = "VehicleId")] string vehicleId,
+            [FromForm(Name = "DiscountId")] string discountId)
+        {
+
+            return View();
         }
     }
 }

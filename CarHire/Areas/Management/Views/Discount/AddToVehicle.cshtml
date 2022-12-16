@@ -1,0 +1,43 @@
+﻿@model DiscountsVehicleModel
+
+@{
+    ViewData["Title"] = "Vehicle Discounts";
+}
+
+<h2 class="text-center text-danger">Add discount to vehicle</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Vehicle Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Model</u></p>
+            
+            <div class="form-inline">
+                <form method="post">
+                    <input asp-for="@Model.VehicleId" />
+                    <div class="form-group text-white">
+                        <label asp-for="@Model.Model"></label>
+                        <span class="small text-white">- @Model.Model</span>
+
+                    </div>
+                    <div class="form-group text-black">
+                        <label asp-for="@Model.DiscountId"></label>
+                        <select asp-for="@Model.DiscountId" class="form-control">
+                            @foreach (var discount in @Model.Discounts)
+                            {
+                                <option value="@discount.Id">@discount.Name - @discount.DiscountSize %</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-3" type="submit" value="Add" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

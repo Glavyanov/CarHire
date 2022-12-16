@@ -44,6 +44,7 @@
             else
             {
                 TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
                 return RedirectToAction(nameof(EditAll));
             }
 

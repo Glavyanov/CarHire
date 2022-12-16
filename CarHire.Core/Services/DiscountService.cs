@@ -13,6 +13,7 @@
     public class DiscountService : IDiscountService
     {
         private readonly IRepository repo;
+
         public DiscountService(IRepository _repo)
         {
             repo = _repo;
@@ -63,6 +64,33 @@
                     Name = d.Name
 
                 }).ToListAsync();
+        }
+
+        public async Task<DiscountsVehicleModel> GetVehicleAndDiscountsAsync(string vehicleId)
+        {
+            Guid vehicleGuidId = new Guid(vehicleId);
+
+            var vehicle = await repo.AllReadonly<Vehicle>(v => v.Id == vehicleGuidId).FirstAsync();
+
+            var discounts = await repo.AllReadonly<Discount>()
+                .Select(d => new DiscountHomeModel()
+                {
+                    Id = d.Id.ToString(),
+                    Name = d.Name,
+                    DiscountSize = d.DiscountSize,
+                    ExpireOn = d.ExpireOn
+                })
+                .ToListAsync();
+
+            var result = new DiscountsVehicleModel()
+            {
+                VehicleId = vehicle.Id.ToString(),
+                ImageUrl = vehicle.ImageUrl,
+                Model = vehicle.Model,
+                Discounts = discounts
+            };
+
+            return result;
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using CarHire.Core.Models.Role;
-using CarHire.Core.Models.User;
-using CarHire.Core.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Moq;
-
-namespace CarHire.UnitTests
+﻿namespace CarHire.UnitTests
 {
     [TestFixture]
     public class UserServiceTests

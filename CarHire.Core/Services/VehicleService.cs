@@ -1,14 +1,16 @@
 ﻿namespace CarHire.Core.Services
 {
+    using System.Reflection;
+
+    using Microsoft.EntityFrameworkCore;
+
     using CarHire.Core.Contracts;
-    using CarHire.Core.Models.Discount;
     using CarHire.Core.Models.Enum;
     using CarHire.Core.Models.Vehicle;
+    using CarHire.Core.Models.Discount;
     using CarHire.Infrastructure.Data.Common;
     using CarHire.Infrastructure.Data.Entities;
     using CarHire.Infrastructure.Data.Entities.Enums;
-    using Microsoft.EntityFrameworkCore;
-    using System.Reflection;
 
     public class VehicleService : IVehicleService
     {
@@ -39,9 +41,7 @@
 
         public async Task<VehicleDetailsModel> GetVehicleDetailsByIdAsync(string id)
         {
-            /*var discounts = await repo*/
-
-             var vehicle = await repo.AllReadonly<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
+            return await repo.AllReadonly<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
                 .Include(v => v.VehicleDiscounts)
                 .ThenInclude(v => v.Discount)
                 .Select(x => new VehicleDetailsModel()
@@ -72,8 +72,6 @@
                     }).ToList()
 
                 }).FirstAsync();
-
-            return vehicle;
         }
 
         public async Task<IEnumerable<VehicleHomeModel>> GetVehiclesByCategoryAsync(int categoryId)

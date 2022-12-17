@@ -94,6 +94,8 @@
             public const string ErrorMessageCategoryExist = "The category already exists!";
             public const string ErrorMessageDiscount = "The discount does not exists!";
             public const string ErrorMessageDiscountExist = "The discount already exists!";
+            public const string ErrorMessageDiscountOnVehicleExist = "The vehicle already has this discount!";
+            public const string ErrorMessageDiscountOnVehicleNotExists = "The vehicle does not have this discount!";
             public const string ErrorMessageRenterExist = "You don\'t have permission";
             public const string ErrorMessageAddUserToRole = "User not added in role!";
             public const string ErrorMessageAddUserExistToRole = "The user already is in role!";
@@ -112,6 +114,8 @@
             public const string WarningMessageAddVehicle = "Vehicle successfully added!";
             public const string WarningMessageEditVehicle = "Vehicle successfully edited!";
             public const string WarningMessageDeleteComment = "Comment successfully deleted!";
+            public const string WarningMessageDiscountAdded= "Discount successfully added to vehicle!";
+            public const string WarningMessageDiscountRemoved= "Discount successfully removed from vehicle!";
 
             public const string SuccessMessage = "SuccessMessage";
             public const string FeedbackMessage = "Тhank you, your comment is important to us!";

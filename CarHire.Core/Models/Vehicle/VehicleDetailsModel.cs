@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CarHire.Core.Models.Vehicle
+﻿namespace CarHire.Core.Models.Vehicle
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using CarHire.Core.Models.Discount;
+
     public class VehicleDetailsModel
     {
         public string Id { get; set; } = null!;
@@ -38,6 +40,8 @@ namespace CarHire.Core.Models.Vehicle
         public decimal PricePerDay { get; set; }
 
         public string FuelType { get; set; } = null!;
+
+        public List<DiscountHomeModel> Discounts { get; set; } = new List<DiscountHomeModel>();
 
     }
 }

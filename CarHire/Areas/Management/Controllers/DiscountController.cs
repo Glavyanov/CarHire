@@ -12,7 +12,7 @@
         private readonly IVehicleService vehicleService;
 
         public DiscountController(
-            IDiscountService _discountService, 
+            IDiscountService _discountService,
             IVehicleService _vehicleService)
         {
             discountService = _discountService;
@@ -91,7 +91,7 @@
 
             var discounts = await discountService.GetAllAsync();
 
-            Func<DiscountHomeModel, bool> checkDiscount = (DiscountHomeModel x) => 
+            Func<DiscountHomeModel, bool> checkDiscount = (DiscountHomeModel x) =>
             x.Name.ToLower() == model!.Name.ToLower() && x.DiscountSize == model.DiscountSize;
 
             if (discounts.Any(checkDiscount))
@@ -110,7 +110,7 @@
 
                 TempData[MessageConstant.ErrorMessage] = ex.Message;
             }
-            
+
 
             return RedirectToAction(nameof(Index));
         }
@@ -139,12 +139,77 @@
         }
 
         [HttpPost]
-        public IActionResult AddToVehicle(
+        public async Task<IActionResult> AddToVehicle(
+            [FromForm(Name = "VehicleId")] string vehicleId,
+            [FromForm(Name = "DiscountId")] string discountId)
+        {
+            if (await discountService.ExistDiscountOnVehicleAsync(vehicleId, discountId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageDiscountOnVehicleExist;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            if (!await vehicleService.ExistsAsync(vehicleId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            if (!await discountService.ExistsbyIdAsync(discountId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageDiscount;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            await discountService.AddDiscountToVehicleAsync(vehicleId, discountId);
+
+            TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageDiscountAdded;
+
+            return RedirectToAction("Details", "Vehicles", new { area = "", id = vehicleId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(
             [FromForm(Name = "VehicleId")] string vehicleId,
             [FromForm(Name = "DiscountId")] string discountId)
         {
 
-            return View();
+            if (!await vehicleService.ExistsAsync(vehicleId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageVehicle;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            if (!await discountService.ExistsbyIdAsync(discountId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageDiscount;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            if (!await discountService.ExistDiscountOnVehicleAsync(vehicleId, discountId))
+            {
+                TempData[MessageConstant.ErrorMessage] = MessageConstant.ErrorMessageDiscountOnVehicleNotExists;
+
+                return RedirectToAction(nameof(AllVehicles));
+            }
+
+            try
+            {
+                await discountService.RemoveDiscountFromVehicleAsync(vehicleId, discountId);
+
+                TempData[MessageConstant.WarningMessage] = MessageConstant.WarningMessageDiscountRemoved;
+            }
+            catch (ArgumentException ex)
+            {
+                TempData[MessageConstant.ErrorMessage] = ex.Message;
+            }
+
+            return RedirectToAction("Details", "Vehicles", new { area = "", id = vehicleId });
         }
     }
 }

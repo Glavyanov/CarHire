@@ -19,6 +19,20 @@
             repo = _repo;
         }
 
+        public async Task AddDiscountToVehicleAsync(string vehicleId, string discountId)
+        {
+            Guid vehicleGuidId = new Guid(vehicleId);
+            Guid discountGuidId = new Guid(discountId);
+            VehicleDiscount vehicleDiscount = new()
+            {
+                VehicleId = vehicleGuidId,
+                DiscountId = discountGuidId
+            };
+
+            await repo.AddAsync(vehicleDiscount);
+            await repo.SaveChangesAsync();
+        }
+
         public async Task CreateDiscountAsync(DiscountAddModel model)
         {
             Discount discount = new()
@@ -48,6 +62,13 @@
                 throw new ArgumentException("No such discount found to edit!");
             }
             
+        }
+
+        public async Task<bool> ExistDiscountOnVehicleAsync(string vehicleId, string discountId)
+        {
+            return await repo.AllReadonly<VehicleDiscount>(
+                vd => vd.VehicleId.ToString() == vehicleId && vd.DiscountId.ToString() == discountId)
+                .AnyAsync();
         }
 
         public async Task<bool> ExistsbyIdAsync(string id) =>
@@ -91,6 +112,22 @@
             };
 
             return result;
+        }
+
+        public async Task RemoveDiscountFromVehicleAsync(string vehicleId, string discountId)
+        {
+            var entry = await repo.All<VehicleDiscount>(
+                vd => vd.VehicleId.ToString() == vehicleId && vd.DiscountId.ToString() == discountId)
+                .FirstOrDefaultAsync();
+
+            if (entry == null)
+            {
+                throw new ArgumentException("No such record in the database!");
+            }
+
+            repo.Delete(entry);
+
+            await repo.SaveChangesAsync();
         }
     }
 }

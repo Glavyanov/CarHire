@@ -1,6 +1,7 @@
 ﻿namespace CarHire.Core.Services
 {
     using CarHire.Core.Contracts;
+    using CarHire.Core.Models.Discount;
     using CarHire.Core.Models.Enum;
     using CarHire.Core.Models.Vehicle;
     using CarHire.Infrastructure.Data.Common;
@@ -38,7 +39,11 @@
 
         public async Task<VehicleDetailsModel> GetVehicleDetailsByIdAsync(string id)
         {
-            return await repo.AllReadonly<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
+            /*var discounts = await repo*/
+
+             var vehicle = await repo.AllReadonly<Vehicle>(v => v.Id.ToString() == id && !v.IsDeleted)
+                .Include(v => v.VehicleDiscounts)
+                .ThenInclude(v => v.Discount)
                 .Select(x => new VehicleDetailsModel()
                 {
                     Id = x.Id.ToString(),
@@ -57,9 +62,18 @@
                     Doors = x.Doors,
                     PricePerDay = x.PricePerDay,
                     Seats = x.Seats,
-                    TankCapacity = x.TankCapacity
+                    TankCapacity = x.TankCapacity,
+                    Discounts = x.VehicleDiscounts.Select(d => new DiscountHomeModel()
+                    {
+                        DiscountSize = d.Discount.DiscountSize,
+                        Name = d.Discount.Name,
+                        ExpireOn = d.Discount.ExpireOn,
+                        Id = d.Discount.Id.ToString()
+                    }).ToList()
 
                 }).FirstAsync();
+
+            return vehicle;
         }
 
         public async Task<IEnumerable<VehicleHomeModel>> GetVehiclesByCategoryAsync(int categoryId)

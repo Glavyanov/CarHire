@@ -1,6 +1,3 @@
-
-![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?style=plastic)
-
 # CarHire
 
 ***The application provides an opportunity to rent a vehicle from an office after registration and filling out the rental form.
@@ -78,3 +75,11 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 ![Screenshot 2023-01-09 211356](https://user-images.githubusercontent.com/89041019/211389193-0bf4a316-a91b-4e6e-9cea-4867e279f45a.png)
 
+<br>
+<br>
+<br>
+
+![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)
+![GitHub all releases](https://img.shields.io/github/downloads/Glavyanov/CarHire/total)
+![GitHub forks](https://img.shields.io/github/forks/Glavyanov/CarHire?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/Glavyanov/CarHire?style=social)

@@ -9,11 +9,19 @@ The selection is made through a panel with vehicle categories, which is also the
 ![Screenshot 2023-01-09 150710](https://user-images.githubusercontent.com/89041019/211315281-bf8adb00-7971-4b66-8ee2-98f6800190d9.png)
 ---
 
+<br>
+<br>
+<br>
+
 ***It is possible to view the details of the car and comments left by previous renters.<br>
 Each user has a section (My Rent) with their current rent through which the vehicle is returned after the end of the rent.***
 
 ![Screenshot 2023-01-09 132534](https://user-images.githubusercontent.com/89041019/211317922-b31b1c68-3902-4b6c-b885-85561e26f92a.png)
 ---
+
+<br>
+<br>
+<br>
 
 ***After granted an access level by the administration, an employee with the rank of manager can edit the data and add new ones
 such as: comments, vehicle details, trade discounts, categories.***<br>
@@ -21,6 +29,10 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 ![Screenshot 2023-01-09 153439](https://user-images.githubusercontent.com/89041019/211320222-d1c9b190-f411-41ad-960d-8f45e5999d4e.png)
 ---
+
+<br>
+<br>
+<br>
 
 ***An employee with the rank of administrator (which is added automatically with database seeding) can add/remove roles to a given user that give the level of access to the data.***
 

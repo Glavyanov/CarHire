@@ -1,3 +1,6 @@
+
+![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?style=plastic)
+
 # CarHire
 
 ***The application provides an opportunity to rent a vehicle from an office after registration and filling out the rental form.
@@ -44,7 +47,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 <br>
 <br>
 
-![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?style=plastic)
 
 ## Tech Stack
 
@@ -54,11 +56,18 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 > - ![](https://img.shields.io/badge/ASP.NET%20Core-v6.0.8-%23512bd4)
 > - ![](https://img.shields.io/badge/ASP.NET%20Core%20Identity-v6.0.8-%23512bd4)
 > - ![](https://img.shields.io/badge/EntityFrameworkCore-v6.0.8-blue)
+> - ![](https://img.shields.io/badge/MSSQLServer-2019--latest-%23eb0c0c)
 
 ### 2. Front-End
 
 > - ![](https://img.shields.io/badge/jQuery-v3.5.1-%230769AD)
 > - ![](https://img.shields.io/badge/Bootstrap-v5.1.0-%236610f2)
 > - ![](https://img.shields.io/badge/sweetalert2-v11.6.10-%237066e0)
+
+### 3. Tests
+
+> - ![](https://img.shields.io/badge/SQLite-v7.0.0-%230088e9f2)
+> - ![](https://img.shields.io/badge/MOQ-v4.8.13-%23ebba06f2)
+> - ![](https://img.shields.io/badge/NUnit-v3.13.3-%230e8300)
 
 ## 🗺️ Database Diagram

@@ -3,6 +3,15 @@
 The selection is made through a panel with vehicle categories, which is also the home page***
 
 ![Screenshot 2023-01-09 115729](https://user-images.githubusercontent.com/89041019/211303761-b88c6629-2e97-48f3-ae40-8ce9e3b1875b.png)
-***or through the all cars section.***
+---
+***or through the all vehicles section.***
 
 ![Screenshot 2023-01-09 150710](https://user-images.githubusercontent.com/89041019/211315281-bf8adb00-7971-4b66-8ee2-98f6800190d9.png)
+---
+
+***It is possible to view the details of the car and comments left by previous renters.<br>
+Each user has a section (My Rent) with their current rent through which the vehicle is returned after the end of the rent.***
+
+![Screenshot 2023-01-09 132534](https://user-images.githubusercontent.com/89041019/211317922-b31b1c68-3902-4b6c-b885-85561e26f92a.png)
+
+---

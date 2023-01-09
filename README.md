@@ -1,4 +1,5 @@
 # CarHire
+
 ***The application provides an opportunity to rent a vehicle from an office after registration and filling out the rental form.
 The selection is made through a panel with vehicle categories, which is also the home page***
 
@@ -38,3 +39,15 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 ![Screenshot 2023-01-09 154523](https://user-images.githubusercontent.com/89041019/211322356-740abb55-df19-47fa-a15a-b6db0d7e75ee.png)
 ---
+
+<br>
+<br>
+<br>
+
+![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?style=plastic)
+
+# Tech Stack
+
+- ![](https://img.shields.io/badge/Visual%20Studio%202022-v17.4.2-%233b2e58)
+- ![](https://img.shields.io/badge/ASP.NET%20Core-v6.0.8-%23512bd4)
+- ![](https://img.shields.io/badge/EntityFrameworkCore-v6.0.8-blue)

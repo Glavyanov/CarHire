@@ -71,3 +71,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 > - ![](https://img.shields.io/badge/NUnit-v3.13.3-%230e8300)
 
 ## 🗺️ Database Diagram
+
+![Screenshot 2023-01-09 211356](https://user-images.githubusercontent.com/89041019/211389193-0bf4a316-a91b-4e6e-9cea-4867e279f45a.png)
+

@@ -46,8 +46,19 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?style=plastic)
 
-# Tech Stack
+## Tech Stack
 
-- ![](https://img.shields.io/badge/Visual%20Studio%202022-v17.4.2-%233b2e58)
-- ![](https://img.shields.io/badge/ASP.NET%20Core-v6.0.8-%23512bd4)
-- ![](https://img.shields.io/badge/EntityFrameworkCore-v6.0.8-blue)
+### 1. Back-End
+
+> - ![](https://img.shields.io/badge/Visual%20Studio%202022-v17.4.2-%233b2e58)
+> - ![](https://img.shields.io/badge/ASP.NET%20Core-v6.0.8-%23512bd4)
+> - ![](https://img.shields.io/badge/ASP.NET%20Core%20Identity-v6.0.8-%23512bd4)
+> - ![](https://img.shields.io/badge/EntityFrameworkCore-v6.0.8-blue)
+
+### 2. Front-End
+
+> - ![](https://img.shields.io/badge/jQuery-v3.5.1-%230769AD)
+> - ![](https://img.shields.io/badge/Bootstrap-v5.1.0-%236610f2)
+> - ![](https://img.shields.io/badge/sweetalert2-v11.6.10-%237066e0)
+
+## 🗺️ Database Diagram

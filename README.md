@@ -78,7 +78,7 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 <br>
 <br>
 
-## Usage
+## ⌨️ Usage
 
   **1. Download ZIP file from top green button <> Code**
   

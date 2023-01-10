@@ -12,7 +12,6 @@ The selection is made through a panel with vehicle categories, which is also the
 
 <br>
 <br>
-<br>
 
 ***It is possible to view the details of the car and comments left by previous renters.<br>
 Each user has a section (My Rent) with their current rent through which the vehicle is returned after the end of the rent.***
@@ -20,7 +19,6 @@ Each user has a section (My Rent) with their current rent through which the vehi
 ![Screenshot 2023-01-09 132534](https://user-images.githubusercontent.com/89041019/211317922-b31b1c68-3902-4b6c-b885-85561e26f92a.png)
 ---
 
-<br>
 <br>
 <br>
 
@@ -33,7 +31,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
-<br>
 
 ***An employee with the rank of administrator (which is added automatically with database seeding) can add/remove roles to a given user that give the level of access to the data.***
 
@@ -42,8 +39,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
-<br>
-
 
 ## :books: Tech Stack
 
@@ -67,7 +62,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 > - ![](https://img.shields.io/badge/MOQ-v4.8.13-%23ebba06f2)
 > - ![](https://img.shields.io/badge/NUnit-v3.13.3-%230e8300)
 
-<br>
 <br>
 <br>
 

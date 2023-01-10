@@ -103,7 +103,7 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
  **5. Open Package Manager Console choose for Default project : CarHire.Infrastructure and type:**
 
 ```javascript
-update database
+update-database
 ```
 
 <br>

@@ -12,7 +12,6 @@ The selection is made through a panel with vehicle categories, which is also the
 
 <br>
 <br>
-<br>
 
 ***It is possible to view the details of the car and comments left by previous renters.<br>
 Each user has a section (My Rent) with their current rent through which the vehicle is returned after the end of the rent.***
@@ -20,7 +19,6 @@ Each user has a section (My Rent) with their current rent through which the vehi
 ![Screenshot 2023-01-09 132534](https://user-images.githubusercontent.com/89041019/211317922-b31b1c68-3902-4b6c-b885-85561e26f92a.png)
 ---
 
-<br>
 <br>
 <br>
 
@@ -33,7 +31,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
-<br>
 
 ***An employee with the rank of administrator (which is added automatically with database seeding) can add/remove roles to a given user that give the level of access to the data.***
 
@@ -42,8 +39,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
-<br>
-
 
 ## :books: Tech Stack
 
@@ -69,7 +64,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
-<br>
 
 ## 🗺️ Database Diagram
 
@@ -77,6 +71,40 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
+
+## ⌨️ Usage
+
+  **1. Download ZIP file from top green button <> Code**
+  
+  ![Screenshot 2023-01-10 110811](https://user-images.githubusercontent.com/89041019/211515639-9f67bab3-ccda-453d-984e-fc60db88b243.png)
+
+<br>
+
+ **2. Open or download and open [MSSQLServer instance](https://www.microsoft.com/en-us/sql-server/sql-server-downloads "Microsoft official")**
+ 
+ **3. Open CarHire.csproj.user with IDE**
+ 
+ **4. Right click on CarHire and press Manage User Secrets in secret.json write your own connection string**
+```javascript
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "your_own_connection_string"
+  }
+}
+```
+
+ **5. Open Package Manager Console choose for Default project : CarHire.Infrastructure and type:**
+
+```javascript
+update-database
+```
+
+ **6. It is now ready to use. And you can login with seeded users:**
+ 
+ |First name| Last name| Email   | Password   | Role  |
+ |-------| ------- | ------------- |:-------------:| -----:|
+ | John | Doe  |John@mail.com| 123456 | Admin |
+ | Jane | Doe  |Jane@mail.com| 654321 |   n/a |
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

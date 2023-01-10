@@ -86,7 +86,7 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 
- **2. Open or download and open [MSSQLServer instance](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)**
+ **2. Open or download and open [MSSQLServer instance](https://www.microsoft.com/en-us/sql-server/sql-server-downloads "Microsoft official")**
  
 <br>
 <br>

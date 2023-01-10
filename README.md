@@ -77,6 +77,14 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
 <br>
 <br>
+
+## Usage
+
+  **1. Download ZIP file from top green button <> Code**
+  
+  ![Screenshot 2023-01-10 110811](https://user-images.githubusercontent.com/89041019/211515639-9f67bab3-ccda-453d-984e-fc60db88b243.png)
+
+<br>
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

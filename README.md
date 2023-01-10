@@ -90,8 +90,14 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
  
  **3. Open CarHire.csproj.user with IDE**
  
- **4. Right click on CarHire and press Manage User Secrets**
-
+ **4. Right click on CarHire and press Manage User Secrets in secret.json write your own connection string**
+```javascript
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "your_own_connection_string"
+  }
+}
+```
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

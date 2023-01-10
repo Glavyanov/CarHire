@@ -100,6 +100,14 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 ```
 <br>
 
+ **5. Open Package Manager Console choose for Default project : CarHire.Infrastructure and type:**
+
+```javascript
+update database
+```
+
+<br>
+
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)
 ![GitHub all releases](https://img.shields.io/github/downloads/Glavyanov/CarHire/total)
 ![GitHub forks](https://img.shields.io/github/forks/Glavyanov/CarHire?style=social)

@@ -98,7 +98,6 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
   }
 }
 ```
-<br>
 
  **5. Open Package Manager Console choose for Default project : CarHire.Infrastructure and type:**
 
@@ -106,6 +105,12 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 update-database
 ```
 
+ **6. It is now ready to use. And you can login with seeded users:**
+ 
+ |First name| Last name| Email   | Password   | Role  |
+ |-------| ------- | ------------- |:-------------:| -----:|
+ | John | Doe  |John@mail.com| 123456 | Admin |
+ | Jane | Doe  |Jane@mail.com| 654321 |   n/a |
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

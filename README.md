@@ -88,7 +88,10 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 
  **2. Open or download and open [MSSQLServer instance](https://www.microsoft.com/en-us/sql-server/sql-server-downloads "Microsoft official")**
  
-<br>
+ **3. Open CarHire.csproj.user with IDE**
+ 
+ **4. Right click on CarHire and press Manage User Secrets**
+
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

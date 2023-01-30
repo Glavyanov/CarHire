@@ -21,7 +21,7 @@
                 }
                 <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 16%;" 
                 asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 90%; height: 350px;">
+                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         }
     </div>

@@ -22,6 +22,14 @@ Each user has a section (My Rent) with their current rent through which the vehi
 <br>
 <br>
 
+***If all vehicles in a given category are already rented, an appropriate message will pop up like in the example below.***
+
+![Screenshot 2023-02-05 130033](https://user-images.githubusercontent.com/89041019/216815125-f8aa8052-0207-4dba-9bb3-eddf60b6c0f1.png)
+---
+
+<br>
+<br>
+
 ***After granted an access level by the administration, an employee with the rank of manager can edit the data and add new ones
 such as: comments, vehicle details, trade discounts, categories.***<br>
 ***Manager area:***

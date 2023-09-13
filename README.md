@@ -1,4 +1,4 @@
-# [CarHire](https://carhireallstars.azurewebsites.net{:target="_blank" rel="noopener"})
+# [CarHire](https://carhireallstars.azurewebsites.net)
 
 ***The application provides an opportunity to rent a vehicle from an office after registration and filling out the rental form.
 The selection is made through a panel with vehicle categories, which is also the home page***

@@ -404,3 +404,4 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
+/CarHire/appsettings.Production.json

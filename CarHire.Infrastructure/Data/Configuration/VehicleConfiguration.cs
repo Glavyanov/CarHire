@@ -46,7 +46,7 @@
                 Transmission = Entities.Enums.Transmission.Automatic,
                 AirConditioning = true,
                 Seats = 4,
-                ImageUrl = "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2021/12/265349819_2874854382806097_5595825663715011364_n.jpg",
+                ImageUrl = "https://s1.cdn.autoevolution.com/images/news/gallery/chevrolet-chevelle-ss-black-panther-looks-wide-and-then-some_3.jpg",
                 Doors = 2,
                 Suspension = Entities.Enums.Suspension.Hydropneumatic,
                 NavigationSystem = true,

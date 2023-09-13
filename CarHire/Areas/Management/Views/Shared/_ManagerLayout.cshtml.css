@@ -49,7 +49,6 @@ button.accept-policy {
     background-size: cover;
     background-position: center;
     margin-top: -1rem;
-    margin-left: -4rem;
-    width: 90rem;
+    width: 100%;
     height: 50rem;
 }

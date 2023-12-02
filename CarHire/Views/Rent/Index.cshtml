@@ -1,5 +1,7 @@
 ﻿@model VehicleRentModel
 
+<script src="~/knockout/knockout-latest.js"></script>
+
 @{
     ViewData["Title"] = "Rent Vehicle";
     Model.RentDays = 1;
@@ -13,7 +15,7 @@
             <form method="post">
                 <input asp-for="@Model.Id" />
                 <input asp-for="@Model.ImageUrl" />
-                <input asp-for="@Model.PricePerDay" id="pricePerDay"/>
+                <input asp-for="@Model.PricePerDay"/>
                 <div class="mb-3 text-center">
                     <label asp-for="@Model.DrivingLicense" class="form-label text-danger"><h5>Driving License</h5></label>
                     <input asp-for="@Model.DrivingLicense" class="form-control" aria-required="true" />
@@ -21,13 +23,13 @@
                 </div>
                 <div class="mb-3 text-center">
                     <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
-                    <input asp-for="@Model.RentDays" class="form-control" aria-required="true" id="rentDays" onchange="calculatePrice(event)"/>
+                        <input asp-for="@Model.RentDays" class="form-control" aria-required="true" data-bind="value: rentDays, valueUpdate: 'input'" />
                     <span asp-validation-for="RentDays" class="text-danger"></span>
                     
                 </div>
                 <div class ="mb-3 text-center">
                     <label class="form-label text-danger"><h5>Price: </h5></label>
-                    <input id="price" placeholder="@Model.PricePerDay.ToString("N2") Euro" disabled />
+                    <input data-bind="value: formatedPrice()" disabled/>
                 </div>
                 <div class="mb-3">
                     <input class="btn btn-primary" type="submit" value="Rent" />
@@ -42,11 +44,15 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        function calculatePrice(e){
-            days = +$("#rentDays").val();
-            price = +$("#pricePerDay").val();
+        function RentData() {
+            var that = this;
 
-            $("#price").val((days * price).toFixed(2) + " Euro");
+            that.pricePerDay = ko.observable(@Model.PricePerDay);
+            that.rentDays = ko.observable(@Model.RentDays);
+
+            that.formatedPrice = ko.computed(() => `${(that.pricePerDay() * that.rentDays()).toFixed(2)} Euro` );
         }
+
+        ko.applyBindings(new RentData());
     </script>
 }

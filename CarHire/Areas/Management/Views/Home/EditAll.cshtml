@@ -16,12 +16,12 @@
                 <div class="col-lg-6 position-relative mb-5">
                     @if (!item.IsRented)
                     {
-                        <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 45%;"
+                        <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 100%;"
                      asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     }
                     else
                     {
-                        <p class="btn btn-primary position-absolute top-0 start-0" style="background-color: red;height: 40px; width: 45%;">Rented</p>
+                        <p class="btn btn-primary position-absolute top-0 start-0" style="background-color: red;height: 40px; width: 100%;">Rented</p>
                     }
                 </div>
             </div>

@@ -92,7 +92,7 @@
             var order = await repo.All<Order>( o => !o.IsDeleted &&
                             rentersIds.Contains(o.RenterId) && 
                             o.VehicleId == vehicleGuidId).FirstOrDefaultAsync();
-            if (order != null)
+            if (order is { IsDeleted: false })
             {
                 order.IsDeleted = true;
                 await repo.SaveChangesAsync();

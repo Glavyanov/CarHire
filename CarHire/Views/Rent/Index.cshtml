@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-3 text-center">
                     <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
-                        <input asp-for="@Model.RentDays" class="form-control" aria-required="true" data-bind="value: rentDays, valueUpdate: 'input'" />
+                    <input asp-for="@Model.RentDays" pattern="[0-9]" class="form-control" aria-required="true" data-bind="value: rentDays, valueUpdate: 'input'" />
                     <span asp-validation-for="RentDays" class="text-danger"></span>
                     
                 </div>
@@ -43,6 +43,7 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery-validation/dist/jquery-override.validator.js"></script>
     <script>
         function RentData() {
             var that = this;

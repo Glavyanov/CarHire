@@ -49,7 +49,8 @@
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                UserName = model.Email
+                UserName = model.Email,
+                EmailConfirmed = true
             };
 
             var result = await userManager.CreateAsync(user,model.Password);

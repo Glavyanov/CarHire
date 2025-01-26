@@ -63,6 +63,7 @@ such as: comments, vehicle details, trade discounts, categories.***<br>
 > - ![](https://img.shields.io/badge/jQuery-v3.5.1-%230769AD)
 > - ![](https://img.shields.io/badge/Bootstrap-v5.1.0-%236610f2)
 > - ![](https://img.shields.io/badge/sweetalert2-v11.6.10-%237066e0)
+> - ![](https://img.shields.io/badge/knockout.js-v3.5.1-%236e0200)
 
 ### 3. Tests
 

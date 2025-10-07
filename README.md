@@ -111,9 +111,9 @@ update-database
  **6. It is now ready to use. And you can login with seeded users:**
  
  |First name| Last name| Email   | Password   | Role  |
- |-------| ------- | ------------- |:-------------:| -----:|
+ |-------| ------- | ------------- |:-------------:|:-----:|
  | John | Doe  |John@mail.com| 123456 | Admin |
- | Jane | Doe  |Jane@mail.com| 654321 |   n/a |
+ | Jane | Doe  |Jane@mail.com| 654321 |  N/A  |
 <br>
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)

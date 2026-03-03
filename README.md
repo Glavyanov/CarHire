@@ -116,7 +116,7 @@ update-database
  | Jane | Doe  |Jane@mail.com| 654321 |  N/A  |
 <br>
 
-![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire)
+![GitHub language count](https://img.shields.io/github/languages/count/Glavyanov/CarHire?cacheSeconds=3600)
 ![GitHub all releases](https://img.shields.io/github/downloads/Glavyanov/CarHire/total)
 ![GitHub forks](https://img.shields.io/github/forks/Glavyanov/CarHire?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Glavyanov/CarHire?style=social)

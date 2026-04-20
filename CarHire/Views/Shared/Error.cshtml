@@ -1,25 +1,129 @@
-﻿@model ErrorViewModel
+@model ErrorViewModel
 @{
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+@section Head {
+    <style>
+        .ed-error {
+            min-height: calc(100vh - 240px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--s-8) var(--s-5);
+        }
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+        .ed-error__inner {
+            max-width: 720px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-5);
+            text-align: center;
+            align-items: center;
+        }
+
+        .ed-error__code {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(6rem, 20vw, 14rem);
+            line-height: 0.85;
+            color: var(--accent);
+            font-variation-settings: "opsz" 144;
+            letter-spacing: -0.04em;
+            margin: 0;
+        }
+
+        .ed-error__eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: var(--tracking-widest);
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+
+        .ed-error__title {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: var(--fs-2xl);
+            line-height: 1.1;
+            color: var(--ink);
+            margin: 0;
+            font-variation-settings: "opsz" 72;
+            max-width: 22ch;
+        }
+
+        .ed-error__lede {
+            font-family: var(--font-body);
+            font-size: var(--fs-md);
+            line-height: 1.6;
+            color: var(--ink-muted);
+            max-width: 52ch;
+            margin: 0;
+        }
+
+        .ed-error__meta {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            letter-spacing: var(--tracking-wide);
+            color: var(--ink-faint);
+            text-transform: uppercase;
+        }
+
+        .ed-error__meta code {
+            color: var(--accent);
+            font-family: var(--font-mono);
+        }
+
+        .ed-error__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--s-3);
+            margin-top: var(--s-3);
+            min-height: 52px;
+            padding: var(--s-3) var(--s-6);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            letter-spacing: var(--tracking-widest);
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            text-decoration: none;
+            transition: background var(--dur-fast) var(--ease-editorial), gap var(--dur-med) var(--ease-editorial);
+        }
+
+        .ed-error__cta:hover,
+        .ed-error__cta:focus-visible {
+            background: var(--accent-hi);
+            border-color: var(--accent-hi);
+            gap: var(--s-4);
+        }
+    </style>
 }
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+<section class="ed-error">
+    <div class="ed-error__inner stagger-in">
+        <p class="ed-error__eyebrow">— Off the road</p>
+        <h1 class="ed-error__code" aria-label="Error"><em>×</em></h1>
+        <h2 class="ed-error__title">
+            Something took an unexpected turn.
+        </h2>
+        <p class="ed-error__lede">
+            The request didn't reach the garage. It may have been a loose link, a stale bookmark, or a brief mechanical fault on our side. Try heading back to the collection — we'll take it from there.
+        </p>
+
+        @if (Model.ShowRequestId)
+        {
+            <p class="ed-error__meta">
+                Request ID · <code>@Model.RequestId</code>
+            </p>
+        }
+
+        <a class="ed-error__cta" asp-controller="Home" asp-action="Index">
+            <span>Back to the collection</span>
+            <span aria-hidden="true">→</span>
+        </a>
+    </div>
+</section>

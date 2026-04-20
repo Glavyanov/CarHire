@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Editorial Luxury — base layer
+   Applied AFTER bootstrap.min.css, site.css and CarHire.styles.css so these
+   rules win by order. Keep this file focused on the base canvas + primitives;
+   per-view styling lives inline or in dedicated files in later phases.
+   ========================================================================== */
+
+/* --- Base canvas -------------------------------------------------------- */
+
+html {
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    letter-spacing: var(--tracking-normal);
+    font-feature-settings: "ss01", "ss02", "cv11";
+}
+
+/* Selection echoes the brand accent */
+::selection {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* Scrollbar — subtle, not invisible */
+* {
+    scrollbar-color: var(--hairline-hi) transparent;
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--hairline-hi);
+    border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* --- Typography --------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 var(--s-4);
+    font-variation-settings: "opsz" 72;
+}
+
+h1, .h1 { font-size: var(--fs-3xl); font-variation-settings: "opsz" 144; }
+h2, .h2 { font-size: var(--fs-2xl); }
+h3, .h3 { font-size: var(--fs-xl); }
+h4, .h4 { font-size: var(--fs-lg); }
+
+p {
+    color: var(--ink);
+    margin: 0 0 var(--s-4);
+    max-width: 68ch;
+}
+
+a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--accent);
+}
+
+strong, b { font-weight: 600; }
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--hairline);
+    margin: var(--s-7) 0;
+    opacity: 1;
+}
+
+small, .caption {
+    font-size: var(--fs-xs);
+    color: var(--ink-muted);
+}
+
+/* --- Focus ring --------------------------------------------------------- */
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* --- Reusable primitives ----------------------------------------------- */
+
+/* Small uppercase label: "— The Collection" */
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+}
+
+/* Editorial numbered index: 01 · 02 · 03 */
+.index-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--accent);
+    letter-spacing: var(--tracking-wide);
+}
+
+/* Hairline rule — thin horizontal divider */
+.rule {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--hairline);
+    border: 0;
+}
+
+/* Editorial button — gold outline, fills on hover */
+.btn-editorial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    padding: var(--s-3) var(--s-5);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+        color    var(--dur-fast) var(--ease-editorial),
+        background-color var(--dur-fast) var(--ease-editorial),
+        border-color var(--dur-fast) var(--ease-editorial);
+}
+
+.btn-editorial:hover,
+.btn-editorial:focus-visible {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-editorial--solid {
+    color: var(--bg);
+    background: var(--accent);
+}
+
+.btn-editorial--solid:hover,
+.btn-editorial--solid:focus-visible {
+    background: var(--accent-hi);
+    border-color: var(--accent-hi);
+}
+
+.btn-editorial--ghost {
+    color: var(--ink-muted);
+    border-color: var(--hairline-hi);
+}
+
+.btn-editorial--ghost:hover,
+.btn-editorial--ghost:focus-visible {
+    color: var(--ink);
+    background: transparent;
+    border-color: var(--ink);
+}
+
+/* Vehicle card — structural shell, per-view skinning in Phase 3 */
+.card-vehicle {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--hairline);
+    transition:
+        transform  var(--dur-med) var(--ease-editorial),
+        border-color var(--dur-med) var(--ease-editorial),
+        background-color var(--dur-med) var(--ease-editorial);
+}
+
+.card-vehicle:hover {
+    transform: translateY(-4px);
+    border-color: var(--hairline-hi);
+    background: var(--bg-elev-2);
+}
+
+/* Hero — full-bleed cinematic block */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 72vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(10, 10, 10, 0.15) 0%, rgba(10, 10, 10, 0.65) 70%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero > img,
+.hero > .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Staggered reveal on load ----------------------------------------- */
+
+.stagger-in > * {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp var(--dur-slow) var(--ease-editorial) forwards;
+}
+
+.stagger-in > *:nth-child(1) { animation-delay: 80ms;  }
+.stagger-in > *:nth-child(2) { animation-delay: 200ms; }
+.stagger-in > *:nth-child(3) { animation-delay: 320ms; }
+.stagger-in > *:nth-child(4) { animation-delay: 440ms; }
+.stagger-in > *:nth-child(5) { animation-delay: 560ms; }
+.stagger-in > *:nth-child(6) { animation-delay: 680ms; }
+.stagger-in > *:nth-child(7) { animation-delay: 800ms; }
+.stagger-in > *:nth-child(n+8) { animation-delay: 920ms; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Grain overlay — adds editorial warmth over the dark canvas ------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: var(--grain-opacity, 0.04);
+    mix-blend-mode: var(--grain-blend, overlay);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96  0 0 0 0 0.94  0 0 0 0 0.91  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 200px 200px;
+}
+
+/* --- Reduced motion --------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .stagger-in > * {
+        opacity: 1;
+        transform: none;
+    }
+}

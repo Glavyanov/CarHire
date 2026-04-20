@@ -1,0 +1,137 @@
+/* ──────────────────────────────────────────────────────────
+   SweetAlert2 · Editorial dark theme
+   Retrofits the toast popups with dark palette, gold accent,
+   Fraunces + JetBrains Mono typography. Preserves toast sizing.
+   ────────────────────────────────────────────────────────── */
+
+.swal2-container.ed-swal__container {
+    padding: var(--s-5);
+}
+
+.swal2-popup.ed-swal__popup {
+    background: var(--bg-elev-1);
+    color: var(--ink);
+    border: 1px solid var(--hairline-hi);
+    border-radius: 0;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.04) inset,
+        0 24px 48px -20px rgba(0, 0, 0, 0.7);
+    font-family: var(--font-body);
+    padding: var(--s-4) var(--s-5);
+    min-width: 280px;
+    max-width: 440px;
+}
+
+.swal2-popup.ed-swal__popup.swal2-toast {
+    padding: var(--s-3) var(--s-4);
+    gap: var(--s-3);
+    align-items: center;
+}
+
+/* Left gold hairline accent — the editorial signature */
+.swal2-popup.ed-swal__popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+}
+
+.swal2-popup.ed-swal__popup--error::before {
+    background: var(--danger);
+}
+
+/* HTML body — the message itself */
+.swal2-popup.ed-swal__popup .swal2-html-container,
+.swal2-popup.ed-swal__popup .ed-swal__body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.swal2-popup.ed-swal__popup .ed-swal__eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+}
+
+.swal2-popup.ed-swal__popup--error .ed-swal__eyebrow {
+    color: var(--danger);
+}
+
+.swal2-popup.ed-swal__popup--warning .ed-swal__eyebrow {
+    color: var(--accent);
+}
+
+.swal2-popup.ed-swal__popup .ed-swal__message {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    color: var(--ink);
+    font-variation-settings: "opsz" 36;
+    margin: 0;
+}
+
+/* Icon tweaks — keep SweetAlert's vector but tune the stroke colour */
+.swal2-popup.ed-swal__popup .swal2-icon {
+    border-color: var(--hairline-hi);
+    color: var(--ink);
+    width: 1.75em;
+    height: 1.75em;
+    margin: 0;
+}
+
+.swal2-popup.ed-swal__popup.swal2-toast .swal2-icon {
+    margin-inline-end: var(--s-3);
+}
+
+.swal2-popup.ed-swal__popup--error .swal2-icon.swal2-error {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.swal2-popup.ed-swal__popup--error .swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+    background-color: var(--danger);
+}
+
+.swal2-popup.ed-swal__popup--warning .swal2-icon.swal2-warning {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Timer progress bar — thin gold hairline */
+.swal2-popup.ed-swal__popup .swal2-timer-progress-bar {
+    background: var(--accent);
+    height: 1px;
+}
+
+.swal2-popup.ed-swal__popup--error .swal2-timer-progress-bar {
+    background: var(--danger);
+}
+
+/* Close button */
+.swal2-popup.ed-swal__popup .swal2-close {
+    color: var(--ink-muted);
+    font-size: 1.5rem;
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+
+.swal2-popup.ed-swal__popup .swal2-close:hover,
+.swal2-popup.ed-swal__popup .swal2-close:focus-visible {
+    color: var(--accent);
+    background: transparent;
+    outline: none;
+}

@@ -1,28 +1,76 @@
-﻿@model IEnumerable<VehicleHomeModel>
+@model IEnumerable<VehicleHomeModel>
 
 @{
-    ViewData["Title"] = "All Vehicles";
+    ViewData["Title"] = "The Collection";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-6 position-relative mb-5">
-                @if (!item.IsRented)
-                {
-                    <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 16%;" 
-                    asp-controller="Rent" asp-action="Index" asp-route-id="@item.Id">Rent</a>
-                }
-                else
-                {
-                    <p class="btn btn-primary position-absolute top-0 start-0" 
-                    style="background-color: red;height: 40px; width: 16%;">Rented</p>
-                }
-                <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 16%;" 
-                asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 100%; height: 100%; object-fit: cover;">
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-vehicles.css" asp-append-version="true" />
+}
+
+<section class="ed-fleet" aria-labelledby="ed-fleet-title">
+    <div class="ed-fleet__inner">
+        <header class="ed-fleet__head stagger-in">
+            <div class="ed-fleet__headline">
+                <span class="eyebrow">— The Collection</span>
+                <h1 id="ed-fleet-title" class="ed-fleet__title">
+                    The full <em>fleet.</em>
+                </h1>
             </div>
+            <span class="ed-fleet__count" aria-label="Number of vehicles">
+                <strong>@Model.Count().ToString("D2")</strong> pieces curated
+            </span>
+        </header>
+
+        @if (Model.Any())
+        {
+            <ul class="ed-fleet__grid stagger-in">
+                @{ var index = 1; }
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <article class="ed-card">
+                            <div class="ed-card__media">
+                                <img class="ed-card__img" src="@item.ImageUrl" alt="Vehicle @index.ToString("D2")" loading="lazy" />
+
+                                @if (!item.IsRented)
+                                {
+                                    <a class="ed-card__pill"
+                                       asp-controller="Rent" asp-action="Index" asp-route-id="@item.Id"
+                                       aria-label="Rent vehicle @index.ToString("D2")">
+                                        Rent
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="ed-card__pill ed-card__pill--rented" aria-label="Vehicle currently rented">
+                                        Rented
+                                    </span>
+                                }
+
+                                <span class="ed-card__num" aria-hidden="true">@index.ToString("D2")</span>
+                            </div>
+
+                            <div class="ed-card__meta">
+                                <div class="ed-card__label">
+                                    <span class="ed-card__eyebrow">Piece № @index.ToString("D2")</span>
+                                    <span class="ed-card__name">From the garage</span>
+                                </div>
+                                <a class="ed-card__details"
+                                   asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">
+                                    <span>Details</span>
+                                    <span class="ed-card__details-arrow" aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </article>
+                    </li>
+                    index++;
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="ed-fleet__empty">— The garage is currently empty. Check back soon. —</p>
         }
     </div>
-</div>
+</section>

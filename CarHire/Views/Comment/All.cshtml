@@ -1,43 +1,56 @@
-﻿@model CommentExposeModel
+@model CommentExposeModel
 
 @{
-    ViewData["Title"] = "Comments Page";
-    int count = 1;
+    ViewData["Title"] = "Driver notes";
 }
 
-<h2 class="text-center">All Comments</h2>
-<hr />
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-comment.css" asp-append-version="true" />
+}
 
-<div class="container" style="display:inline">
-    <div class="row">
-        <div class="col-4">
-            <img class="card-img-top" style="width: 20rem;"
-                 src="@Model.ImageUrl" alt="Vehicle Image">
-        </div>
-        @foreach (var comment in Model.Comments)
-        {
-            <div class="u-repeater u-repeater-1">
-                <div class="u-align-left u-container-style u-gradient u-list-item u-radius-20 u-repeater-item u-shape-round u-list-item-1">
-                    <div class="u-container-layout u-similar-container u-container-layout-1">
-                        <div class="form-outline">
-                            <div class="form-outline">
-                                <h2 class="u-custom-font u-font-montserrat u-text u-text-palette-2-base u-text-2">@count</h2>
-                            </div>
-                        </div>
-                        <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" rows="6" disabled >@comment.Description</textarea>
-                        </div>
-                    </div>
-                </div>
+<section class="ed-feed" aria-labelledby="ed-feed-title">
+    <div class="ed-feed__inner stagger-in">
+
+        <header class="ed-feed__head">
+            <figure class="ed-feed__media">
+                <img class="ed-feed__img" src="@Model.ImageUrl" alt="Vehicle" />
+            </figure>
+
+            <div class="ed-feed__headline">
+                <span class="eyebrow">— Driver notes</span>
+                <h1 id="ed-feed-title" class="ed-feed__title">
+                    What the road <em>said back.</em>
+                </h1>
+                <span class="ed-feed__count" aria-label="Number of notes">
+                    <strong>@Model.Comments.Count().ToString("D2")</strong> note@(Model.Comments.Count() == 1 ? "" : "s") on record
+                </span>
+                <a class="ed-feed__back" asp-controller="Vehicles" asp-action="Index">
+                    <span aria-hidden="true">←</span>
+                    <span>Back to the collection</span>
+                </a>
             </div>
-            {
-                count++;
-            }
-        }
-        @if (!Model.Comments.Any())
+        </header>
+
+        @if (Model.Comments.Any())
         {
-            <hr />
-            <h2 class="text-center">No comments found by this vehicle!</h2>
+            <ol class="ed-feed__list">
+                @{ var count = 1; }
+                @foreach (var comment in Model.Comments)
+                {
+                    <li class="ed-feed__item">
+                        <span class="ed-feed__num" aria-hidden="true">№ @count.ToString("D2")</span>
+                        <blockquote class="ed-feed__quote">
+                            @comment.Description
+                        </blockquote>
+                    </li>
+                    count++;
+                }
+            </ol>
         }
+        else
+        {
+            <p class="ed-feed__empty">— No notes on record for this piece. Be the first to write one.</p>
+        }
+
     </div>
-</div>
+</section>

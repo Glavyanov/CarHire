@@ -1,76 +1,162 @@
-﻿@model VehicleDetailsModel
+@model VehicleDetailsModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewData["Title"] = $"{Model.Make} {Model.Model}";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-details.css" asp-append-version="true" />
+}
 
-<div class="container" style="display:inline">
-    <div class="row">
-        <div class="col-4">
-            <img class="card-img-top" style="width: 20rem;"
-                 src="@Model.ImageUrl" alt="Vehicle Image">
-        </div>
-        <div class="col-4">
-            <p style="font-size:25px;"><u>@Model.Make</u></p>
-            <p style="font-size:25px;"><u>@Model.Model</u></p>
-            <p>Manufactured in: <b>@Model.Year</b></p>
-            <p>
-                Price per day :
-                <b>@String.Format("{0:f2}", Model.PricePerDay) EUR</b>
-            </p>
-            <p>Category: <b>@Model.CategoryName</b></p>
-            <div class="form-inline">
-                <a class="btn btn-primary" asp-controller="Comment" asp-action="All"
-                   asp-route-vehicleId="@Model.Id">View comments</a>
-                @if (!Model.IsRented)
-                {
-                    <form class="ml-2" asp-controller="Rent"
-                      asp-action="Index" asp-route-id="@Model.Id" method="get">
-                        <input class="btn btn-warning" type="submit" value="Rent" style="height: 40px; width: 140px;" />
-                    </form>
-                }
-                else
-                {
-                    <div style="background-color: red;height: 40px; width: 140px; border-radius: 4px;">
-                        <p style="text-align: center;">
-                            <b>Rented</b>
-                        </p>
-                    </div>
+<section class="ed-detail" aria-labelledby="ed-detail-title">
+    <div class="ed-detail__inner stagger-in">
 
-                }
+        <nav class="ed-detail__crumb" aria-label="Breadcrumb">
+            <a class="ed-detail__back" asp-controller="Vehicles" asp-action="Index">
+                <span aria-hidden="true">←</span>
+                <span>Back to the collection</span>
+            </a>
+            <div class="ed-detail__crumb-meta">
+                <em>@Model.CategoryName</em>
+                <span class="ed-detail__crumb-sep" aria-hidden="true">·</span>
+                <span>MY @Model.Year</span>
             </div>
-            <p></p>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Vehicle Info</h5>
-                    <p class="card-text">Suspension:  @Model.Suspension</p>
-                    <p class="card-text">Navigation:  @(Model.NavigationSystem ? "Yes" : "No")</p>
-                    <p class="card-text">Gear box:  @Model.Transmission</p>
-                    <p class="card-text">Air condition:  @(Model.AirCondition ? "Yes" : "No")</p>
-                    <p class="card-text">Seats: @Model.Seats</p>
-                    <p class="card-text">Doors: @Model.Doors</p>
-                    <p class="card-text">Fuel type: @Model.FuelType</p>
-                    <p class="card-text">Consumption: @(Model.Consumption == null ? "N/A" : String.Format("{0:f2}", Model.Consumption))</p>
-                    <p class="card-text">Tank capacity: @(Model.TankCapacity == null ? "N/A" : Model.TankCapacity)</p>
+        </nav>
+
+        <header class="ed-detail__head">
+            <h1 id="ed-detail-title" class="ed-detail__title">
+                <span class="ed-detail__title-make">@Model.Make</span>
+                <span class="ed-detail__title-model">@Model.Model.</span>
+            </h1>
+
+            <div class="ed-detail__cta-col">
+                <div class="ed-detail__price">
+                    <span class="ed-detail__price-eyebrow">Price per day</span>
+                    <div>
+                        <span class="ed-detail__price-value">@String.Format("{0:f2}", Model.PricePerDay)</span>
+                        <span class="ed-detail__price-unit">EUR / day</span>
+                    </div>
+                </div>
+
+                <div class="ed-detail__actions">
+                    @if (!Model.IsRented)
+                    {
+                        <a class="ed-detail__rent"
+                           asp-controller="Rent" asp-action="Index" asp-route-id="@Model.Id">
+                            <span>Reserve this piece</span>
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="ed-detail__rented" aria-label="Currently rented">
+                            Currently out on the road
+                        </span>
+                    }
+
+                    <a class="ed-detail__comments"
+                       asp-controller="Comment" asp-action="All" asp-route-vehicleId="@Model.Id">
+                        <span>Read driver notes</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col-4">
-            @foreach (var item in Model.Discounts)
-            {
-                <div class="col-sm-1">
-                    <div style="background-color: red; height: 40px; width: 17rem;">
-                        <p style="text-align: center;">
-                            <b>@item.Name - @item.DiscountSize%</b>
-                        </p>
-                    </div>
-                    <img class="card-img-top" style="width: 17rem;"
-                     src="https://grandnode.com/content/images/thumbs/5b17a6869e8c8b2cc8075e4d_discount-buy-2-get-1_850.png" alt="Discount Image">
+        </header>
+
+        <figure class="ed-detail__hero">
+            <img class="ed-detail__hero-img" src="@Model.ImageUrl" alt="@Model.Make @Model.Model" />
+            <figcaption class="ed-detail__hero-caption">— The garage · Piece</figcaption>
+        </figure>
+
+        <div class="ed-detail__body">
+            <div class="ed-detail__body-main">
+                <h2 class="ed-detail__section-title">Specification</h2>
+                <ul class="ed-spec">
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Year</span>
+                        <span class="ed-spec__value">@Model.Year</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Category</span>
+                        <span class="ed-spec__value">@Model.CategoryName</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Transmission</span>
+                        <span class="ed-spec__value">@Model.Transmission</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Suspension</span>
+                        <span class="ed-spec__value">@Model.Suspension</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Fuel type</span>
+                        <span class="ed-spec__value">@Model.FuelType</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Seats</span>
+                        <span class="ed-spec__value">@Model.Seats</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Doors</span>
+                        <span class="ed-spec__value">@Model.Doors</span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Air condition</span>
+                        <span class="ed-spec__value @(Model.AirCondition ? "ed-spec__value--yes" : "ed-spec__value--no")">
+                            @(Model.AirCondition ? "Yes" : "No")
+                        </span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Navigation</span>
+                        <span class="ed-spec__value @(Model.NavigationSystem ? "ed-spec__value--yes" : "ed-spec__value--no")">
+                            @(Model.NavigationSystem ? "Yes" : "No")
+                        </span>
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Consumption</span>
+                        @if (Model.Consumption == null)
+                        {
+                            <span class="ed-spec__value ed-spec__value--na">N/A</span>
+                        }
+                        else
+                        {
+                            <span class="ed-spec__value">@String.Format("{0:f2}", Model.Consumption) L/100km</span>
+                        }
+                    </li>
+                    <li class="ed-spec__row">
+                        <span class="ed-spec__label">Tank capacity</span>
+                        @if (Model.TankCapacity == null)
+                        {
+                            <span class="ed-spec__value ed-spec__value--na">N/A</span>
+                        }
+                        else
+                        {
+                            <span class="ed-spec__value">@Model.TankCapacity L</span>
+                        }
+                    </li>
+                </ul>
+            </div>
+
+            <aside class="ed-detail__body-side">
+                <h2 class="ed-detail__section-title">Current offers</h2>
+                <div class="ed-offers">
+                    @if (Model.Discounts != null && Model.Discounts.Any())
+                    {
+                        @foreach (var item in Model.Discounts)
+                        {
+                            <div class="ed-offer">
+                                <span class="ed-offer__name">@item.Name</span>
+                                <span class="ed-offer__size">@item.DiscountSize</span>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="ed-offers__empty">— No active offers on this piece.</p>
+                    }
                 </div>
-            }
+            </aside>
         </div>
+
     </div>
-</div>
+</section>

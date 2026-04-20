@@ -1,22 +1,76 @@
-﻿@model IEnumerable<VehicleHomeModel>
+@model IEnumerable<VehicleHomeModel>
 
 @{
-    ViewData["Title"] = "My rented vehicles";
+    ViewData["Title"] = "Your Garage";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        @foreach (var item in Model)
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-garage.css" asp-append-version="true" />
+}
+
+<section class="ed-garage" aria-labelledby="ed-garage-title">
+    <div class="ed-garage__inner">
+        <header class="ed-garage__head stagger-in">
+            <div class="ed-garage__headline">
+                <span class="eyebrow">— In Your Garage</span>
+                <h1 id="ed-garage-title" class="ed-garage__title">
+                    Currently on the <em>road.</em>
+                </h1>
+            </div>
+            @if (Model.Any())
+            {
+                <span class="ed-garage__count" aria-label="Pieces currently on the road">
+                    <strong>@Model.Count().ToString("D2")</strong> piece@(Model.Count() == 1 ? "" : "s") with you
+                </span>
+            }
+        </header>
+
+        @if (Model.Any())
         {
-            <div class="col-lg-6 position-relative mb-5">
-               
-                <a class="btn btn-primary position-absolute top-0 start-0" style="height: 40px; width: 16%;"
-               asp-controller="Comment" asp-action="Index" asp-route-id="@item.Id">Drop</a>
-               
-                <a class="btn btn-primary position-absolute bottom-0 start-0" style="height: 40px; width: 16%;"
-               asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="Vehicle Image" style="width: 85%; height: 350px;">
+            <ul class="ed-garage__grid stagger-in">
+                @{ var index = 1; }
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <article class="ed-piece">
+                            <div class="ed-piece__media">
+                                <img class="ed-piece__img" src="@item.ImageUrl" alt="Piece @index.ToString("D2")" loading="lazy" />
+                                <span class="ed-piece__status" aria-label="Currently on the road">On the road</span>
+                                <span class="ed-piece__num" aria-hidden="true">@index.ToString("D2")</span>
+                            </div>
+
+                            <div class="ed-piece__meta">
+                                <div class="ed-piece__label">
+                                    <span class="ed-piece__eyebrow">Piece № @index.ToString("D2")</span>
+                                    <span class="ed-piece__name">In your garage</span>
+                                </div>
+                                <a class="ed-piece__details"
+                                   asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.Id">
+                                    <span>Details</span>
+                                    <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+
+                            <a class="ed-piece__return"
+                               asp-controller="Comment" asp-action="Index" asp-route-id="@item.Id">
+                                <span>Return &amp; leave a note</span>
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </article>
+                    </li>
+                    index++;
+                }
+            </ul>
+        }
+        else
+        {
+            <div class="ed-garage__empty">
+                <p class="ed-garage__empty-line">- Your garage is quiet. Nothing on the road right now. -</p>
+                <a class="ed-garage__empty-cta" asp-controller="Vehicles" asp-action="Index">
+                    <span>Browse the collection</span>
+                    <span aria-hidden="true">→</span>
+                </a>
             </div>
         }
     </div>
-</div>
+</section>

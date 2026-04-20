@@ -1,49 +1,103 @@
-﻿@model VehicleRentModel
-
-<script src="~/knockout/knockout-latest.js"></script>
+@model VehicleRentModel
 
 @{
-    ViewData["Title"] = "Rent Vehicle";
+    ViewData["Title"] = "Reserve this piece";
     Model.RentDays = 1;
-
 }
 
-<article style="background-image: url(@Model.ImageUrl); background-size: cover; width: 80rem; height: 70rem">
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <form method="post">
-                <input asp-for="@Model.Id" />
-                <input asp-for="@Model.ImageUrl" />
-                <input asp-for="@Model.PricePerDay"/>
-                <div class="mb-3 text-center">
-                    <label asp-for="@Model.DrivingLicense" class="form-label text-danger"><h5>Driving License</h5></label>
-                    <input asp-for="@Model.DrivingLicense" class="form-control" aria-required="true" />
-                    <span asp-validation-for="DrivingLicense" class="text-danger"></span>
-                </div>
-                <div class="mb-3 text-center">
-                    <label asp-for="@Model.RentDays" class="form-label text-danger"><h5>Rent Days</h5></label>
-                    <input asp-for="@Model.RentDays" pattern="[0-9]" class="form-control" aria-required="true" data-bind="value: rentDays, valueUpdate: 'input'" />
-                    <span asp-validation-for="RentDays" class="text-danger"></span>
-                    
-                </div>
-                <div class ="mb-3 text-center">
-                    <label class="form-label text-danger"><h5>Price: </h5></label>
-                    <input data-bind="value: formatedPrice()" disabled/>
-                </div>
-                <div class="mb-3">
-                    <input class="btn btn-primary" type="submit" value="Rent" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</article>
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-rent.css" asp-append-version="true" />
+}
 
+<section class="ed-rent" aria-labelledby="ed-rent-title">
+    <div class="ed-rent__backdrop" style="background-image: url('@Model.ImageUrl');" aria-hidden="true"></div>
+
+    <div class="ed-rent__inner stagger-in">
+
+        <header class="ed-rent__head">
+            <span class="eyebrow">— Reservation</span>
+            <h1 id="ed-rent-title" class="ed-rent__title">
+                A few details, <em>and it's yours.</em>
+            </h1>
+        </header>
+
+        <div class="ed-rent__body">
+
+            <form method="post" class="ed-form" novalidate>
+                <input asp-for="@Model.Id" type="hidden" />
+                <input asp-for="@Model.ImageUrl" type="hidden" />
+                <input asp-for="@Model.PricePerDay" type="hidden" />
+
+                <div class="ed-field">
+                    <label asp-for="@Model.DrivingLicense" class="ed-field__label">
+                        <span class="ed-field__label-num">01</span>
+                        <span>Driving license</span>
+                    </label>
+                    <input asp-for="@Model.DrivingLicense"
+                           class="ed-field__input"
+                           placeholder="e.g. DL-123-456-789"
+                           autocomplete="off"
+                           aria-required="true" />
+                    <span asp-validation-for="DrivingLicense" class="ed-field__error"></span>
+                </div>
+
+                <div class="ed-field">
+                    <label asp-for="@Model.RentDays" class="ed-field__label">
+                        <span class="ed-field__label-num">02</span>
+                        <span>Number of days</span>
+                    </label>
+                    <input asp-for="@Model.RentDays"
+                           pattern="[0-9]"
+                           class="ed-field__input"
+                           inputmode="numeric"
+                           aria-required="true"
+                           data-bind="value: rentDays, valueUpdate: 'input'" />
+                    <span class="ed-field__hint">Minimum 1 · adjust to see the total update live.</span>
+                    <span asp-validation-for="RentDays" class="ed-field__error"></span>
+                </div>
+
+                <button type="submit" class="ed-form__submit">
+                    <span>Confirm reservation</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+            </form>
+
+            <aside class="ed-summary" aria-label="Order summary">
+                <span class="ed-summary__eyebrow">— The piece</span>
+                <div class="ed-summary__media">
+                    <img class="ed-summary__img" src="@Model.ImageUrl" alt="Selected vehicle" />
+                </div>
+
+                <ul class="ed-summary__rows">
+                    <li class="ed-summary__row">
+                        <span class="ed-summary__row-label">Rate</span>
+                        <span class="ed-summary__row-value">@String.Format("{0:f2}", Model.PricePerDay) EUR<span class="ed-summary__total-unit">/ day</span></span>
+                    </li>
+                    <li class="ed-summary__row">
+                        <span class="ed-summary__row-label">Days</span>
+                        <span class="ed-summary__row-value" data-bind="text: rentDays">@Model.RentDays</span>
+                    </li>
+                </ul>
+
+                <div class="ed-summary__total">
+                    <span class="ed-summary__total-label">Total</span>
+                    <div>
+                        <span class="ed-summary__total-value" data-bind="text: formatedTotal">@String.Format("{0:f2}", Model.PricePerDay * Model.RentDays)</span>
+                        <span class="ed-summary__total-unit">EUR</span>
+                    </div>
+                </div>
+
+                <p class="ed-summary__note">Charged at pickup. Fuel and tolls excluded.</p>
+            </aside>
+        </div>
+
+    </div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/lib/jquery-validation/dist/jquery-override.validator.js"></script>
+    <script src="~/knockout/knockout-latest.js"></script>
     <script>
         function RentData() {
             var that = this;
@@ -51,7 +105,7 @@
             that.pricePerDay = ko.observable(@Model.PricePerDay);
             that.rentDays = ko.observable(@Model.RentDays);
 
-            that.formatedPrice = ko.computed(() => `${(that.pricePerDay() * that.rentDays()).toFixed(2)} Euro` );
+            that.formatedTotal = ko.computed(() => (that.pricePerDay() * that.rentDays()).toFixed(2));
         }
 
         ko.applyBindings(new RentData());

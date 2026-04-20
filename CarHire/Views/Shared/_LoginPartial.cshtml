@@ -1,26 +1,31 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(ViewBag.UserFirstName == "" ? User.Identity?.Name! : ViewBag.UserFirstName)</a>
-    </li>
-    <li class="nav-item">
-            <form class="form-inline" asp-area="" asp-controller="User" asp-action="Logout">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="User" asp-action="Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="User" asp-action="Login">Login</a>
-    </li>
-}
+<ul class="ed-nav__auth">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <a class="ed-nav__auth-name"
+               asp-area="Identity"
+               asp-page="/Account/Manage/Index"
+               title="Manage account">
+                @(ViewBag.UserFirstName == "" ? User.Identity?.Name! : ViewBag.UserFirstName)
+            </a>
+        </li>
+        <li>
+            <form class="ed-nav__logout-form" asp-area="" asp-controller="User" asp-action="Logout">
+                <button type="submit" class="ed-nav__logout">Sign out</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a class="ed-nav__link" asp-controller="User" asp-action="Register">Register</a>
+        </li>
+        <li>
+            <a class="ed-nav__cta" asp-controller="User" asp-action="Login">Sign in</a>
+        </li>
+    }
 </ul>

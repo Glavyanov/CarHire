@@ -1,33 +1,56 @@
-﻿@model CommentHomeModel
+@model CommentHomeModel
 
 @{
-    ViewData["Title"] = "Comment Page";
+    ViewData["Title"] = "Leave a note";
     Model.UserName = ViewBag.UserFirstName;
 }
 
-<h2 class="text-center">Please write your comments here</h2>
-<hr />
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-comment.css" asp-append-version="true" />
+}
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
-            <input  asp-for="@Model.VehicleId" />
-            <input asp-for="@Model.UserId" />
-            <input asp-for="@Model.UserName" />
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" rows="4" class="form-control" placeholder="My Comment..."></textarea>
-                <span asp-validation-for="Description" class="small text-danger"></span>
+<section class="ed-note" aria-labelledby="ed-note-title">
+    <div class="ed-note__inner stagger-in">
+
+        <header class="ed-note__head">
+            <span class="eyebrow">— Driver's note</span>
+            <h1 id="ed-note-title" class="ed-note__title">
+                Tell us how it <em>drove.</em>
+            </h1>
+            <p class="ed-note__lede">
+                A short note for the next driver — how it handled, what surprised you, whether it lived up to its part of the fleet.
+            </p>
+        </header>
+
+        <form method="post" class="ed-note__form" novalidate>
+            <input asp-for="@Model.VehicleId" type="hidden" />
+            <input asp-for="@Model.UserId" type="hidden" />
+            <input asp-for="@Model.UserName" type="hidden" />
+
+            <div>
+                <label asp-for="Description" class="visually-hidden">Your note</label>
+                <textarea asp-for="Description"
+                          class="ed-note__textarea"
+                          rows="6"
+                          placeholder="Felt like it knew the road better than I did&hellip;"></textarea>
+                <span asp-validation-for="Description" class="ed-note__error"></span>
             </div>
-            <div class="text-center">
-                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+
+            <div class="ed-note__actions">
+                <button type="submit" class="ed-note__submit">
+                    <span>Publish the note</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+                <a class="ed-note__dismiss"
+                   asp-controller="Rent" asp-action="Drop" asp-route-id="@Model.VehicleId">
+                    <span>Skip &amp; return piece</span>
+                    <span aria-hidden="true">→</span>
+                </a>
             </div>
         </form>
+
     </div>
-    <div class="col-sm-12">
-        <a class="btn btn-primary" asp-controller="Rent" asp-action="Drop" asp-route-id="@Model.VehicleId" >Dismiss</a>
-    </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

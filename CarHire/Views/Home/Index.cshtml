@@ -1,32 +1,61 @@
-﻿@model IEnumerable<CategoryHomeModel>
+@model IEnumerable<CategoryHomeModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<h2 class="text-center text-info">Vehicle Categories</h2>
-<hr />
-
-<div class="row" style="margin-left: 2%; width: 100%; ">
-        @foreach (var cat in Model)
-        {
-            <div class="col">
-                <a class="btn btn-primary" asp-controller="Vehicles" asp-action="ByCategory" asp-route-categoryId="@cat.CategoryId" style="height: 40px; width: 80%;">@cat.Name</a>
-            </div>
-        }
-</div>
-<div class="container image" ></div>
-
-@section Scripts {
-    <style>
-       div.image {
-           background-image: url('https://traveltomerida.com/wp-content/uploads/2021/07/Merida-Car-Rental-Header.jpg');
-           background-size: cover;
-           background-position: center;
-           margin-top: 1rem;
-           margin-left: 0rem;
-           width: 100%;
-           height: 30rem;
-       }​
-    </style>
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-home.css" asp-append-version="true" />
 }
+
+<section class="ed-hero" aria-labelledby="ed-hero-headline">
+    <div class="ed-hero__bg"
+         style="background-image: url('https://traveltomerida.com/wp-content/uploads/2021/07/Merida-Car-Rental-Header.jpg');"
+         aria-hidden="true"></div>
+    <div class="ed-hero__scrim" aria-hidden="true"></div>
+
+    <div class="ed-hero__content stagger-in">
+        <span class="eyebrow ed-hero__eyebrow">— Est. MMXXIII · All Stars Collective</span>
+        <h1 id="ed-hero-headline" class="ed-hero__headline">
+            <span class="ed-hero__headline-line">Drive</span>
+            <span class="ed-hero__headline-line ed-hero__headline-line--indent">something</span>
+            <span class="ed-hero__headline-line">unforgettable.</span>
+        </h1>
+        <p class="ed-hero__lede">
+            A curated fleet for the long way home. Every category, handpicked every season.
+        </p>
+        <a class="ed-hero__scroll" href="#collection">
+            <span>Explore the collection</span>
+            <span class="ed-hero__scroll-line" aria-hidden="true"></span>
+        </a>
+    </div>
+</section>
+
+<section class="ed-collection" id="collection" aria-labelledby="ed-collection-title">
+    <div class="ed-collection__inner">
+        <header class="ed-collection__head stagger-in">
+            <span class="eyebrow">— The Collection</span>
+            <h2 id="ed-collection-title" class="ed-collection__title">
+                Every discipline. <em>One garage.</em>
+            </h2>
+        </header>
+
+        <ul class="ed-collection__list stagger-in">
+            @{ var index = 1; }
+            @foreach (var cat in Model)
+            {
+                <li class="ed-collection__item">
+                    <a class="ed-collection__row"
+                       asp-controller="Vehicles"
+                       asp-action="ByCategory"
+                       asp-route-categoryId="@cat.CategoryId">
+                        <span class="ed-collection__num">@index.ToString("D2")</span>
+                        <span class="ed-collection__name">@cat.Name</span>
+                        <span class="ed-collection__arrow" aria-hidden="true">→</span>
+                    </a>
+                </li>
+                index++;
+            }
+        </ul>
+    </div>
+</section>

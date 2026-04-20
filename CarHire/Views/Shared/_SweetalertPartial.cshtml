@@ -1,6 +1,4 @@
-﻿@using static CarHire.Infrastructure.Data.ValidationConstants.MessageConstant;
-
-<script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
+@using static CarHire.Infrastructure.Data.ValidationConstants.MessageConstant;
 
 @if (TempData[ErrorMessage] != null)
 {
@@ -9,10 +7,18 @@
             Swal.fire({
                 icon: 'error',
                 toast: true,
-                html: '<b style="color:#FFFAF0">@TempData[ErrorMessage]</b>',
-                background: '#B22222',
-                timer: 3500
-            })
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4200,
+                timerProgressBar: true,
+                customClass: {
+                    container: 'ed-swal__container',
+                    popup: 'ed-swal__popup ed-swal__popup--error',
+                    htmlContainer: 'ed-swal__body'
+                },
+                html: '<span class="ed-swal__eyebrow">— Off the road</span>' +
+                      '<span class="ed-swal__message">@Html.Raw(Html.Encode(TempData[ErrorMessage]))</span>'
+            });
         })();
     </script>
 }
@@ -22,10 +28,20 @@
     <script>
         (function () {
             Swal.fire({
+                icon: 'warning',
                 toast: true,
-                html: '<strong style="color:black;">@TempData[WarningMessage]</strong>',
-                background: 'orange'
-            })
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4200,
+                timerProgressBar: true,
+                customClass: {
+                    container: 'ed-swal__container',
+                    popup: 'ed-swal__popup ed-swal__popup--warning',
+                    htmlContainer: 'ed-swal__body'
+                },
+                html: '<span class="ed-swal__eyebrow">— Take note</span>' +
+                      '<span class="ed-swal__message">@Html.Raw(Html.Encode(TempData[WarningMessage]))</span>'
+            });
         })();
     </script>
 }

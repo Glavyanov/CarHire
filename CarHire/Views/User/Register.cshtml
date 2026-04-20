@@ -1,44 +1,107 @@
-﻿@model UserRegisterModel
+@model UserRegisterModel
+
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Join the collective";
 }
 
-<div class="d-flex justify-content-end">
-    <div class="col-md-4">
-        <form id="registerForm" method="post">
-            <h1>@ViewData["Title"]</h1>
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
-                <label asp-for="FirstName"></label>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true" />
-                <label asp-for="LastName"></label>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Email"></label>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Password"></label>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="ConfirmedPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="ConfirmedPassword"></label>
-                <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-auth.css" asp-append-version="true" />
+}
+
+<section class="ed-auth" aria-labelledby="ed-auth-title">
+
+    <aside class="ed-auth__stage" aria-hidden="true">
+        <div class="ed-auth__stage-bg"
+             style="background-image: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="ed-auth__stage-scrim"></div>
+        <div class="ed-auth__stage-content">
+            <span class="ed-auth__stage-eyebrow">— CarHire · All Stars Collective</span>
+            <p class="ed-auth__stage-pull">
+                Every discipline. <em>One garage.</em>
+            </p>
+            <span class="ed-auth__stage-caption">Est. MMXXIII · Invitation extended</span>
+        </div>
+    </aside>
+
+    <div class="ed-auth__panel">
+        <div class="ed-auth__inner stagger-in">
+            <header class="ed-auth__head">
+                <span class="eyebrow">— New driver</span>
+                <h1 id="ed-auth-title" class="ed-auth__title">
+                    Join the <em>collective.</em>
+                </h1>
+                <p class="ed-auth__sub">Five fields stand between you and the keys.</p>
+            </header>
+
+            <form id="registerForm" method="post" class="ed-auth__form" novalidate>
+                <div asp-validation-summary="ModelOnly" class="ed-auth__summary"></div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="FirstName" class="ed-auth__label">First name</label>
+                    <input asp-for="FirstName"
+                           class="ed-auth__input"
+                           autocomplete="given-name"
+                           aria-required="true"
+                           placeholder="Alex" />
+                    <span asp-validation-for="FirstName" class="ed-auth__error"></span>
+                </div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="LastName" class="ed-auth__label">Last name</label>
+                    <input asp-for="LastName"
+                           class="ed-auth__input"
+                           autocomplete="family-name"
+                           aria-required="true"
+                           placeholder="Morgan" />
+                    <span asp-validation-for="LastName" class="ed-auth__error"></span>
+                </div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="Email" class="ed-auth__label">Email</label>
+                    <input asp-for="Email"
+                           class="ed-auth__input"
+                           autocomplete="username"
+                           aria-required="true"
+                           placeholder="you@example.com" />
+                    <span asp-validation-for="Email" class="ed-auth__error"></span>
+                </div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="Password" class="ed-auth__label">Password</label>
+                    <input asp-for="Password"
+                           class="ed-auth__input"
+                           autocomplete="new-password"
+                           aria-required="true"
+                           placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="ed-auth__error"></span>
+                </div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="ConfirmedPassword" class="ed-auth__label">Confirm password</label>
+                    <input asp-for="ConfirmedPassword"
+                           class="ed-auth__input"
+                           autocomplete="new-password"
+                           aria-required="true"
+                           placeholder="••••••••" />
+                    <span asp-validation-for="ConfirmedPassword" class="ed-auth__error"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="ed-auth__submit">
+                    <span>Take the keys</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+
+                <div class="ed-auth__foot">
+                    <span>Already a driver?</span>
+                    <a class="ed-auth__foot-link" asp-controller="User" asp-action="Login">
+                        <span>Sign in</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

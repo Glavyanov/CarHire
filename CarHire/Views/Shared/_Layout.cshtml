@@ -1,56 +1,129 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <title>@ViewData["Title"] - CarHire</title>
+
+    <script>
+        /* Pre-paint theme resolver — runs before any CSS applies to avoid FOUC.
+           Reads localStorage first; falls back to prefers-color-scheme. */
+        (function () {
+            try {
+                var stored = localStorage.getItem('carhire-theme');
+                var theme = stored ||
+                    (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+                        ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { /* storage blocked — keep default dark */ }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CarHire.styles.css" asp-append-version="true" />
-    <link rel=stylesheet href="~/lib/limonte-sweetalert2/sweetalert2.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/limonte-sweetalert2/sweetalert2.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/design-tokens.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/editorial.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/editorial-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/editorial-swal.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Head", required: false)
+
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
 </head>
-<body>
+<body id="top">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CarHire</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Vehicles" asp-action="Index">All Vehicles</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Rent" asp-action="MyRent">My Rent</a>
-                @if(User.IsInRole(Admin))
-                {
-                    <a class="navbar-brand" asp-area="Administration" asp-controller="Home" asp-action="Index">Admin</a>
-                }
-                @if (User.IsInRole(Manager))
-                {
-                    <a class="navbar-brand" asp-area="Management" asp-controller="Home" asp-action="Index">Manager</a>
-                }
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav class="ed-nav navbar navbar-expand-md" aria-label="Primary">
+            <div class="ed-nav__inner container-fluid">
+                <a class="ed-nav__brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    CarHire<span class="ed-nav__brand-dot" aria-hidden="true"></span>
+                </a>
+
+                <button class="navbar-toggler ed-nav__toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#edNavCollapse"
+                        aria-controls="edNavCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="ed-nav__toggler-box" aria-hidden="true"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                    <partial name="_LoginPartial" />
-                    <partial name="_SweetalertPartial" />
+
+                <div class="ed-nav__collapse navbar-collapse collapse" id="edNavCollapse">
+                    <ul class="ed-nav__links">
+                        <li>
+                            <a class="ed-nav__link" asp-area="" asp-controller="Vehicles" asp-action="Index">The Collection</a>
+                        </li>
+                        <li>
+                            <a class="ed-nav__link" asp-area="" asp-controller="Rent" asp-action="MyRent">My Rent</a>
+                        </li>
+                        @if (User.IsInRole(Admin))
+                        {
+                            <li>
+                                <a class="ed-nav__link ed-nav__link--gated" asp-area="Administration" asp-controller="Home" asp-action="Index">Admin</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(Manager))
+                        {
+                            <li>
+                                <a class="ed-nav__link ed-nav__link--gated" asp-area="Management" asp-controller="Home" asp-action="Index">Manager</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="ed-nav__end">
+                        <button id="themeToggle"
+                                type="button"
+                                class="ed-nav__theme"
+                                aria-pressed="false"
+                                aria-label="Switch to light theme">
+                            <span class="ed-nav__theme-icon" aria-hidden="true">
+                                <svg class="ed-nav__theme-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                                <svg class="ed-nav__theme-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                            </span>
+                            <span class="ed-nav__theme-label">Light</span>
+                        </button>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </nav>
+        <partial name="_SweetalertPartial" />
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - CarHire - <a id="home" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="ed-footer">
+        <div class="ed-footer__inner">
+            <div class="ed-footer__col ed-footer__col--left">
+                <span class="ed-footer__wordmark">CarHire</span>
+                <span class="ed-footer__mono">© MMXXVI · ALL STARS</span>
+            </div>
+            <div class="ed-footer__col ed-footer__col--right">
+                <a class="ed-footer__link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="ed-footer__link" asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
+                <a class="ed-footer__link" asp-area="" asp-controller="Rent" asp-action="MyRent">My Rent</a>
+                <a class="ed-footer__back-to-top" href="#top" aria-label="Back to top">
+                    Back to top <span aria-hidden="true">↑</span>
+                </a>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/theme-toggle.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

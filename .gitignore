@@ -405,3 +405,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 /CarHire/appsettings.Production.json
+.claude

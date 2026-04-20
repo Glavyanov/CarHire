@@ -1,0 +1,330 @@
+/* ==========================================================================
+   Editorial Auth — Phase 9
+   50/50 split · ambient stage · centered borderless form
+   ========================================================================== */
+
+.ed-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px); /* rough navbar offset */
+    isolation: isolate;
+}
+
+/* --- Stage (left, ambient image) --------------------------------------- */
+
+.ed-auth__stage {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elev-1);
+    isolation: isolate;
+}
+
+.ed-auth__stage-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0.12) contrast(1.06) brightness(0.82);
+    transform-origin: 50% 55%;
+    animation: edAuthKenBurns var(--dur-cinema) var(--ease-in-out) forwards,
+               edAuthDrift 36s var(--ease-in-out) 1800ms infinite alternate;
+}
+
+@keyframes edAuthKenBurns {
+    from { transform: scale(1.08); opacity: 0; }
+    to   { transform: scale(1.0);  opacity: 1; }
+}
+
+@keyframes edAuthDrift {
+    from { transform: scale(1.0)  translate3d(0, 0, 0); }
+    to   { transform: scale(1.06) translate3d(-1.5%, -1%, 0); }
+}
+
+.ed-auth__stage-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg,
+            rgba(10, 10, 10, 0.35) 0%,
+            rgba(10, 10, 10, 0.12) 40%,
+            rgba(10, 10, 10, 0.55) 100%);
+}
+
+.ed-auth__stage-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: var(--s-7);
+    gap: var(--s-6);
+}
+
+.ed-auth__stage-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--ink-on-image-muted);
+}
+
+.ed-auth__stage-pull {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--fs-3xl);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink-on-image);
+    margin: 0;
+    font-variation-settings: "opsz" 96;
+    max-width: 22ch;
+}
+
+.ed-auth__stage-pull em {
+    font-style: italic;
+    color: var(--accent-hi);
+    font-weight: 400;
+}
+
+.ed-auth__stage-caption {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--ink-on-image-muted);
+}
+
+/* --- Form panel (right) ------------------------------------------------ */
+
+.ed-auth__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--s-8) var(--s-7);
+    background: var(--bg);
+    border-left: 1px solid var(--hairline);
+}
+
+.ed-auth__inner {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+}
+
+.ed-auth__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.ed-auth__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--fs-3xl);
+    line-height: 1.0;
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+    font-variation-settings: "opsz" 96;
+}
+
+.ed-auth__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+}
+
+.ed-auth__sub {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--ink-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --- Fields ------------------------------------------------------------ */
+
+.ed-auth__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+}
+
+.ed-auth__summary {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: var(--tracking-wide);
+    color: var(--danger);
+    text-transform: uppercase;
+    min-height: 0;
+}
+
+.ed-auth__summary:empty {
+    display: none;
+}
+
+.ed-auth__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+}
+
+.ed-auth__label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+}
+
+.ed-auth__input {
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--hairline);
+    padding: var(--s-3) 0 var(--s-2);
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--fs-lg);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: var(--tracking-tight);
+    font-variation-settings: "opsz" 48;
+    caret-color: var(--accent);
+    transition:
+        border-color var(--dur-fast) var(--ease-editorial),
+        color var(--dur-fast) var(--ease-editorial);
+}
+
+.ed-auth__input:focus,
+.ed-auth__input:focus-visible {
+    outline: none;
+    border-bottom-color: var(--accent);
+    box-shadow: 0 1px 0 0 var(--accent);
+}
+
+.ed-auth__input.input-validation-error {
+    border-bottom-color: var(--danger);
+    color: var(--danger);
+}
+
+.ed-auth__error {
+    display: block;
+    margin-top: var(--s-1);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: var(--tracking-wide);
+    color: var(--danger);
+    text-transform: uppercase;
+    min-height: 1em;
+}
+
+/* --- Submit + footer -------------------------------------------------- */
+
+.ed-auth__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-3);
+    width: 100%;
+    min-height: 56px;
+    margin-top: var(--s-3);
+    padding: var(--s-3) var(--s-6);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    transition:
+        background var(--dur-fast) var(--ease-editorial),
+        letter-spacing var(--dur-med) var(--ease-editorial);
+}
+
+.ed-auth__submit:hover,
+.ed-auth__submit:focus-visible {
+    background: var(--accent-hi);
+    border-color: var(--accent-hi);
+    letter-spacing: 0.22em;
+}
+
+.ed-auth__foot {
+    margin-top: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--hairline);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: var(--tracking-wide);
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    row-gap: var(--s-2);
+}
+
+.ed-auth__foot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    transition: color var(--dur-fast) var(--ease-editorial), gap var(--dur-med) var(--ease-editorial);
+}
+
+.ed-auth__foot-link:hover,
+.ed-auth__foot-link:focus-visible {
+    color: var(--accent);
+    gap: var(--s-3);
+}
+
+/* --- Responsive -------------------------------------------------------- */
+
+@media (max-width: 1279px) {
+    .ed-auth__panel { padding: var(--s-7) var(--s-6); }
+    .ed-auth__stage-content { padding: var(--s-6); }
+}
+
+@media (max-width: 959px) {
+    .ed-auth {
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px 1fr;
+        min-height: 0;
+    }
+    .ed-auth__panel {
+        border-left: none;
+        border-top: 1px solid var(--hairline);
+        padding: var(--s-7) var(--s-5);
+    }
+    .ed-auth__stage-content {
+        padding: var(--s-5);
+        gap: var(--s-4);
+    }
+    .ed-auth__stage-pull { font-size: var(--fs-xl); max-width: 30ch; }
+}
+
+@media (max-width: 639px) {
+    .ed-auth { grid-template-rows: 160px 1fr; }
+    .ed-auth__panel { padding: var(--s-6) var(--s-4); }
+    .ed-auth__stage-content { padding: var(--s-4); }
+    .ed-auth__stage-pull { font-size: var(--fs-lg); }
+    .ed-auth__foot { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ed-auth__stage-bg { animation: none; transform: none; }
+}

@@ -1,34 +1,77 @@
-﻿@model UserLoginModel
+@model UserLoginModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Sign in";
 }
 
-<div class="d-flex justify-content-end">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h1>@ViewData["Title"]</h1>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Email" class="form-label"></label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-auth.css" asp-append-version="true" />
+}
+
+<section class="ed-auth" aria-labelledby="ed-auth-title">
+
+    <aside class="ed-auth__stage" aria-hidden="true">
+        <div class="ed-auth__stage-bg"
+             style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="ed-auth__stage-scrim"></div>
+        <div class="ed-auth__stage-content">
+            <span class="ed-auth__stage-eyebrow">— CarHire · All Stars Collective</span>
+            <p class="ed-auth__stage-pull">
+                The long way home <em>starts here.</em>
+            </p>
+            <span class="ed-auth__stage-caption">Est. MMXXIII · Key to the garage</span>
+        </div>
+    </aside>
+
+    <div class="ed-auth__panel">
+        <div class="ed-auth__inner stagger-in">
+            <header class="ed-auth__head">
+                <span class="eyebrow">— Returning driver</span>
+                <h1 id="ed-auth-title" class="ed-auth__title">
+                    Sign <em>in.</em>
+                </h1>
+                <p class="ed-auth__sub">Pick up where you left off.</p>
+            </header>
+
+            <form id="account" method="post" class="ed-auth__form" novalidate>
+                <div asp-validation-summary="ModelOnly" class="ed-auth__summary"></div>
+
+                <div class="ed-auth__field">
+                    <label asp-for="Email" class="ed-auth__label">Email</label>
+                    <input asp-for="Email"
+                           class="ed-auth__input"
+                           autocomplete="username"
+                           aria-required="true"
+                           placeholder="you@example.com" />
+                    <span asp-validation-for="Email" class="ed-auth__error"></span>
                 </div>
-                <div class="form-floating">
-                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Password" class="form-label"></label>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                <div class="ed-auth__field">
+                    <label asp-for="Password" class="ed-auth__label">Password</label>
+                    <input asp-for="Password"
+                           class="ed-auth__input"
+                           autocomplete="current-password"
+                           aria-required="true"
+                           placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="ed-auth__error"></span>
                 </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+
+                <button id="login-submit" type="submit" class="ed-auth__submit">
+                    <span>Unlock the garage</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+
+                <div class="ed-auth__foot">
+                    <span>New here?</span>
+                    <a class="ed-auth__foot-link" asp-controller="User" asp-action="Register">
+                        <span>Create account</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
                 </div>
             </form>
-        </section>
+        </div>
     </div>
-   
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

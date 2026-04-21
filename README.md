@@ -33,7 +33,10 @@ Each user has a section (My Rent) with their current rent through which the vehi
 
 ***If all vehicles in a given category are already rented, an appropriate message will pop up like in the example below.***
 
-![Screenshot 2023-02-05 130033](https://user-images.githubusercontent.com/89041019/216815125-f8aa8052-0207-4dba-9bb3-eddf60b6c0f1.png)
+<!-- ![Screenshot 2023-02-05 130033](https://user-images.githubusercontent.com/89041019/216815125-f8aa8052-0207-4dba-9bb3-eddf60b6c0f1.png) -->
+
+<img width="1900" height="790" alt="image" src="https://github.com/user-attachments/assets/3bf30b3b-d754-4e95-bfd7-6cdb92d51850" />
+
 ---
 
 <br>

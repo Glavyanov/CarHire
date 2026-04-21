@@ -1,9 +1,14 @@
 @using static CarHire.Infrastructure.Data.ValidationConstants.MessageConstant;
 
+@* SweetAlert2 loads at the bottom of the body, but this partial is rendered
+   inside <header>. Defer the call until DOMContentLoaded so `Swal` exists
+   before we fire. *@
+
 @if (TempData[ErrorMessage] != null)
 {
     <script>
-        (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof Swal === 'undefined') return;
             Swal.fire({
                 icon: 'error',
                 toast: true,
@@ -19,14 +24,15 @@
                 html: '<span class="ed-swal__eyebrow">— Off the road</span>' +
                       '<span class="ed-swal__message">@Html.Raw(Html.Encode(TempData[ErrorMessage]))</span>'
             });
-        })();
+        });
     </script>
 }
 
 @if (TempData[WarningMessage] != null)
 {
     <script>
-        (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof Swal === 'undefined') return;
             Swal.fire({
                 icon: 'warning',
                 toast: true,
@@ -42,6 +48,6 @@
                 html: '<span class="ed-swal__eyebrow">— Take note</span>' +
                       '<span class="ed-swal__message">@Html.Raw(Html.Encode(TempData[WarningMessage]))</span>'
             });
-        })();
+        });
     </script>
 }
